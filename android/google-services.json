@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "60023935270",
+    "project_id": "beritagembira-250ff",
+    "storage_bucket": "beritagembira-250ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60023935270:android:e131323f8a00f66c8671e7",
+        "android_client_info": {
+          "package_name": "com.goodnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60023935270-ksh5ehv1f8n7hav08nui5knt81s7omvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goodnews",
+            "certificate_hash": "8002b7a5dff05c4be6d0ff02b8aecb0dbd46099b"
+          }
+        },
+        {
+          "client_id": "60023935270-utnqiru2d2bnhm7v3irps9q0cjfnocc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClab36ruK1qWD6WKLwecqnf0BsBN9GTS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60023935270-fq5c9flq5tc1ehehon6b5eca4aed4lnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
