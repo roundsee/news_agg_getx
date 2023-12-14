@@ -36,8 +36,7 @@ class SplashScreen extends GetWidget<SplashController> {
                 onTap: () {
                   if (strToken != "") {
                     Get.toNamed(
-                      AppRoutes.selectFavCategoryScreen,
-                    );
+                        AppRoutes.alternativeHomePageDesignContainerScreen);
                   } else {
                     Get.toNamed(
                       AppRoutes.loginPageScreen,

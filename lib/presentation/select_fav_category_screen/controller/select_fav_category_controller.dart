@@ -1,5 +1,8 @@
 import 'package:new_agg/core/app_export.dart';
+import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/models/category_model.dart';
+import 'package:new_agg/core/service/CategoryService.dart';
+import 'package:new_agg/presentation/select_fav_category_screen/models/categorychipitems_item_model.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/models/select_fav_category_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -13,10 +16,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// This class manages the state of the SelectFavCategoryScreen, including the
 /// current selectFavCategoryModelObj
 class SelectFavCategoryController extends GetxController {
+  String SelectedCategory = "";
   TextEditingController ionsearchcircleController = TextEditingController();
 
   Rx<SelectFavCategoryModel> selectFavCategoryModelObj =
       SelectFavCategoryModel().obs;
+
+  Rx<SelectFavCategoryModel> selectFavCategoryModelxx =
+      SelectFavCategoryModel().obs;
+
+  var categorychipitemsItemList = CategoryService().fetchDataCategory();
 
   var category = <Category>[].obs;
   var selectedCategory = <Category>[].obs;
@@ -28,43 +37,12 @@ class SelectFavCategoryController extends GetxController {
     ionsearchcircleController.dispose();
   }
 
-  void onInit() {
-    super.onInit();
-    fetchCategory();
-  }
-
-  Category? categoryModel;
-  fetchCategory() async {
-    try {
-      isLoading(true);
-
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      var token = prefs!.getString('token').toString();
-
-      var headers = {
-        'Content-Type': 'application/json',
-        'Authorization': token,
-        'User-Agent': 'LENOVO ideapad 3'
-      };
-
-      var url = Uri.parse(
-          ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.categories);
-      Map body = {};
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
-
-      if (response.statusCode == 200) {
-        ///data successfully
-        var result = jsonDecode(response.body);
-
-        categoryModel = Category.fromJson(result);
-      } else {
-        print('error fetching data');
-      }
-    } catch (e) {
-      print('Error while getting data is $e');
-    } finally {
-      isLoading(false);
+  SaveFav() {
+    var Result = CategoryService().SaveFavCategory(selectedCategory.toString());
+    if (Result == 1) {
+      // goto Home
+    } else {
+      // Error saving
     }
   }
 }

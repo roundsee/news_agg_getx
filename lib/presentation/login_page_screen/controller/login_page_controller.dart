@@ -51,7 +51,8 @@ class LoginPageController extends GetxController {
         final json = jsonDecode(response.body);
 
         if (json['data']['user']['status'] == 1) {
-          Get.off(SelectFavCategoryScreen());
+          // Get.off(SelectFavCategoryScreen());
+          Get.off((HomePage));
         }
 
         //if (json['code'] == 0) {

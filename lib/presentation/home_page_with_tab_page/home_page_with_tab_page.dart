@@ -79,12 +79,12 @@ class HomePageWithTabPage extends StatelessWidget {
               child: TabBar(
                   controller: controller.tabviewController,
                   labelPadding: EdgeInsets.zero,
-                  labelColor: appTheme.whiteA700,
+                  labelColor: appTheme.gray200,
                   labelStyle: TextStyle(
                       fontSize: 10.fSize,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w400),
-                  unselectedLabelColor: appTheme.whiteA700,
+                  unselectedLabelColor: appTheme.gray400,
                   unselectedLabelStyle: TextStyle(
                       fontSize: 10.fSize,
                       fontFamily: 'Inter',

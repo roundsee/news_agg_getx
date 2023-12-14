@@ -1,18 +1,18 @@
 import '../controller/home_controller.dart';
-import '../models/ninetyfoursection_item_model.dart';
+import '../models/generalnews_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
 // ignore: must_be_immutable
-class NinetyfoursectionItemWidget extends StatelessWidget {
-  NinetyfoursectionItemWidget(
-    this.ninetyfoursectionItemModelObj, {
+class GeneralNewsItemWidget extends StatelessWidget {
+  GeneralNewsItemWidget(
+    this.generalNewsItemModelObj, {
     Key? key,
   }) : super(
           key: key,
         );
 
-  NinetyfoursectionItemModel ninetyfoursectionItemModelObj;
+  GeneralNewsItemModel generalNewsItemModelObj;
 
   var controller = Get.find<HomeController>();
 
@@ -59,7 +59,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                       ),
                       child: Obx(
                         () => Text(
-                          ninetyfoursectionItemModelObj.politik!.value,
+                          generalNewsItemModelObj.category!.value,
                           style: CustomTextStyles.bodySmallWhiteA700_1,
                         ),
                       ),
@@ -91,7 +91,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                             ),
                             child: Obx(
                               () => Text(
-                                ninetyfoursectionItemModelObj.politik1!.value,
+                                generalNewsItemModelObj.politik1!.value,
                                 style: CustomTextStyles.bodySmallWhiteA700_1,
                               ),
                             ),
@@ -107,7 +107,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
           SizedBox(height: 10.v),
           Obx(
             () => Text(
-              ninetyfoursectionItemModelObj.britaniaRayaResmi!.value,
+              generalNewsItemModelObj.title!.value,
               style: theme.textTheme.labelLarge,
             ),
           ),
@@ -118,7 +118,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
               width: 201.h,
               child: Obx(
                 () => Text(
-                  ninetyfoursectionItemModelObj.description!.value,
+                  generalNewsItemModelObj.description!.value,
                   maxLines: null,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodySmall,
@@ -134,7 +134,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                 padding: EdgeInsets.only(top: 21.v),
                 child: Obx(
                   () => Text(
-                    ninetyfoursectionItemModelObj.jamYangLalu!.value,
+                    generalNewsItemModelObj.publish!.value,
                     style: CustomTextStyles.bodySmallGray600,
                   ),
                 ),
@@ -150,7 +150,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                   SizedBox(height: 3.v),
                   Obx(
                     () => Text(
-                      ninetyfoursectionItemModelObj.oneHundred!.value,
+                      generalNewsItemModelObj.jLike!.value,
                       style: theme.textTheme.bodySmall,
                     ),
                   ),
@@ -168,7 +168,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                     SizedBox(height: 3.v),
                     Obx(
                       () => Text(
-                        ninetyfoursectionItemModelObj.oneHundred1!.value,
+                        generalNewsItemModelObj.jSave!.value,
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
@@ -187,7 +187,7 @@ class NinetyfoursectionItemWidget extends StatelessWidget {
                     SizedBox(height: 3.v),
                     Obx(
                       () => Text(
-                        ninetyfoursectionItemModelObj.oneHundred2!.value,
+                        generalNewsItemModelObj.jShare!.value,
                         style: theme.textTheme.bodySmall,
                       ),
                     ),

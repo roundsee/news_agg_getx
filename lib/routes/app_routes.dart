@@ -173,6 +173,7 @@ class AppRoutes {
         LoginPageBinding(),
       ],
     ),
+    
     GetPage(
       name: alternativeHomePageDesignContainerScreen,
       page: () => AlternativeHomePageDesignContainerScreen(),

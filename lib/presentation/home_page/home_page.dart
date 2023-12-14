@@ -1,11 +1,11 @@
-import '../home_page/widgets/alternativehomepagedesignsection_item_widget.dart';
-import '../home_page/widgets/ninetyfoursection_item_widget.dart';
-import '../home_page/widgets/rumahsakitsection_item_widget.dart';
+import 'widgets/selected_item_widget.dart';
+import 'widgets/generalnews_item_widget.dart';
+import 'widgets/recommended_item_widget.dart';
 import 'controller/home_controller.dart';
-import 'models/alternativehomepagedesignsection_item_model.dart';
+import 'models/selectednews_item_model.dart';
 import 'models/home_model.dart';
-import 'models/ninetyfoursection_item_model.dart';
-import 'models/rumahsakitsection_item_model.dart';
+import 'models/generalnews_item_model.dart';
+import 'models/recommended_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                     SizedBox(height: 20.v),
                     _buildRecommendationSection(),
                     SizedBox(height: 8.v),
-                    _buildRumahSakitSection(),
+                    _RecommendedSection(),
                     SizedBox(height: 20.v),
                     Align(
                         alignment: Alignment.centerLeft,
@@ -42,9 +42,9 @@ class HomePage extends StatelessWidget {
                                 style:
                                     CustomTextStyles.titleSmallBlack900Bold))),
                     SizedBox(height: 11.v),
-                    _buildAlternativeHomePageDesignSection(),
+                    _buildSelectedNewsSection(),
                     SizedBox(height: 10.v),
-                    _buildNinetyFourSection()
+                    //  _buildNinetyFourSection()
                   ])
                 ])))));
   }
@@ -62,6 +62,19 @@ class HomePage extends StatelessWidget {
 
   /// Section Widget
   Widget _buildCardNewsSection() {
+    String imageUrl = "https://dimensy.id/assets/images/about/about-us1.jpg";
+    String id = "id";
+    String url = "";
+    String publishAt = "hari ini";
+    String strCategory = " Category";
+    String description = "Description";
+    String strSlug = "hdhdhksjdks aksd akd";
+    String title = "Title";
+    int jLike = 1;
+    int jSave = 2;
+    int jShare = 3;
+    int isLike = 1;
+    int isSave = 1;
     return GestureDetector(
         onTap: () {
           onTapCardNewsSection();
@@ -79,7 +92,8 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadiusStyle.roundedBorder5,
                       image: DecorationImage(
-                          image: AssetImage(ImageConstant.imgFrame40),
+                          image: NetworkImage(
+                              imageUrl), // AssetImage(ImageConstant.imgFrame40),
                           fit: BoxFit.cover)),
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -101,7 +115,7 @@ class HomePage extends StatelessWidget {
                   child: Container(
                       width: 242.h,
                       margin: EdgeInsets.only(right: 46.h),
-                      child: Text("msg_elon_musk_memaksa".tr,
+                      child: Text(title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.labelLarge))),
@@ -115,29 +129,29 @@ class HomePage extends StatelessWidget {
                         children: [
                           SizedBox(
                               width: 179.h,
-                              child: Text("msg_aksi_boykot_masal".tr,
+                              child: Text(description,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: theme.textTheme.bodySmall)),
                           SizedBox(height: 20.v),
-                          Text("lbl_4_jam_yang_lalu".tr,
+                          Text(publishAt,
                               style: CustomTextStyles.bodySmallGray600)
                         ]),
                     Padding(
                         padding: EdgeInsets.only(left: 27.h, top: 20.v),
                         child: _buildFrameThirtySeven(
                             userImage: ImageConstant.imgSolarHeartBold,
-                            userLabel: "lbl_100".tr)),
+                            userLabel: jLike.toString())),
                     Padding(
                         padding: EdgeInsets.only(left: 10.h, top: 20.v),
                         child: _buildFrameThirtySeven(
                             userImage: ImageConstant.imgPhBookmarkSimpleFill,
-                            userLabel: "lbl_100".tr)),
+                            userLabel: jSave.toString())),
                     Padding(
                         padding: EdgeInsets.only(left: 10.h, top: 20.v),
                         child: _buildFrameThirtySeven(
                             userImage: ImageConstant.imgMajesticonsShareCircle,
-                            userLabel: "lbl_100".tr))
+                            userLabel: jShare.toString()))
                   ]),
               SizedBox(height: 7.v)
             ])));
@@ -158,7 +172,7 @@ class HomePage extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildRumahSakitSection() {
+  Widget _RecommendedSection() {
     return Padding(
         padding: EdgeInsets.only(left: 26.h, right: 23.h),
         child: Obx(() => ListView.separated(
@@ -167,17 +181,17 @@ class HomePage extends StatelessWidget {
             separatorBuilder: (context, index) {
               return SizedBox(height: 10.v);
             },
-            itemCount: controller
-                .homeModelObj.value.rumahsakitsectionItemList.value.length,
+            itemCount:
+                controller.homeModelObj.value.recommendedItemList.value.length,
             itemBuilder: (context, index) {
-              RumahsakitsectionItemModel model = controller
-                  .homeModelObj.value.rumahsakitsectionItemList.value[index];
-              return RumahsakitsectionItemWidget(model);
+              RecommendedItemModel model = controller
+                  .homeModelObj.value.recommendedItemList.value[index];
+              return RecommendedItemWidget(model);
             })));
   }
 
   /// Section Widget
-  Widget _buildAlternativeHomePageDesignSection() {
+  Widget _buildSelectedNewsSection() {
     return Obx(() => GridView.builder(
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -186,20 +200,17 @@ class HomePage extends StatelessWidget {
             mainAxisSpacing: 10.h,
             crossAxisSpacing: 10.h),
         physics: BouncingScrollPhysics(),
-        itemCount: controller.homeModelObj.value
-            .alternativehomepagedesignsectionItemList.value.length,
+        itemCount:
+            controller.homeModelObj.value.selectedNewsItemList.value.length,
         itemBuilder: (context, index) {
-          AlternativehomepagedesignsectionItemModel model = controller
-              .homeModelObj
-              .value
-              .alternativehomepagedesignsectionItemList
-              .value[index];
-          return AlternativehomepagedesignsectionItemWidget(model);
+          SelectedNewsItemModel model =
+              controller.homeModelObj.value.selectedNewsItemList.value[index];
+          return SelectedNewsItemWidget(model);
         }));
   }
 
   /// Section Widget
-  Widget _buildNinetyFourSection() {
+  Widget _buildGeneralNewsSection() {
     return Padding(
         padding: EdgeInsets.only(left: 20.h, right: 23.h),
         child: Obx(() => ListView.separated(
@@ -208,12 +219,12 @@ class HomePage extends StatelessWidget {
             separatorBuilder: (context, index) {
               return SizedBox(height: 10.v);
             },
-            itemCount: controller
-                .homeModelObj.value.ninetyfoursectionItemList.value.length,
+            itemCount:
+                controller.homeModelObj.value.generalNewsItemList.value.length,
             itemBuilder: (context, index) {
-              NinetyfoursectionItemModel model = controller
-                  .homeModelObj.value.ninetyfoursectionItemList.value[index];
-              return NinetyfoursectionItemWidget(model);
+              GeneralNewsItemModel model = controller
+                  .homeModelObj.value.generalNewsItemList.value[index];
+              return GeneralNewsItemWidget(model);
             })));
   }
 

@@ -1,18 +1,18 @@
 import '../controller/home_controller.dart';
-import '../models/rumahsakitsection_item_model.dart';
+import '../models/recommended_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
 // ignore: must_be_immutable
-class RumahsakitsectionItemWidget extends StatelessWidget {
-  RumahsakitsectionItemWidget(
-    this.rumahsakitsectionItemModelObj, {
+class RecommendedItemWidget extends StatelessWidget {
+  RecommendedItemWidget(
+    this.recommendedItemModelObj, {
     Key? key,
   }) : super(
           key: key,
         );
 
-  RumahsakitsectionItemModel rumahsakitsectionItemModelObj;
+  RecommendedItemModel recommendedItemModelObj;
 
   var controller = Get.find<HomeController>();
 
@@ -51,7 +51,7 @@ class RumahsakitsectionItemWidget extends StatelessWidget {
                   width: 180.h,
                   child: Obx(
                     () => Text(
-                      rumahsakitsectionItemModelObj.rumahSakitDiGaza!.value,
+                      recommendedItemModelObj.title!.value,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: CustomTextStyles.labelLargeGray900,
@@ -61,7 +61,7 @@ class RumahsakitsectionItemWidget extends StatelessWidget {
                 SizedBox(height: 8.v),
                 Obx(
                   () => Text(
-                    rumahsakitsectionItemModelObj.oktober!.value,
+                    recommendedItemModelObj.publishAt!.value,
                     style: CustomTextStyles.bodySmallGray70007,
                   ),
                 ),

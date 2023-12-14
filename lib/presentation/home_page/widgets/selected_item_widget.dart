@@ -1,19 +1,18 @@
 import '../controller/home_controller.dart';
-import '../models/alternativehomepagedesignsection_item_model.dart';
+import '../models/selectednews_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
 // ignore: must_be_immutable
-class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
-  AlternativehomepagedesignsectionItemWidget(
-    this.alternativehomepagedesignsectionItemModelObj, {
+class SelectedNewsItemWidget extends StatelessWidget {
+  SelectedNewsItemWidget(
+    this.selectedNewsItemModelObj, {
     Key? key,
   }) : super(
           key: key,
         );
 
-  AlternativehomepagedesignsectionItemModel
-      alternativehomepagedesignsectionItemModelObj;
+  SelectedNewsItemModel selectedNewsItemModelObj;
 
   var controller = Get.find<HomeController>();
 
@@ -57,8 +56,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                       ),
                       child: Obx(
                         () => Text(
-                          alternativehomepagedesignsectionItemModelObj
-                              .politik!.value,
+                          selectedNewsItemModelObj.category!.value,
                           style: CustomTextStyles.bodySmallWhiteA700_1,
                         ),
                       ),
@@ -90,8 +88,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                             ),
                             child: Obx(
                               () => Text(
-                                alternativehomepagedesignsectionItemModelObj
-                                    .politik1!.value,
+                                selectedNewsItemModelObj.politik1!.value,
                                 style: CustomTextStyles.bodySmallWhiteA700_1,
                               ),
                             ),
@@ -110,8 +107,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 12.h),
             child: Obx(
               () => Text(
-                alternativehomepagedesignsectionItemModelObj
-                    .keputusanPrabowo!.value,
+                selectedNewsItemModelObj.title!.value,
                 maxLines: null,
                 overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelLarge,
@@ -141,8 +137,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                             SizedBox(height: 3.v),
                             Obx(
                               () => Text(
-                                alternativehomepagedesignsectionItemModelObj
-                                    .oneHundred!.value,
+                                selectedNewsItemModelObj.jLike!.value,
                                 style: theme.textTheme.bodySmall,
                               ),
                             ),
@@ -161,8 +156,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                               SizedBox(height: 3.v),
                               Obx(
                                 () => Text(
-                                  alternativehomepagedesignsectionItemModelObj
-                                      .oneHundred1!.value,
+                                  selectedNewsItemModelObj.jSave!.value,
                                   style: theme.textTheme.bodySmall,
                                 ),
                               ),
@@ -182,8 +176,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                               SizedBox(height: 3.v),
                               Obx(
                                 () => Text(
-                                  alternativehomepagedesignsectionItemModelObj
-                                      .oneHundred2!.value,
+                                  selectedNewsItemModelObj.jShare!.value,
                                   style: theme.textTheme.bodySmall,
                                 ),
                               ),
@@ -203,8 +196,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                           width: 201.h,
                           child: Obx(
                             () => Text(
-                              alternativehomepagedesignsectionItemModelObj
-                                  .description!.value,
+                              selectedNewsItemModelObj.description!.value,
                               maxLines: null,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.bodySmall,
@@ -214,8 +206,7 @@ class AlternativehomepagedesignsectionItemWidget extends StatelessWidget {
                         SizedBox(height: 11.v),
                         Obx(
                           () => Text(
-                            alternativehomepagedesignsectionItemModelObj
-                                .jamYangLalu!.value,
+                            selectedNewsItemModelObj.publish!.value,
                             style: CustomTextStyles.bodySmallGray600,
                           ),
                         ),

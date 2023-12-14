@@ -7,11 +7,11 @@ import 'package:new_agg/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
-  const SelectFavCategoryScreen({Key? key})
+   SelectFavCategoryScreen({Key? key})
       : super(
           key: key,
         );
-
+SelectFavCategoryController SelectFavController = Get.put(SelectFavCategoryController());
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);

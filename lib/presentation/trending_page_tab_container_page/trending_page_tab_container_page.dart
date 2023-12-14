@@ -41,9 +41,9 @@ class TrendingPageTabContainerPage extends StatelessWidget {
                               controller: controller.tabviewController,
                               children: [
                                 HistoryPage(),
-                                HistoryPage(),
-                                HistoryPage(),
-                                HistoryPage(),
+                                //HistoryPage(),
+                                //HistoryPage(),
+                                //HistoryPage(),
                                 HistoryPage()
                               ])))
                 ]))));

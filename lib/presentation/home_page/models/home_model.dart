@@ -1,115 +1,86 @@
 import '../../../core/app_export.dart';
-import 'rumahsakitsection_item_model.dart';
-import 'alternativehomepagedesignsection_item_model.dart';
-import 'ninetyfoursection_item_model.dart';
+import 'recommended_item_model.dart';
+import 'selectednews_item_model.dart';
+import 'generalnews_item_model.dart';
 
 /// This class defines the variables used in the [home_page],
 /// and is typically used to hold data that is passed between different parts of the application.
 class HomeModel {
-  Rx<List<RumahsakitsectionItemModel>> rumahsakitsectionItemList = Rx([
-    RumahsakitsectionItemModel(
-        rumahSakitDiGaza: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
-        oktober: "11 Oktober 2023 . Kesehatan ".obs),
-    RumahsakitsectionItemModel(
-        rumahSakitDiGaza: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
-        oktober: "11 Oktober 2023 . Kesehatan ".obs),
-    RumahsakitsectionItemModel(
-        rumahSakitDiGaza: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
-        oktober: "11 Oktober 2023 . Kesehatan ".obs),
-    RumahsakitsectionItemModel(
-        rumahSakitDiGaza: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
-        oktober: "11 Oktober 2023 . Kesehatan ".obs),
-    RumahsakitsectionItemModel(
-        rumahSakitDiGaza: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
-        oktober: "11 Oktober 2023 . Kesehatan ".obs)
+  Rx<List<RecommendedItemModel>> recommendedItemList = Rx([
+    RecommendedItemModel(
+        title: "Recommended Title".obs,
+        publishAt: "11 Oktober 2023 . Kesehatan ".obs),
+    RecommendedItemModel(
+        title: "Recommended Title".obs,
+        publishAt: "11 Oktober 2023 . Kesehatan ".obs),
+    /*
+    RecommendedItemModel(
+        title: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
+        publishAt: "11 Oktober 2023 . Kesehatan ".obs),
+    RecommendedItemModel(
+        title: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
+        publishAt: "11 Oktober 2023 . Kesehatan ".obs),
+    RecommendedItemModel(
+        title: "Rumah Sakit Di Gaza Terancam Jadi Kamar Jenazah".obs,
+        publishAt: "11 Oktober 2023 . Kesehatan ".obs)
+  */
   ]);
 
-  Rx<List<AlternativehomepagedesignsectionItemModel>>
-      alternativehomepagedesignsectionItemList = Rx([
-    AlternativehomepagedesignsectionItemModel(
-        politik: "Politik".obs,
+  Rx<List<SelectedNewsItemModel>> selectedNewsItemList = Rx([
+    SelectedNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        keputusanPrabowo:
-            "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs,
+        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs,
         description:
             "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
                 .obs,
-        jamYangLalu: "4 jam yang lalu".obs),
-    AlternativehomepagedesignsectionItemModel(
-        politik: "Politik".obs,
+        publish: "4 jam yang lalu".obs),
+    SelectedNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        keputusanPrabowo:
-            "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs),
-    AlternativehomepagedesignsectionItemModel(
-        politik: "Politik".obs,
+        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs),
+    SelectedNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        keputusanPrabowo:
-            "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs)
+        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs)
   ]);
 
-  Rx<List<NinetyfoursectionItemModel>> ninetyfoursectionItemList = Rx([
-    NinetyfoursectionItemModel(
-        politik: "Politik".obs,
+  Rx<List<GeneralNewsItemModel>> generalNewsItemList = Rx([
+    GeneralNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        britaniaRayaResmi:
-            "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
+        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
         description:
             "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
                 .obs,
-        jamYangLalu: "4 jam yang lalu".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs),
-    NinetyfoursectionItemModel(
-        politik: "Politik".obs,
+        publish: "4 jam yang lalu".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs),
+    GeneralNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        britaniaRayaResmi:
-            "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
+        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
         description:
             "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
                 .obs,
-        jamYangLalu: "4 jam yang lalu".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs),
-    NinetyfoursectionItemModel(
-        politik: "Politik".obs,
+        publish: "4 jam yang lalu".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs),
+    GeneralNewsItemModel(
+        category: "Politik".obs,
         politik1: "Politik".obs,
-        britaniaRayaResmi:
-            "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
+        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
         description:
             "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
                 .obs,
-        jamYangLalu: "4 jam yang lalu".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs),
-    NinetyfoursectionItemModel(
-        politik: "Politik".obs,
-        politik1: "Politik".obs,
-        britaniaRayaResmi:
-            "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
-        jamYangLalu: "4 jam yang lalu".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs),
-    NinetyfoursectionItemModel(
-        politik: "Politik".obs,
-        politik1: "Politik".obs,
-        britaniaRayaResmi:
-            "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
-        jamYangLalu: "4 jam yang lalu".obs,
-        oneHundred: "100".obs,
-        oneHundred1: "100".obs,
-        oneHundred2: "100".obs)
+        publish: "4 jam yang lalu".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs),
   ]);
 }
