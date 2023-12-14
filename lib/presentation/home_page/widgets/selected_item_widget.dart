@@ -19,116 +19,105 @@ class SelectedNewsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.v),
+      padding: EdgeInsets.symmetric(vertical: 5.v),
       decoration: AppDecoration.fillBlueGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder10,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 0,
-            margin: EdgeInsets.all(0),
-            color: theme.colorScheme.onPrimaryContainer,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusStyle.roundedBorder5,
-            ),
-            child: Container(
-              height: 75.v,
-              width: 287.h,
-              decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Card(
+              clipBehavior: Clip.antiAlias,
+              elevation: 0,
+              margin: EdgeInsets.all(1),
+              color: theme.colorScheme.onPrimaryContainer,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusStyle.roundedBorder5,
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        top: 8.v,
-                        right: 6.h,
-                      ),
-                      padding: EdgeInsets.all(5.h),
-                      decoration: AppDecoration.fillGray700021.copyWith(
-                        borderRadius: BorderRadiusStyle.roundedBorder5,
-                      ),
-                      child: Obx(
-                        () => Text(
-                          selectedNewsItemModelObj.category!.value,
-                          style: CustomTextStyles.bodySmallWhiteA700_1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      padding: EdgeInsets.all(10.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadiusStyle.roundedBorder5,
-                        image: DecorationImage(
-                          image: AssetImage(
-                            ImageConstant.imgFrame4175x287,
+              child: Container(
+                height: 160.v,
+                width: 287.h,
+                decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
+                  borderRadius: BorderRadiusStyle.roundedBorder5,
+                ),
+                child: Column(
+                  children: [
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            padding: EdgeInsets.all(30.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadiusStyle.roundedBorder5,
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  ImageConstant.imgFrame4175x287,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(height: 27.v),
+                                Container(
+                                  width: 30.h,
+                                  padding: EdgeInsets.all(5.h),
+                                  decoration:
+                                      AppDecoration.fillGray70002.copyWith(
+                                    borderRadius:
+                                        BorderRadiusStyle.roundedBorder5,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          fit: BoxFit.cover,
                         ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SizedBox(height: 35.v),
-                          Container(
-                            width: 33.h,
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: 8.v,
+                              right: 6.h,
+                            ),
                             padding: EdgeInsets.all(5.h),
-                            decoration: AppDecoration.fillGray70002.copyWith(
+                            decoration: AppDecoration.fillIndigo.copyWith(
                               borderRadius: BorderRadiusStyle.roundedBorder5,
                             ),
                             child: Obx(
                               () => Text(
-                                selectedNewsItemModelObj.politik1!.value,
+                                selectedNewsItemModelObj.category!.value,
                                 style: CustomTextStyles.bodySmallWhiteA700_1,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        //TITLE ========
+                        SizedBox(height: 4.v),
+                        Container(
+                          width: 287.h,
+                          margin: EdgeInsets.symmetric(horizontal: 12.h),
+                          child: Obx(
+                            () => Text(
+                              selectedNewsItemModelObj.title!.value,
+                              maxLines: null,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.labelLarge,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 10.v),
-          Container(
-            width: 287.h,
-            margin: EdgeInsets.symmetric(horizontal: 12.h),
-            child: Obx(
-              () => Text(
-                selectedNewsItemModelObj.title!.value,
-                maxLines: null,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelLarge,
-              ),
-            ),
-          ),
-          SizedBox(height: 4.v),
-          Align(
-            alignment: Alignment.centerRight,
-            child: SizedBox(
-              height: 53.v,
-              width: 278.h,
-              child: Stack(
-                alignment: Alignment.topLeft,
-                children: [
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Row(
+                    SizedBox(height: 5.v),
+                    Row(
                       children: [
                         Column(
                           children: [
+                            // LIKE ==============
                             CustomImageView(
                               imagePath: ImageConstant.imgSolarHeartBold,
                               height: 20.adaptSize,
@@ -143,6 +132,7 @@ class SelectedNewsItemWidget extends StatelessWidget {
                             ),
                           ],
                         ),
+                        // SAVE  ==============
                         Padding(
                           padding: EdgeInsets.only(left: 10.h),
                           child: Column(
@@ -163,6 +153,7 @@ class SelectedNewsItemWidget extends StatelessWidget {
                             ],
                           ),
                         ),
+                        // SHARE  ==============
                         Padding(
                           padding: EdgeInsets.only(left: 10.h),
                           child: Column(
@@ -185,40 +176,58 @@ class SelectedNewsItemWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 201.h,
-                          child: Obx(
-                            () => Text(
-                              selectedNewsItemModelObj.description!.value,
-                              maxLines: null,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.bodySmall,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 11.v),
-                        Obx(
-                          () => Text(
-                            selectedNewsItemModelObj.publish!.value,
-                            style: CustomTextStyles.bodySmallGray600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 7.v),
-        ],
+            SizedBox(height: 10.v),
+
+            //LIKE SAVE SHARE
+            Align(
+              alignment: Alignment.centerRight,
+              child: SizedBox(
+                height: 53.v,
+                width: 278.h,
+                child: Stack(
+                  alignment: Alignment.topLeft,
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 201.h,
+                            child: Obx(
+                              () => Text(
+                                selectedNewsItemModelObj.description!.value,
+                                maxLines: null,
+                                overflow: TextOverflow.ellipsis,
+                                style: theme.textTheme.bodySmall,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 11.v),
+                          Obx(
+                            () => Text(
+                              selectedNewsItemModelObj.publish!.value,
+                              style: CustomTextStyles.bodySmallGray600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 7.v),
+          ],
+        ),
       ),
     );
   }

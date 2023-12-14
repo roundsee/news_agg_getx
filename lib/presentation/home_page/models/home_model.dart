@@ -30,32 +30,38 @@ class HomeModel {
     SelectedNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs,
+        title: "Title 1 ".obs,
         jLike: "100".obs,
         jSave: "100".obs,
         jShare: "100".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
+        description: "Description 1".obs,
         publish: "4 jam yang lalu".obs),
     SelectedNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs),
+        title: "Title 2 ".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs,
+        description: "Description 2".obs,
+        publish: "4 jam yang lalu".obs),
     SelectedNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Keputusan Prabowo Pembawa Gibran Menjadi Cawapres ".obs)
+        title: "Title 3 ".obs,
+        jLike: "100".obs,
+        jSave: "100".obs,
+        jShare: "100".obs,
+        description: "Description 2".obs,
+        publish: "4 jam yang lalu".obs),
   ]);
 
   Rx<List<GeneralNewsItemModel>> generalNewsItemList = Rx([
     GeneralNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
+        title: "Title 1".obs,
+        description: "Deescription 1".obs,
         publish: "4 jam yang lalu".obs,
         jLike: "100".obs,
         jSave: "100".obs,
@@ -63,10 +69,8 @@ class HomeModel {
     GeneralNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
+        title: "Title 1".obs,
+        description: "Description 1".obs,
         publish: "4 jam yang lalu".obs,
         jLike: "100".obs,
         jSave: "100".obs,
@@ -74,10 +78,8 @@ class HomeModel {
     GeneralNewsItemModel(
         category: "Politik".obs,
         politik1: "Politik".obs,
-        title: "Britania Raya Resmi Menarik Diri dari Uni Eropa".obs,
-        description:
-            "Keputusan Inggris sudah bulat untuk meninggalkan uni eropa setelah mengganti mata uang mereka menjadi poundsterling"
-                .obs,
+        title: "Title 2".obs,
+        description: "Description 2".obs,
         publish: "4 jam yang lalu".obs,
         jLike: "100".obs,
         jSave: "100".obs,

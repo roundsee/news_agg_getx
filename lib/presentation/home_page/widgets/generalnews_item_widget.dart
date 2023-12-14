@@ -38,7 +38,7 @@ class GeneralNewsItemWidget extends StatelessWidget {
               borderRadius: BorderRadiusStyle.roundedBorder5,
             ),
             child: Container(
-              height: 75.v,
+              height: 90.v,
               width: 287.h,
               decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
                 borderRadius: BorderRadiusStyle.roundedBorder5,

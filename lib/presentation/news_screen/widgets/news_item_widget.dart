@@ -158,7 +158,7 @@ class NewsItemWidget extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  SizedBox(height: 35.v),
+                                  SizedBox(height: 30.v),
                                   Container(
                                     width: 33.h,
                                     padding: EdgeInsets.all(5.h),

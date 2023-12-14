@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     SizedBox(height: 11.v),
                     _buildSelectedNewsSection(),
                     SizedBox(height: 10.v),
-                    //  _buildNinetyFourSection()
+                    _buildGeneralNewsSection(),
                   ])
                 ])))));
   }
@@ -195,7 +195,7 @@ class HomePage extends StatelessWidget {
     return Obx(() => GridView.builder(
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisExtent: 200.v,
+            mainAxisExtent: 150.v,
             crossAxisCount: 3,
             mainAxisSpacing: 10.h,
             crossAxisSpacing: 10.h),
