@@ -239,9 +239,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
   onTapSignIn() {
     // ignore: unnecessary_statements
     LoginPageController().loginWithEmail();
-    //Get.toNamed(
-    //  AppRoutes.alternativeHomePageDesignContainerScreen,
-    // );
+    Get.toNamed(AppRoutes.homePageWithTabPage);
   }
 
   /// Navigates to the registerPageScreen when the action is triggered.

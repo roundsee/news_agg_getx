@@ -1,0 +1,29 @@
+{
+    "project_info": {
+      "project_number": "690432680411",
+      "project_id": "newscoll-903b4",
+      "storage_bucket": "newscoll-903b4.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:690432680411:android:93c8f24c42a5259d4847fe",
+          "android_client_info": {
+            "package_name": "com.goodnews.app"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyCBAvt9zSbLcu50L7mT8Bg4Jt4U7JqkF_Y"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

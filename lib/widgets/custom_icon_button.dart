@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
 class CustomIconButton extends StatelessWidget {
-  CustomIconButton({
-    Key? key,
-    this.alignment,
-    this.height,
-    this.width,
-    this.padding,
-    this.decoration,
-    this.child,
-    this.onTap,
-  }) : super(
+  CustomIconButton(
+      {Key? key,
+      this.alignment,
+      this.height,
+      this.width,
+      this.padding,
+      this.decoration,
+      this.child,
+      this.onTap,
+      this.category})
+      : super(
           key: key,
         );
 
@@ -26,6 +27,8 @@ class CustomIconButton extends StatelessWidget {
   final BoxDecoration? decoration;
 
   final Widget? child;
+
+  final String? category;
 
   final VoidCallback? onTap;
 

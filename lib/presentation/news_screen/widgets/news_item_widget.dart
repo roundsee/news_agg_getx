@@ -1,4 +1,3 @@
-import '../controller/news_controller.dart';
 import '../models/news_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -14,7 +13,7 @@ class NewsItemWidget extends StatelessWidget {
 
   NewsItemModel newsItemModelObj;
 
-  var controller = Get.find<NewsController>();
+  // var controller = Get.find<NewsController>();
 
   @override
   Widget build(BuildContext context) {

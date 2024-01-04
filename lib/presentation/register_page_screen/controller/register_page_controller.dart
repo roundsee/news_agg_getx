@@ -40,8 +40,7 @@ class RegisterPageController extends GetxController {
     try {
       var headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'admin@news-aggregator.com',
-        'User-Agent': 'LENOVO ideapad 3'
+        'Authorization': 'admin@news-aggregator.com'
       };
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.registerEmail);

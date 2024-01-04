@@ -1,6 +1,7 @@
+import 'package:new_agg/core/controllers/news_controller.dart';
+
 import '../news_screen/widgets/news_item_widget.dart';
-import 'controller/news_controller.dart';
-import 'models/news_item_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/widgets/app_bar/appbar_leading_image.dart';
@@ -8,145 +9,369 @@ import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
 import 'package:new_agg/widgets/custom_text_form_field.dart';
 
-class NewsScreen extends GetWidget<NewsController> {
-  const NewsScreen({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class NewsScreen extends StatelessWidget {
+  NewsScreen({Key? key}) : super(key: key);
+
+  NewsController controller = Get.put(NewsController());
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+    // controller from GetView
+
+//    return controller.obx(
+//      (state) {
+    //============================
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(),
-            body: SizedBox(
-                width: mediaQueryData.size.width,
-                child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: 19.v),
-                    child: Padding(
-                        padding: EdgeInsets.only(bottom: 5.v),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: 238.h,
-                                  margin: EdgeInsets.only(left: 28.h),
-                                  child: Text("msg_elon_musk_memaksa2".tr,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: CustomTextStyles
-                                          .titleMediumInterSemiBold)),
-                              SizedBox(height: 7.v),
+      resizeToAvoidBottomInset: false,
+      appBar: _buildAppBar(),
+      body: SizedBox(
+          width: mediaQueryData.size.width,
+          child: SingleChildScrollView(
+              padding: EdgeInsets.only(top: 19.v),
+              child: Padding(
+                  padding: EdgeInsets.only(bottom: 5.v),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            width: 238.h,
+                            margin: EdgeInsets.only(left: 28.h),
+                            child: Text(
+                                //controller.newsModelObj.value.data!
+                                //    .content!.title.obs
+                                controller.title.value.toString(),
+                                //controller.newsModelObj.value!.data!
+                                //    .content!.title!
+                                //    .toString(), //  "msg_elon_musk_memaksa2".tr,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    CustomTextStyles.titleMediumInterSemiBold)),
+                        SizedBox(height: 7.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 30.h),
+                            child: Text("msg_lorem_ipsum_dolor".tr,
+                                style: CustomTextStyles.titleSmallBluegray900)),
+                        SizedBox(height: 8.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 28.h),
+                            child: Text("test",
+                                //controller
+                                //    .newsModelObj.value.data!.content!.author
+                                //    .toString(),
+                                style: CustomTextStyles.bodySmallGray70002)),
+                        SizedBox(height: 5.v),
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                                width: 307.h,
+                                margin:
+                                    EdgeInsets.only(left: 25.h, right: 28.h),
+                                child: Text("msg_lorem_ipsum_dolor2".tr,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: CustomTextStyles.labelLargeMedium))),
+                        SizedBox(height: 14.v),
+                        ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(10), // Image border
+                          child: SizedBox.fromSize(
+                            size: Size.fromRadius(48), // Image radius
+                            child: Image.network(
+                                controller.imgUrl.value.toString(),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        //CustomImageView(
+                        //    imagePath: controller.imgUrl.value.toString(),
+                        //.newsModelObj.value.data!.content!.header
+                        //.toString(), //ImageConstant.imgRectangle8,
+                        //    height: 223.v,
+                        //    width: 307.h,
+                        //    alignment: Alignment.center),
+                        SizedBox(height: 14.v),
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                                width: 307.h,
+                                margin:
+                                    EdgeInsets.only(left: 25.h, right: 28.h),
+                                child: Text(controller.description.toString(),
+                                    //.newsModelObj.value.data!.content!.body
+                                    // .toString(),
+                                    maxLines: 26,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: CustomTextStyles.labelLargeMedium))),
+                        SizedBox(height: 17.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 25.h),
+                            child: Row(children: [
+                              _buildFrameThirtySeven(
+                                  userImage:
+                                      ImageConstant.imgSolarHeartBoldRed70001,
+                                  userLabel: controller.like.toString()),
+                              // .newsModelObj.value.data!
+                              //    .content!.statistics!.like
+                              //    .toString()),
                               Padding(
-                                  padding: EdgeInsets.only(left: 30.h),
-                                  child: Text("msg_lorem_ipsum_dolor".tr,
-                                      style: CustomTextStyles
-                                          .titleSmallBluegray900)),
-                              SizedBox(height: 8.v),
+                                  padding: EdgeInsets.only(left: 10.h),
+                                  child: _buildFrameThirtySeven(
+                                      userImage: ImageConstant
+                                          .imgPhBookmarkSimpleFillOnerror,
+                                      userLabel: controller.jlike.toString())
+                                  //controller.newsModelObj.value
+                                  //    .data!.content!.statistics!.save
+                                  //    .toString())
+                                  ),
                               Padding(
-                                  padding: EdgeInsets.only(left: 28.h),
-                                  child: Text("msg_author_remar".tr,
-                                      style:
-                                          CustomTextStyles.bodySmallGray70002)),
-                              SizedBox(height: 5.v),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                      width: 307.h,
-                                      margin: EdgeInsets.only(
-                                          left: 25.h, right: 28.h),
-                                      child: Text("msg_lorem_ipsum_dolor2".tr,
-                                          maxLines: 5,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: CustomTextStyles
-                                              .labelLargeMedium))),
-                              SizedBox(height: 14.v),
-                              CustomImageView(
-                                  imagePath: ImageConstant.imgRectangle8,
-                                  height: 223.v,
-                                  width: 307.h,
-                                  alignment: Alignment.center),
-                              SizedBox(height: 14.v),
-                              Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                      width: 307.h,
-                                      margin: EdgeInsets.only(
-                                          left: 25.h, right: 28.h),
-                                      child: Text("msg_lorem_ipsum_dolor3".tr,
-                                          maxLines: 26,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: CustomTextStyles
-                                              .labelLargeMedium))),
-                              SizedBox(height: 17.v),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 25.h),
-                                  child: Row(children: [
-                                    _buildFrameThirtySeven(
-                                        userImage: ImageConstant
-                                            .imgSolarHeartBoldRed70001,
-                                        userLabel: "lbl_100".tr),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.h),
-                                        child: _buildFrameThirtySeven(
-                                            userImage: ImageConstant
-                                                .imgPhBookmarkSimpleFillOnerror,
-                                            userLabel: "lbl_100".tr)),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.h),
-                                        child: _buildFrameThirtySeven(
-                                            userImage: ImageConstant
-                                                .imgMajesticonsShareCircle,
-                                            userLabel: "lbl_100".tr))
-                                  ])),
-                              SizedBox(height: 19.v),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: CustomTextFormField(
-                                      controller:
-                                          controller.frameFiftyNineController,
-                                      hintText: "msg_tambahkan_komentar".tr,
-                                      hintStyle:
-                                          CustomTextStyles.bodySmallGray60003,
-                                      textInputAction: TextInputAction.done,
-                                      alignment: Alignment.center,
-                                      borderDecoration:
-                                          TextFormFieldStyleHelper.fillBlueGray,
-                                      fillColor: appTheme.blueGray100)),
-                              SizedBox(height: 16.v),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: _buildFrameSixtySix(
-                                      userName: "lbl_ronsi".tr,
-                                      hCounter: "lbl_6_h".tr,
-                                      message: "msg_apakah_tidak_masalah".tr,
-                                      wpfLike: ImageConstant.imgWpfLike,
-                                      likesCounter: "lbl_40_likes".tr,
-                                      reply: "lbl_reply".tr,
-                                      viewMoreReplies:
-                                          "msg_view_more_54_replies".tr)),
-                              SizedBox(height: 17.v),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: _buildFrameSixtySix(
-                                      userName: "lbl_ronsi".tr,
-                                      hCounter: "lbl_6_h".tr,
-                                      message: "msg_apakah_tidak_masalah".tr,
-                                      wpfLike: ImageConstant.imgWpfLikeGray900,
-                                      likesCounter: "lbl_40_likes".tr,
-                                      reply: "lbl_reply".tr,
-                                      viewMoreReplies:
-                                          "msg_view_more_54_replies".tr)),
-                              SizedBox(height: 31.v),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 20.h),
-                                  child: Text("lbl_berita_serupa".tr,
-                                      style: theme.textTheme.labelLarge)),
-                              SizedBox(height: 8.v),
-                              _buildNews()
-                            ]))))));
+                                padding: EdgeInsets.only(left: 10.h),
+                                child: _buildFrameThirtySeven(
+                                    userImage:
+                                        ImageConstant.imgMajesticonsShareCircle,
+                                    userLabel: controller.jshare.toString()),
+                                //controller.newsModelObj.value
+                                // .data!.content!.statistics!.share
+                                //.toString())
+                              )
+                            ])),
+                        SizedBox(height: 19.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 25.h, right: 28.h),
+                            child: CustomTextFormField(
+                                //controller:
+                                //    controller.frameFiftyNineController,
+                                hintText: "msg_tambahkan_komentar".tr,
+                                hintStyle: CustomTextStyles.bodySmallGray60003,
+                                textInputAction: TextInputAction.done,
+                                alignment: Alignment.center,
+                                borderDecoration:
+                                    TextFormFieldStyleHelper.fillBlueGray,
+                                fillColor: appTheme.blueGray100)),
+                        SizedBox(height: 16.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 25.h, right: 28.h),
+                            child: _buildFrameSixtySix(
+                                userName: "lbl_ronsi".tr,
+                                hCounter: "lbl_6_h".tr,
+                                message: "msg_apakah_tidak_masalah".tr,
+                                wpfLike: ImageConstant.imgWpfLike,
+                                likesCounter: "lbl_40_likes".tr,
+                                reply: "lbl_reply".tr,
+                                viewMoreReplies:
+                                    "msg_view_more_54_replies".tr)),
+                        SizedBox(height: 17.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 25.h, right: 28.h),
+                            child: _buildFrameSixtySix(
+                                userName: "lbl_ronsi".tr,
+                                hCounter: "lbl_6_h".tr,
+                                message: "msg_apakah_tidak_masalah".tr,
+                                wpfLike: ImageConstant.imgWpfLikeGray900,
+                                likesCounter: "lbl_40_likes".tr,
+                                reply: "lbl_reply".tr,
+                                viewMoreReplies:
+                                    "msg_view_more_54_replies".tr)),
+                        SizedBox(height: 31.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20.h),
+                            child: Text("lbl_berita_serupa".tr,
+                                style: theme.textTheme.labelLarge)),
+                        SizedBox(height: 8.v),
+                        _buildNews()
+                      ])))),
+      /**
+              onLoading: Container(
+                  child: Center(
+                child: SizedBox(
+                  child: CircularProgressIndicator(),
+                  height: 100.0,
+                  width: 100.0,
+                ),
+              )),
+              */
+    ));
+
+    //==============================
+//      },
+
+//    );
+/*
+    mediaQueryData = MediaQuery.of(context);
+
+    if (controller.isLoading.value) {
+      return CircularProgressIndicator();
+    } else {
+      return SafeArea(
+          child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: _buildAppBar(),
+              body: SizedBox(
+                  width: mediaQueryData.size.width,
+                  child: SingleChildScrollView(
+                      padding: EdgeInsets.only(top: 19.v),
+                      child: Padding(
+                          padding: EdgeInsets.only(bottom: 5.v),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    width: 238.h,
+                                    margin: EdgeInsets.only(left: 28.h),
+                                    child: Text(
+                                        controller.newsModelObj.value!.data!
+                                            .content!.title!
+                                            .toString(), //  "msg_elon_musk_memaksa2".tr,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: CustomTextStyles
+                                            .titleMediumInterSemiBold)),
+                                SizedBox(height: 7.v),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 30.h),
+                                    child: Text("msg_lorem_ipsum_dolor".tr,
+                                        style: CustomTextStyles
+                                            .titleSmallBluegray900)),
+                                SizedBox(height: 8.v),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 28.h),
+                                    child: Text(
+                                        controller.newsModelObj.value.data!
+                                            .content!.author
+                                            .toString(),
+                                        style: CustomTextStyles
+                                            .bodySmallGray70002)),
+                                SizedBox(height: 5.v),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                        width: 307.h,
+                                        margin: EdgeInsets.only(
+                                            left: 25.h, right: 28.h),
+                                        child: Text("msg_lorem_ipsum_dolor2".tr,
+                                            maxLines: 5,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: CustomTextStyles
+                                                .labelLargeMedium))),
+                                SizedBox(height: 14.v),
+                                CustomImageView(
+                                    imagePath: controller.newsModelObj.value
+                                        .data!.content!.header
+                                        .toString(), //ImageConstant.imgRectangle8,
+                                    height: 223.v,
+                                    width: 307.h,
+                                    alignment: Alignment.center),
+                                SizedBox(height: 14.v),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                        width: 307.h,
+                                        margin: EdgeInsets.only(
+                                            left: 25.h, right: 28.h),
+                                        child: Text(
+                                            controller.newsModelObj.value.data!
+                                                .content!.body
+                                                .toString(),
+                                            maxLines: 26,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: CustomTextStyles
+                                                .labelLargeMedium))),
+                                SizedBox(height: 17.v),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 25.h),
+                                    child: Row(children: [
+                                      _buildFrameThirtySeven(
+                                          userImage: ImageConstant
+                                              .imgSolarHeartBoldRed70001,
+                                          userLabel: controller
+                                              .newsModelObj
+                                              .value
+                                              .data!
+                                              .content!
+                                              .statistics!
+                                              .like
+                                              .toString()),
+                                      Padding(
+                                          padding: EdgeInsets.only(left: 10.h),
+                                          child: _buildFrameThirtySeven(
+                                              userImage: ImageConstant
+                                                  .imgPhBookmarkSimpleFillOnerror,
+                                              userLabel: controller
+                                                  .newsModelObj
+                                                  .value
+                                                  .data!
+                                                  .content!
+                                                  .statistics!
+                                                  .save
+                                                  .toString())),
+                                      Padding(
+                                          padding: EdgeInsets.only(left: 10.h),
+                                          child: _buildFrameThirtySeven(
+                                              userImage: ImageConstant
+                                                  .imgMajesticonsShareCircle,
+                                              userLabel: controller
+                                                  .newsModelObj
+                                                  .value
+                                                  .data!
+                                                  .content!
+                                                  .statistics!
+                                                  .share
+                                                  .toString()))
+                                    ])),
+                                SizedBox(height: 19.v),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.h, right: 28.h),
+                                    child: CustomTextFormField(
+                                        //controller:
+                                        //    controller.frameFiftyNineController,
+                                        hintText: "msg_tambahkan_komentar".tr,
+                                        hintStyle:
+                                            CustomTextStyles.bodySmallGray60003,
+                                        textInputAction: TextInputAction.done,
+                                        alignment: Alignment.center,
+                                        borderDecoration:
+                                            TextFormFieldStyleHelper
+                                                .fillBlueGray,
+                                        fillColor: appTheme.blueGray100)),
+                                SizedBox(height: 16.v),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.h, right: 28.h),
+                                    child: _buildFrameSixtySix(
+                                        userName: "lbl_ronsi".tr,
+                                        hCounter: "lbl_6_h".tr,
+                                        message: "msg_apakah_tidak_masalah".tr,
+                                        wpfLike: ImageConstant.imgWpfLike,
+                                        likesCounter: "lbl_40_likes".tr,
+                                        reply: "lbl_reply".tr,
+                                        viewMoreReplies:
+                                            "msg_view_more_54_replies".tr)),
+                                SizedBox(height: 17.v),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.h, right: 28.h),
+                                    child: _buildFrameSixtySix(
+                                        userName: "lbl_ronsi".tr,
+                                        hCounter: "lbl_6_h".tr,
+                                        message: "msg_apakah_tidak_masalah".tr,
+                                        wpfLike:
+                                            ImageConstant.imgWpfLikeGray900,
+                                        likesCounter: "lbl_40_likes".tr,
+                                        reply: "lbl_reply".tr,
+                                        viewMoreReplies:
+                                            "msg_view_more_54_replies".tr)),
+                                SizedBox(height: 31.v),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 20.h),
+                                    child: Text("lbl_berita_serupa".tr,
+                                        style: theme.textTheme.labelLarge)),
+                                SizedBox(height: 8.v),
+                                _buildNews()
+                              ]))))));
+    */
+    // if loaded
   }
 
   /// Section Widget
@@ -172,19 +397,24 @@ class NewsScreen extends GetWidget<NewsController> {
 
   /// Section Widget
   Widget _buildNews() {
-    return SizedBox(
+    return SizedBox(height: 333, child: Text("ddd"));
+    /* return SizedBox(
         height: 199.v,
         child: Obx(() => ListView.separated(
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) {
               return SizedBox(width: 10.h);
             },
+            /*
             itemCount: controller.newsModelObj.value.newsItemList.value.length,
             itemBuilder: (context, index) {
               NewsItemModel model =
                   controller.newsModelObj.value.newsItemList.value[index];
               return NewsItemWidget(model);
-            })));
+
+            }*/
+            )));
+       */
   }
 
   /// Common widget

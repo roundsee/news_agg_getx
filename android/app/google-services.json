@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "182055279876",
+    "project_id": "erp-r17-8a05f",
+    "storage_bucket": "erp-r17-8a05f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182055279876:android:d1f07f4f1517a498310451",
+        "android_client_info": {
+          "package_name": "co.id.r17.erp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZmucglUIT59UX1UzPZWkc1EjpwLm__BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182055279876-g6v0uck1nbae7iullphiu4sd63p0l841.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.odooInternal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182055279876:android:c075ad806b9eeb8d310451",
+        "android_client_info": {
+          "package_name": "com.dps.nooz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZmucglUIT59UX1UzPZWkc1EjpwLm__BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182055279876-g6v0uck1nbae7iullphiu4sd63p0l841.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.odooInternal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182055279876:android:4d3cb5387923501b310451",
+        "android_client_info": {
+          "package_name": "com.example.odoo_internal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZmucglUIT59UX1UzPZWkc1EjpwLm__BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182055279876-jrfrvec4njaejv4o8e2633amk58tvdqb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182055279876-g6v0uck1nbae7iullphiu4sd63p0l841.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.odooInternal"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

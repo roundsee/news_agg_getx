@@ -1,7 +1,10 @@
+import 'package:new_agg/presentation/home_page/controller/home_content_controller.dart';
+//import 'package:new_agg/presentation/home_page/models/news_per_category.dart';
+import 'package:new_agg/core/models/content_per_category.dart';
 import 'widgets/selected_item_widget.dart';
 import 'widgets/generalnews_item_widget.dart';
 import 'widgets/recommended_item_widget.dart';
-import 'controller/home_controller.dart';
+import 'controller/unused_home_controller.dart';
 import 'models/selectednews_item_model.dart';
 import 'models/home_model.dart';
 import 'models/generalnews_item_model.dart';
@@ -12,9 +15,10 @@ import 'package:new_agg/core/app_export.dart';
 // ignore_for_file: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
+  //final Content selectedNews;  // List Recommended News
 
-  HomeController controller = Get.put(HomeController(HomeModel().obs));
-
+  HomeContentCategoryController homeController =
+      Get.put(HomeContentCategoryController());
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -30,9 +34,9 @@ class HomePage extends StatelessWidget {
                     SizedBox(height: 9.v),
                     _buildCardNewsSection(),
                     SizedBox(height: 20.v),
-                    _buildRecommendationSection(),
+                    //    _buildRecommendationSection(),
                     SizedBox(height: 8.v),
-                    _RecommendedSection(),
+                    //   _RecommendedSection(),
                     SizedBox(height: 20.v),
                     Align(
                         alignment: Alignment.centerLeft,
@@ -42,9 +46,9 @@ class HomePage extends StatelessWidget {
                                 style:
                                     CustomTextStyles.titleSmallBlack900Bold))),
                     SizedBox(height: 11.v),
-                    _buildSelectedNewsSection(),
+                    //   _buildSelectedNewsSection(),
                     SizedBox(height: 10.v),
-                    _buildGeneralNewsSection(),
+                    //   _buildGeneralNewsSection(),
                   ])
                 ])))));
   }
@@ -62,14 +66,16 @@ class HomePage extends StatelessWidget {
 
   /// Section Widget
   Widget _buildCardNewsSection() {
-    String imageUrl = "https://dimensy.id/assets/images/about/about-us1.jpg";
+    String imageUrl =
+        "http://eaec-103-124-115-148.ngrok-free.app/storage/images/657a6ee95780b.jpg";
     String id = "id";
     String url = "";
-    String publishAt = "hari ini";
-    String strCategory = " Category";
+    String publishAt = "2023-11-26 07:07:54";
+    String strCategory = "Law";
     String description = "Description";
-    String strSlug = "hdhdhksjdks aksd akd";
-    String title = "Title";
+    String strSlug =
+        "http://d0da-103-124-115-148.ngrok-free.app/app/news/est-saepe-error-voluptatem-sequi-consequatur-quis";
+    String title = "Qui et quo animi ut est dolores quaerat amet.";
     int jLike = 1;
     int jSave = 2;
     int jShare = 3;
@@ -92,8 +98,8 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadiusStyle.roundedBorder5,
                       image: DecorationImage(
-                          image: NetworkImage(
-                              imageUrl), // AssetImage(ImageConstant.imgFrame40),
+                          image: NetworkImage(imageUrl),
+                          // AssetImage(ImageConstant.imgFrame40),
                           fit: BoxFit.cover)),
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -172,6 +178,7 @@ class HomePage extends StatelessWidget {
   }
 
   /// Section Widget
+  /*
   Widget _RecommendedSection() {
     return Padding(
         padding: EdgeInsets.only(left: 26.h, right: 23.h),
@@ -189,8 +196,10 @@ class HomePage extends StatelessWidget {
               return RecommendedItemWidget(model);
             })));
   }
+  */
 
   /// Section Widget
+  /*
   Widget _buildSelectedNewsSection() {
     return Obx(() => GridView.builder(
         shrinkWrap: true,
@@ -208,8 +217,9 @@ class HomePage extends StatelessWidget {
           return SelectedNewsItemWidget(model);
         }));
   }
-
+*/
   /// Section Widget
+/*
   Widget _buildGeneralNewsSection() {
     return Padding(
         padding: EdgeInsets.only(left: 20.h, right: 23.h),
@@ -220,14 +230,14 @@ class HomePage extends StatelessWidget {
               return SizedBox(height: 10.v);
             },
             itemCount:
-                controller.homeModelObj.value.generalNewsItemList.value.length,
+                homeController.listContent!.length,
             itemBuilder: (context, index) {
               GeneralNewsItemModel model = controller
                   .homeModelObj.value.generalNewsItemList.value[index];
               return GeneralNewsItemWidget(model);
             })));
   }
-
+*/
   /// Common widget
   Widget _buildFrameThirtySeven({
     required String userImage,

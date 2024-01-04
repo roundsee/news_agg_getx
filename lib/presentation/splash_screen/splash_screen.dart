@@ -35,6 +35,8 @@ class SplashScreen extends GetWidget<SplashController> {
                 width: 157.h,
                 onTap: () {
                   if (strToken != "") {
+                    //homePageWithTabPage
+                    // Get.toNamed(AppRoutes.homePageWithTabPage);
                     Get.toNamed(
                         AppRoutes.alternativeHomePageDesignContainerScreen);
                   } else {

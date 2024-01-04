@@ -1,3 +1,9 @@
+import 'package:new_agg/presentation/home_page_with_tab_page/binding/home_page_with_tab_page_binding.dart';
+import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
+import 'package:new_agg/presentation/page_recommended_list/binding/rrecommended_list_binding.dart';
+import 'package:new_agg/presentation/page_recommended_list/page_recommended_list.dart';
+import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
+import 'package:new_agg/presentation/page_search_category/binding/page_search_category_binding.dart';
 import 'package:new_agg/presentation/splash_screen/splash_screen.dart';
 import 'package:new_agg/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:new_agg/presentation/forgot_pass_two_screen/forgot_pass_two_screen.dart';
@@ -24,8 +30,8 @@ import 'package:new_agg/presentation/settings_screen/settings_screen.dart';
 import 'package:new_agg/presentation/settings_screen/binding/settings_binding.dart';
 import 'package:new_agg/presentation/register_page_screen/register_page_screen.dart';
 import 'package:new_agg/presentation/register_page_screen/binding/register_page_binding.dart';
-import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
-import 'package:new_agg/presentation/select_fav_category_screen/binding/select_fav_category_binding.dart';
+//import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
+//import 'package:new_agg/presentation/select_fav_category_screen/binding/select_fav_category_binding.dart';
 import 'package:new_agg/presentation/filter_search_screen/filter_search_screen.dart';
 import 'package:new_agg/presentation/filter_search_screen/binding/filter_search_binding.dart';
 import 'package:new_agg/presentation/notification_screen/notification_screen.dart';
@@ -79,6 +85,8 @@ class AppRoutes {
   static const String homePage = '/home_page';
 
   static const String homePageWithTabPage = '/home_page_with_tab_page';
+  static const String pageSearchCategory = '/page_search_category';
+  static const String pageRecommendedList = '/page_recommended_list';
 
   static const String alternativeHomePageDesignContainerScreen =
       '/alternative_home_page_design_container_screen';
@@ -173,7 +181,30 @@ class AppRoutes {
         LoginPageBinding(),
       ],
     ),
-    
+    GetPage(
+      //homePageWithTabPage
+      name: homePageWithTabPage,
+      page: () => HomePageWithTabPage(),
+      bindings: [
+        HomePageWithTabPageBinding(),
+      ],
+    ),
+    GetPage(
+      //homePageWithTabPage
+      name: pageSearchCategory,
+      page: () => PageSearchCategory(),
+      bindings: [
+        PageSearchCategoryBinding(),
+      ],
+    ),
+    GetPage(
+      //homePageWithTabPage
+      name: pageRecommendedList,
+      page: () => PageRecommendedList(),
+      bindings: [
+        RecommendedListBinding(),
+      ],
+    ),
     GetPage(
       name: alternativeHomePageDesignContainerScreen,
       page: () => AlternativeHomePageDesignContainerScreen(),
@@ -216,6 +247,7 @@ class AppRoutes {
         RegisterPageBinding(),
       ],
     ),
+    /*
     GetPage(
       name: selectFavCategoryScreen,
       page: () => SelectFavCategoryScreen(),
@@ -223,6 +255,7 @@ class AppRoutes {
         SelectFavCategoryBinding(),
       ],
     ),
+    */
     GetPage(
       name: filterSearchScreen,
       page: () => FilterSearchScreen(),

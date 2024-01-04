@@ -1,7 +1,8 @@
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
-import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
+//import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
 import 'package:new_agg/presentation/home_page/home_page.dart';
+import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
 import 'package:new_agg/presentation/login_page_screen/models/login_page_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
@@ -49,10 +50,16 @@ class LoginPageController extends GetxController {
       print(response);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
+        var token = json['data']['access_token'];
+        final SharedPreferences? prefs = await _prefs;
+        await prefs?.setString('token', token);
+
+        emailController.clear();
+        passwordController.clear();
 
         if (json['data']['user']['status'] == 1) {
           // Get.off(SelectFavCategoryScreen());
-          Get.off((HomePage));
+          Get.off((HomePageWithTabPage));
         }
 
         //if (json['code'] == 0) {
@@ -114,7 +121,7 @@ class LoginPageController extends GetxController {
           nameController.clear();
           emailController.clear();
           passwordController.clear();
-          Get.off(HomePage());
+          Get.off(HomePageWithTabPage());
         } else {
           throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
         }

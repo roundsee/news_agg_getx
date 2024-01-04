@@ -1,4 +1,5 @@
-import '../controller/news_controller.dart';
+import 'package:new_agg/core/controllers/news_controller.dart';
+
 import 'package:get/get.dart';
 
 /// A binding class for the NewsScreen.
