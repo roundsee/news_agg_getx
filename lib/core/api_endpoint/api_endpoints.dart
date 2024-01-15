@@ -6,6 +6,8 @@ class ApiEndPoints {
   static _CategoryEndPoints categoryEndpoints = _CategoryEndPoints();
   static _ContentEndPoints contentEndpoints = _ContentEndPoints();
   static _SearchEndPoints searchEndpoints = _SearchEndPoints();
+  static _HistoryEndPoints historyEndpoints = _HistoryEndPoints();
+  static _InteractionEndPoints interactionEndpoints = _InteractionEndPoints();
 }
 
 class _AuthEndPoints {
@@ -13,10 +15,22 @@ class _AuthEndPoints {
   final String registerSSO = 'readers/registersso';
   final String loginEmail = 'readers/login';
   final String loginSSO = 'readers/loginsso';
+  final String logout = 'readers/loginout';
+  final String profile = 'readers/profile';
 }
 
 class _SearchEndPoints {
-  final String registerEmail = 'search';
+  final String searchtext = 'search';
+}
+
+class _InteractionEndPoints {
+  final String like = 'interaction/like';
+  final String save = 'interaction/save';
+  final String share = 'interaction/share';
+}
+
+class _HistoryEndPoints {
+  final String history = 'history';
 }
 
 class _CategoryEndPoints {
@@ -29,6 +43,7 @@ class _ContentEndPoints {
   final String CategoryContent = 'contents/categories';
   final String RecommendedContent = 'contents/recommendation';
   final String TrendingContent = 'contents/trending';
+
   final String SuggestedContent = 'contents/suggested';
   final String DetailContent = 'contents/single';
 }

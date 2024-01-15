@@ -5,19 +5,19 @@ import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
-
-import '../history_page/widgets/historypage_item_widget.dart';
-import 'controller/history_controller.dart';
+import 'package:new_agg/core/models/newtrending_model.dart';
+//import '../history_page/widgets/historypage_item_widget.dart';
+import 'controller/new_trending_controller.dart';
 import 'models/history_model.dart';
 import 'models/historypage_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
 // ignore_for_file: must_be_immutable
-class HistoryPage extends StatelessWidget {
-  HistoryPage({Key? key}) : super(key: key);
+class NewTrendingPage extends StatelessWidget {
+  NewTrendingPage({Key? key}) : super(key: key);
 
-  HistoryController controller = Get.put(HistoryController());
+  NewTrendingController controller = Get.put(NewTrendingController());
   CategoriesController categoriesController = Get.put(CategoriesController());
 
   @override
@@ -91,20 +91,22 @@ class HistoryPage extends StatelessWidget {
     ScrollController _controller = new ScrollController();
     return Padding(
         padding: EdgeInsets.only(left: 20.h, right: 23.h),
-        child: Obx(() => Container(
+        child: Obx(
+          () => Container(
               child: ListView(
                   physics: const NeverScrollableScrollPhysics(), // new
                   controller: _controller,
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  children:
-                      List.generate(controller.listHistory!.length, (index) {
-                    return _buildCardHistory(controller.listHistory[index]);
-                  })),
-            )));
+                  children: []
+                  //    List.generate(controller.listTrending!.length, (index) {
+                  //  return _buildCardHistory(controller.listTrending[index]);
+                  // }
+                  )),
+        ));
   }
 
-  Widget _buildCardHistory(Content itemHistory) {
+  Widget _buildCardHistory(itemHistory) {
     return GestureDetector(
       onTap: () {
         onTapCardNews!.call(itemHistory.id);

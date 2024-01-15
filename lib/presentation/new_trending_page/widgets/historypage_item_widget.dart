@@ -1,6 +1,6 @@
 import 'package:new_agg/core/models/history_model.dart';
 
-import '../controller/history_controller.dart';
+//import '../controller/history_controller.dart';
 import '../models/historypage_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -17,7 +17,7 @@ class HistorypageItemWidget extends StatelessWidget {
 
   Content historypageItemModelObj;
 
-  var controller = Get.find<HistoryController>();
+  //var controller = Get.find<HistoryController>();
 
   VoidCallback? onTapCardNews;
 

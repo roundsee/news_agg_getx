@@ -31,23 +31,25 @@ class NewsonelistItemWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               top: 139.v,
-              bottom: 7.v,
+              bottom: 5.v,
             ),
-            child: Column(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgSolarHeartBold,
-                  height: 20.adaptSize,
-                  width: 20.adaptSize,
-                ),
-                SizedBox(height: 3.v),
-                Obx(
-                  () => Text(
-                    newsonelistItemModelObj.oneHundred!.value,
-                    style: theme.textTheme.bodySmall,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.imgSolarHeartBold,
+                    height: 10.adaptSize,
+                    width: 20.adaptSize,
                   ),
-                ),
-              ],
+                  SizedBox(height: 2.v),
+                  Obx(
+                    () => Text(
+                      newsonelistItemModelObj.oneHundred!.value,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(
@@ -56,21 +58,23 @@ class NewsonelistItemWidget extends StatelessWidget {
               top: 139.v,
               bottom: 7.v,
             ),
-            child: Column(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgPhBookmarkSimpleFill,
-                  height: 20.adaptSize,
-                  width: 20.adaptSize,
-                ),
-                SizedBox(height: 3.v),
-                Obx(
-                  () => Text(
-                    newsonelistItemModelObj.oneHundred1!.value,
-                    style: theme.textTheme.bodySmall,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.imgPhBookmarkSimpleFill,
+                    height: 20.adaptSize,
+                    width: 20.adaptSize,
                   ),
-                ),
-              ],
+                  SizedBox(height: 3.v),
+                  Obx(
+                    () => Text(
+                      newsonelistItemModelObj.oneHundred1!.value,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(
@@ -79,21 +83,23 @@ class NewsonelistItemWidget extends StatelessWidget {
               top: 139.v,
               bottom: 7.v,
             ),
-            child: Column(
-              children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgMajesticonsShareCircle,
-                  height: 20.adaptSize,
-                  width: 20.adaptSize,
-                ),
-                SizedBox(height: 3.v),
-                Obx(
-                  () => Text(
-                    newsonelistItemModelObj.oneHundred2!.value,
-                    style: theme.textTheme.bodySmall,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.imgMajesticonsShareCircle,
+                    height: 20.adaptSize,
+                    width: 20.adaptSize,
                   ),
-                ),
-              ],
+                  SizedBox(height: 3.v),
+                  Obx(
+                    () => Text(
+                      newsonelistItemModelObj.oneHundred2!.value,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -102,120 +108,128 @@ class NewsonelistItemWidget extends StatelessWidget {
                 left: 3.h,
                 bottom: 7.v,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    elevation: 0,
-                    margin: EdgeInsets.all(0),
-                    color: theme.colorScheme.onPrimaryContainer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusStyle.roundedBorder5,
-                    ),
-                    child: Container(
-                      height: 75.v,
-                      width: 287.h,
-                      decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 0,
+                      margin: EdgeInsets.all(0),
+                      color: theme.colorScheme.onPrimaryContainer,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusStyle.roundedBorder5,
                       ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                top: 8.v,
-                                right: 6.h,
-                              ),
-                              padding: EdgeInsets.all(5.h),
-                              decoration: AppDecoration.fillGray700021.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder5,
-                              ),
-                              child: Obx(
-                                () => Text(
-                                  newsonelistItemModelObj.politik!.value,
-                                  style: CustomTextStyles.bodySmallWhiteA700_1,
+                      child: Container(
+                        height: 75.v,
+                        width: 287.h,
+                        decoration:
+                            AppDecoration.fillOnPrimaryContainer.copyWith(
+                          borderRadius: BorderRadiusStyle.roundedBorder5,
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: 8.v,
+                                  right: 6.h,
+                                ),
+                                padding: EdgeInsets.all(5.h),
+                                decoration:
+                                    AppDecoration.fillGray700021.copyWith(
+                                  borderRadius:
+                                      BorderRadiusStyle.roundedBorder5,
+                                ),
+                                child: Obx(
+                                  () => Text(
+                                    newsonelistItemModelObj.politik!.value,
+                                    style:
+                                        CustomTextStyles.bodySmallWhiteA700_1,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              padding: EdgeInsets.all(10.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadiusStyle.roundedBorder5,
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    ImageConstant.imgFrame4175x287,
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(height: 35.v),
-                                  Container(
-                                    width: 33.h,
-                                    padding: EdgeInsets.all(5.h),
-                                    decoration:
-                                        AppDecoration.fillGray70002.copyWith(
-                                      borderRadius:
-                                          BorderRadiusStyle.roundedBorder5,
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                padding: EdgeInsets.all(5.h),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadiusStyle.roundedBorder5,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      ImageConstant.imgFrame4175x287,
                                     ),
-                                    child: Obx(
-                                      () => Text(
-                                        newsonelistItemModelObj.politik1!.value,
-                                        style: CustomTextStyles
-                                            .bodySmallWhiteA700_1,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(height: 25.v),
+                                    Container(
+                                      width: 33.h,
+                                      padding: EdgeInsets.all(5.h),
+                                      decoration:
+                                          AppDecoration.fillGray70002.copyWith(
+                                        borderRadius:
+                                            BorderRadiusStyle.roundedBorder5,
+                                      ),
+                                      child: Obx(
+                                        () => Text(
+                                          newsonelistItemModelObj
+                                              .politik1!.value,
+                                          style: CustomTextStyles
+                                              .bodySmallWhiteA700_1,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10.v),
-                  Container(
-                    width: 287.h,
-                    margin: EdgeInsets.only(right: 290.h),
-                    child: Obx(
+                    SizedBox(height: 10.v),
+                    Container(
+                      width: 287.h,
+                      margin: EdgeInsets.only(right: 290.h),
+                      child: Obx(
+                        () => Text(
+                          newsonelistItemModelObj.keputusanPrabowo!.value,
+                          maxLines: null,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.labelLarge,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 4.v),
+                    SizedBox(
+                      width: 201.h,
+                      child: Obx(
+                        () => Text(
+                          newsonelistItemModelObj.description!.value,
+                          maxLines: null,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 11.v),
+                    Obx(
                       () => Text(
-                        newsonelistItemModelObj.keputusanPrabowo!.value,
-                        maxLines: null,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelLarge,
+                        newsonelistItemModelObj.jamYangLalu!.value,
+                        style: CustomTextStyles.bodySmallGray600,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 4.v),
-                  SizedBox(
-                    width: 201.h,
-                    child: Obx(
-                      () => Text(
-                        newsonelistItemModelObj.description!.value,
-                        maxLines: null,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 11.v),
-                  Obx(
-                    () => Text(
-                      newsonelistItemModelObj.jamYangLalu!.value,
-                      style: CustomTextStyles.bodySmallGray600,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

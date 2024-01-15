@@ -8,11 +8,13 @@ import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
 import 'package:new_agg/widgets/custom_text_form_field.dart';
 
-class NewsOneScreen extends GetWidget<NewsOneController> {
-  const NewsOneScreen({Key? key}) : super(key: key);
+class NewsOneScreen extends GetView<NewsOneController> {
+  NewsOneScreen({Key? key}) : super(key: key);
 
+//NewsOneController Detailcontroller = Get.put(NewsOneController());
   @override
   Widget build(BuildContext context) {
+    Get.put(NewsOneController());
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
@@ -30,23 +32,30 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
                               Container(
                                   width: 238.h,
                                   margin: EdgeInsets.only(left: 28.h),
-                                  child: Text("msg_elon_musk_memaksa2".tr,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: CustomTextStyles
-                                          .titleMediumInterSemiBold)),
+                                  child: Obx(
+                                    () => Text(
+                                        controller.title.value.toString(),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: CustomTextStyles
+                                            .titleMediumInterSemiBold),
+                                  )),
                               SizedBox(height: 7.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 30.h),
-                                  child: Text("msg_lorem_ipsum_dolor".tr,
+                                  child: Text("Ini nampilin apa ya ?",
                                       style: CustomTextStyles
                                           .titleSmallBluegray900)),
                               SizedBox(height: 8.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 28.h),
-                                  child: Text("msg_author_remar".tr,
-                                      style:
-                                          CustomTextStyles.bodySmallGray70002)),
+                                  child: Obx(() => Text(
+                                      "Author:" +
+                                          controller.author.value.toString() +
+                                          ", " +
+                                          controller.publish.value.toString(),
+                                      style: CustomTextStyles
+                                          .bodySmallGray70002))),
                               SizedBox(height: 5.v),
                               Align(
                                   alignment: Alignment.center,
@@ -54,11 +63,13 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
                                       width: 307.h,
                                       margin: EdgeInsets.only(
                                           left: 25.h, right: 28.h),
-                                      child: Text("msg_lorem_ipsum_dolor2".tr,
+                                      child: Obx(() => Text(
+                                          controller.description.value
+                                              .toString(),
                                           maxLines: 5,
                                           overflow: TextOverflow.ellipsis,
                                           style: CustomTextStyles
-                                              .labelLargeMedium))),
+                                              .labelLargeMedium)))),
                               SizedBox(height: 14.v),
                               _buildOneStack(),
                               SizedBox(height: 14.v),
@@ -68,7 +79,10 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
                                       width: 307.h,
                                       margin: EdgeInsets.only(
                                           left: 25.h, right: 28.h),
-                                      child: Text("msg_lorem_ipsum_dolor3".tr,
+                                      child: Text(
+                                          "lanjutan...." +
+                                              controller.description.value
+                                                  .toString(),
                                           maxLines: 26,
                                           overflow: TextOverflow.ellipsis,
                                           style: CustomTextStyles
@@ -76,25 +90,55 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
                               SizedBox(height: 17.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 25.h),
-                                  child: Row(children: [
-                                    _buildFrameThirtySeven(
-                                        bookmarkImage: ImageConstant
-                                            .imgSolarHeartBoldRed70001,
-                                        bookmarkLabel: "lbl_100".tr),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.h),
-                                        child: _buildFrameThirtySeven(
-                                            bookmarkImage: ImageConstant
-                                                .imgPhBookmarkSimpleFillOnerror,
-                                            bookmarkLabel: "lbl_100".tr)),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10.h),
-                                        child: _buildFrameThirtySeven(
-                                            bookmarkImage: ImageConstant
-                                                .imgMajesticonsShareCircle,
-                                            bookmarkLabel: "lbl_100".tr))
-                                  ])),
+                                  child: Obx(() => Row(children: [
+                                        GestureDetector(
+                                          child: _buildFrameThirtySeven(
+                                              bookmarkImage: controller.like ==
+                                                      "1"
+                                                  ? ImageConstant
+                                                      .imgSolarHeartBoldRed70001
+                                                  : ImageConstant
+                                                      .imgSolarHeartBold,
+                                              bookmarkLabel: controller
+                                                  .jlike.value
+                                                  .toString()),
+                                          onTap: () {
+                                            controller.InteractionClick(
+                                                controller.idn, 1);
+                                          },
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 10.h),
+                                            child: GestureDetector(
+                                              child: _buildFrameThirtySeven(
+                                                  bookmarkImage: controller
+                                                              .save ==
+                                                          "1"
+                                                      ? ImageConstant
+                                                          .imgPhBookmarkSimpleFillOnerror
+                                                      : ImageConstant
+                                                          .imgPhBookmarkSimpleFill,
+                                                  bookmarkLabel: controller
+                                                      .jsave.value
+                                                      .toString()),
+                                              onTap: () {
+                                                controller.InteractionClick(
+                                                    controller.idn, 2);
+                                              },
+                                            )),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 10.h),
+                                            child: _buildFrameThirtySeven(
+                                                bookmarkImage: ImageConstant
+                                                    .imgMajesticonsShareCircle,
+                                                bookmarkLabel: controller
+                                                    .jshare.value
+                                                    .toString()))
+                                      ]))),
                               SizedBox(height: 19.v),
+/*
                               Padding(
                                   padding:
                                       EdgeInsets.only(left: 25.h, right: 28.h),
@@ -137,6 +181,7 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
                                       reply: "lbl_reply".tr,
                                       viewMoreReplies:
                                           "msg_view_more_54_replies".tr)),
+*/
                               SizedBox(height: 31.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 20.h),
@@ -170,24 +215,28 @@ class NewsOneScreen extends GetWidget<NewsOneController> {
 
   /// Section Widget
   Widget _buildOneStack() {
-    return Align(
+    return Obx(() => Align(
         alignment: Alignment.center,
         child: SizedBox(
             height: 223.v,
             width: 307.h,
             child: Stack(alignment: Alignment.centerLeft, children: [
               CustomImageView(
-                  imagePath: ImageConstant.imgRectangle8223x307,
+                  imagePath: controller.imgUrl.value == ""
+                      ? ImageConstant.imgRectangle8223x307
+                      : controller.imgUrl.value,
                   height: 223.v,
                   width: 307.h,
                   alignment: Alignment.center),
+              /*
               CustomImageView(
                   imagePath: ImageConstant.imgVector,
                   height: 43.adaptSize,
                   width: 43.adaptSize,
                   alignment: Alignment.centerLeft,
                   margin: EdgeInsets.only(left: 125.h))
-            ])));
+                  */
+            ]))));
   }
 
   /// Section Widget

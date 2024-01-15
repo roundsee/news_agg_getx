@@ -1,3 +1,7 @@
+import 'package:cool_alert/cool_alert.dart';
+import 'package:new_agg/presentation/login_page_screen/login_page_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'controller/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -25,7 +29,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
                   _buildFrameSixtyNine(
                       notificationText: "lbl_edit_profil".tr,
                       onTapFrameSixtyNine: () {
-                        onTapFrameSixtyEight();
+                        // onTapFrameSixtyEight();
                       }),
                   SizedBox(height: 10.v),
                   _buildFrameSixtyNine(notificationText: "lbl_notifikasi".tr),
@@ -46,7 +50,88 @@ class SettingsScreen extends GetWidget<SettingsController> {
                                 child: Text("lbl_masuk".tr,
                                     style: CustomTextStyles.bodySmallGray70003))
                           ]))),
-                  _buildLogout(),
+                  //_buildLogout(),
+                  SizedBox(
+                      height: 24.v,
+                      width: 310.h,
+                      child: Stack(alignment: Alignment.centerRight, children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("lbl_keluar".tr,
+                                style: CustomTextStyles.labelLargeMedium)),
+                        GestureDetector(
+                            child: CustomImageView(
+                                imagePath: ImageConstant.imgArrowRight,
+                                height: 24.adaptSize,
+                                width: 24.adaptSize,
+                                alignment: Alignment.centerRight),
+                            onTap: () {
+                              CoolAlert.show(
+                                context: context,
+                                title: "Keluar Aplikasi",
+                                type: CoolAlertType.confirm,
+                                text: 'Do you want to logout',
+                                confirmBtnText: 'Yes',
+                                cancelBtnText: 'No',
+                                confirmBtnColor: Colors.green,
+                                onConfirmBtnTap: () {
+                                  controller.Logout();
+                                  // Get.off(LoginPageScreen());
+                                },
+                              );
+                              //onTapFrameSixtyNine!.call();
+                            }),
+                        //_buildFrameSixtyNine(notificationText: "lbl_keluar".tr)
+                        GestureDetector(
+                            onTap: () {
+                              CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.confirm,
+                                text: 'Do you want to logout',
+                                confirmBtnText: 'Yes',
+                                cancelBtnText: 'No',
+                                confirmBtnColor: Colors.green,
+                              );
+                              /*
+                              AwesomeDialog(
+                                context: context,
+                                keyboardAware: true,
+                                dismissOnBackKeyPress: false,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.bottomSlide,
+                                btnCancelText: "Tidak",
+                                btnOkText: "Keluar",
+                                title: 'Keluar Aplikasi',
+                                // padding: const EdgeInsets.all(5.0),
+                                desc: 'Apakah Anda ingin keluar',
+                                btnCancelOnPress: () {},
+                                btnOkOnPress: () {
+                                  controller.Logout();
+                                  Get.toNamed(
+                                    AppRoutes.loginPageScreen,
+                                  );
+                                },
+                              ).show();
+        */
+                              //onTapFrameSixtyNine!.call();
+                            },
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+/*
+                                  Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 4.v),
+                                      child: Text(notificationText,
+                                          style: CustomTextStyles.labelLargeMedium
+                                              .copyWith(color: appTheme.black900))),
+*/
+                                  CustomImageView(
+                                      imagePath: ImageConstant.imgArrowRight,
+                                      height: 24.adaptSize,
+                                      width: 24.adaptSize)
+                                ]))
+                      ])),
                   SizedBox(height: 10.v),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -101,7 +186,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
               height: 24.adaptSize,
               width: 24.adaptSize,
               alignment: Alignment.centerRight),
-          _buildFrameSixtyNine(notificationText: "lbl_keluar".tr)
+          //_buildFrameSixtyNine(notificationText: "lbl_keluar".tr)
         ]));
   }
 
@@ -112,7 +197,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
   }) {
     return GestureDetector(
         onTap: () {
-          onTapFrameSixtyNine!.call();
+          //onTapFrameSixtyNine!.call();
         },
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

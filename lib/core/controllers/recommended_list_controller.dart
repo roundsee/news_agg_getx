@@ -34,8 +34,8 @@ class RecommendedListController extends GetxController
       _arg2 = 1;
     } else {
       _listType = argumentData[0]['id'];
-      _arg = argumentData[0]['id'];
-      _arg2 = argumentData[0]['id'];
+      _arg = argumentData[1]['arg'];
+      _arg2 = argumentData[2]['agr2'];
     }
     // Get All List  (1: New News, 2: Recommended , 3. Trending, 4. General News)
     getAllRecommendedList();

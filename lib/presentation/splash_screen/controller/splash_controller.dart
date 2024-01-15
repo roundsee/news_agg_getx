@@ -6,6 +6,8 @@ import 'dart:developer' as developer;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:new_agg/presentation/startpage_screen/startpage_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// A controller class for the SplashScreen.
 ///
@@ -13,6 +15,31 @@ import 'package:flutter/services.dart';
 /// current splashModelObj
 class SplashController extends GetxController {
   Rx<SplashModel> splashModelObj = SplashModel().obs;
+  static SplashController get find => Get.find();
+  RxBool animate = false.obs;
+
+  @override
+  void onInit() {
+    startSplash();
+    super.onInit();
+  }
+
+  Future startSplash() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var appsession = prefs!.getString('appsession').toString();
+    var token = prefs!.getString('token').toString();
+
+    // await Future.delayed(const Duration(milliseconds: 500));
+    animate.value = true;
+    // await Future.delayed(const Duration(milliseconds: 5000));
+    // Check Session
+    // if empty = first time open app show start page
+    if (appsession == "") {
+      Get.to(StartpageScreen());
+    } else {
+      Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
+    }
+  }
 
 /*
 static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();

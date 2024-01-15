@@ -52,7 +52,7 @@ class NewsScreen extends StatelessWidget {
                         SizedBox(height: 7.v),
                         Padding(
                             padding: EdgeInsets.only(left: 30.h),
-                            child: Text("msg_lorem_ipsum_dolor".tr,
+                            child: Text(controller.description.toString(),
                                 style: CustomTextStyles.titleSmallBluegray900)),
                         SizedBox(height: 8.v),
                         Padding(
@@ -79,8 +79,8 @@ class NewsScreen extends StatelessWidget {
                               BorderRadius.circular(10), // Image border
                           child: SizedBox.fromSize(
                             size: Size.fromRadius(48), // Image radius
-                            child: Image.network(
-                                controller.imgUrl.value.toString(),
+                            child: CustomImageView(
+                                imagePath: controller.imgUrl.value.toString(),
                                 fit: BoxFit.cover),
                           ),
                         ),

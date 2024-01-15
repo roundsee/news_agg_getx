@@ -1,3 +1,5 @@
+import 'package:new_agg/presentation/history_page/history_page.dart';
+
 import '../profile_screen/widgets/profilelist_item_widget.dart';
 import 'controller/profile_controller.dart';
 import 'models/profilelist_item_model.dart';
@@ -9,49 +11,55 @@ import 'package:new_agg/presentation/trending_page_tab_container_page/trending_p
 import 'package:new_agg/widgets/custom_bottom_bar.dart';
 
 class ProfileScreen extends GetWidget<ProfileController> {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.symmetric(horizontal: 26.h, vertical: 33.v),
-                child: Column(children: [
-                  CustomImageView(
-                      imagePath: ImageConstant.imgMaterialSymbolsSettings,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
-                      alignment: Alignment.centerRight,
-                      onTap: () {
-                        onTapImgImage();
-                      }),
-                  SizedBox(height: 54.v),
-                  CustomImageView(
-                      imagePath: ImageConstant.imgEllipse2,
-                      height: 139.adaptSize,
-                      width: 139.adaptSize,
-                      radius: BorderRadius.circular(69.h)),
-                  SizedBox(height: 15.v),
-                  Text("lbl_idrismerdefi".tr,
-                      style: CustomTextStyles.titleMediumInter),
-                  SizedBox(height: 11.v),
-                  Text("msg_muhammadidrisme".tr,
-                      style: CustomTextStyles.titleSmallGray70005),
-                  SizedBox(height: 13.v),
-                  GestureDetector(
-                      onTap: () {
-                        onTapTxtEditProfile();
-                      },
-                      child: Text("lbl_edit_profile".tr,
-                          style: CustomTextStyles.titleSmallErrorContainer
-                              .copyWith(decoration: TextDecoration.underline))),
-                  SizedBox(height: 28.v),
-                  _buildProfileList()
-                ])),
-            bottomNavigationBar: _buildBottomBar()));
+      body: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(horizontal: 26.h, vertical: 33.v),
+          child: Column(children: [
+            CustomImageView(
+                imagePath: ImageConstant.imgMaterialSymbolsSettings,
+                height: 24.adaptSize,
+                width: 24.adaptSize,
+                alignment: Alignment.centerRight,
+                onTap: () {
+                  onTapImgImage();
+                }),
+            SizedBox(height: 45.v),
+            CustomImageView(
+                imagePath: profileController.photo
+                    .toString(), //ImageConstant.imgEllipse2,
+                height: 139.adaptSize,
+                width: 139.adaptSize,
+                radius: BorderRadius.circular(69.h)),
+            SizedBox(height: 15.v),
+            Obx(
+              () => Text(profileController.name.toString(),
+                  style: CustomTextStyles.titleMediumInter),
+            ),
+            SizedBox(height: 11.v),
+            Obx(() => Text(profileController.email.toString(),
+                style: CustomTextStyles.titleSmallGray70005)),
+            SizedBox(height: 13.v),
+            GestureDetector(
+                onTap: () {
+                  onTapTxtEditProfile();
+                },
+                child: Text("lbl_edit_profile".tr,
+                    style: CustomTextStyles.titleSmallErrorContainer
+                        .copyWith(decoration: TextDecoration.underline))),
+            SizedBox(height: 28.v),
+            _buildProfileList()
+          ])),
+      //bottomNavigationBar: _buildBottomBar()
+    ));
   }
 
   /// Section Widget
@@ -64,7 +72,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
             separatorBuilder: (context, index) {
               return SizedBox(height: 17.v);
             },
-            itemCount: controller
+            itemCount: profileController
                 .profileModelObj.value.profilelistItemList.value.length,
             itemBuilder: (context, index) {
               ProfilelistItemModel model = controller
@@ -88,9 +96,9 @@ class ProfileScreen extends GetWidget<ProfileController> {
       case BottomBarEnum.Trending:
         return AppRoutes.trendingPageTabContainerPage;
       case BottomBarEnum.History:
-        return "/";
+        return AppRoutes.historyPage;
       case BottomBarEnum.Profile:
-        return AppRoutes.beritaYangDiSukaiPage;
+        return AppRoutes.profileScreen;
       default:
         return "/";
     }
@@ -101,10 +109,10 @@ class ProfileScreen extends GetWidget<ProfileController> {
     switch (currentRoute) {
       case AppRoutes.homePageWithTabPage:
         return HomePageWithTabPage();
-      case AppRoutes.trendingPageTabContainerPage:
-        return TrendingPageTabContainerPage();
-      case AppRoutes.beritaYangDiSukaiPage:
-        return BeritaYangDiSukaiPage();
+      case AppRoutes.historyPage:
+        return HistoryPage();
+      case AppRoutes.profileScreen:
+        return ProfileScreen();
       default:
         return DefaultWidget();
     }

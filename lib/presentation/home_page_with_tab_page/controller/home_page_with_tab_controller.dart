@@ -18,11 +18,11 @@ import 'dart:convert';
 /// current homePageWithTabModelObj
 class HomePageWithTabController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  HomePageWithTabController(this.homePageWithTabModelObj);
+  //HomePageWithTabController();
 
   TextEditingController searchController = TextEditingController();
 
-  Rx<HomePageWithTabModel> homePageWithTabModelObj;
+  // Rx<HomePageWithTabModel> homePageWithTabModelObj;
   RxList<Content>? listContent = <Content>[].obs;
   List<Category>? listCategory = <Category>[].obs;
   List<Trend>? listTrend = <Trend>[].obs;
@@ -105,11 +105,12 @@ class HomePageWithTabController extends GetxController
       print(listContent);
       listContent?.refresh();
       isLoading.value = false;
-      update();
+
+      // update();
     } else {
       isLoading.value = false;
       categoryNotFound.value = true;
-      update();
+      // update();
     }
   }
 

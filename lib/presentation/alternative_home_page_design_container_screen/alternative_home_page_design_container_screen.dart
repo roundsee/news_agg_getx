@@ -1,3 +1,6 @@
+import 'package:new_agg/presentation/history_page/history_page.dart';
+import 'package:new_agg/presentation/profile_screen/profile_screen.dart';
+
 import 'controller/alternative_home_page_design_container_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -37,11 +40,12 @@ class AlternativeHomePageDesignContainerScreen
       case BottomBarEnum.Home:
         return AppRoutes.homePageWithTabPage;
       case BottomBarEnum.Trending:
-        return AppRoutes.trendingPageTabContainerPage;
+        //return AppRoutes.trendingPageTabContainerPage;
+        return AppRoutes.historyPage; //
       case BottomBarEnum.History:
-        return "/";
+        return AppRoutes.historyPage;
       case BottomBarEnum.Profile:
-        return AppRoutes.beritaYangDiSukaiPage;
+        return AppRoutes.profileScreen;
       default:
         return "/";
     }
@@ -53,9 +57,11 @@ class AlternativeHomePageDesignContainerScreen
       case AppRoutes.homePageWithTabPage:
         return HomePageWithTabPage();
       case AppRoutes.trendingPageTabContainerPage:
-        return TrendingPageTabContainerPage();
-      case AppRoutes.beritaYangDiSukaiPage:
-        return BeritaYangDiSukaiPage();
+        return HistoryPage(); //return TrendingPageTabContainerPage();
+      case AppRoutes.historyPage:
+        return HistoryPage();
+      case AppRoutes.profileScreen:
+        return ProfileScreen();
       default:
         return DefaultWidget();
     }

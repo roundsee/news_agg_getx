@@ -55,3 +55,11 @@ class Category {
   String? category;
   Category({this.id, this.icon, this.category});
 }
+
+class ChipsCategory {
+  int? id;
+  String? icon;
+  String? category;
+  bool? selected;
+  ChipsCategory({this.id, this.icon, this.category, this.selected});
+}

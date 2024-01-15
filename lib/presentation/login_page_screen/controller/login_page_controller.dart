@@ -7,6 +7,7 @@ import 'package:new_agg/presentation/login_page_screen/models/login_page_model.d
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -59,7 +60,7 @@ class LoginPageController extends GetxController {
 
         if (json['data']['user']['status'] == 1) {
           // Get.off(SelectFavCategoryScreen());
-          Get.off((HomePageWithTabPage));
+          Get.off((SelectFavCategoryScreen()));
         }
 
         //if (json['code'] == 0) {
@@ -76,7 +77,7 @@ class LoginPageController extends GetxController {
           throw jsonDecode(response.body)['message'];
         }
       } else {
-        throw jsonDecode(response.body)["Message"] ?? "Unknown Error Occured";
+        throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (error) {
       Get.back();

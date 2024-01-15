@@ -4,7 +4,7 @@ import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'dart:convert';
 import 'package:new_agg/core/app_export.dart';
 //import 'package:new_agg/core/controllers/categories_controller.dart';
-import 'package:new_agg/core/models/history_model.dart';
+import 'package:new_agg/core/models/newtrending_model.dart';
 //import 'package:new_agg/presentation/history_page/models/history_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,11 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 /// This class manages the state of the HistoryPage, including the
 /// current historyModelObj
-class HistoryController extends GetxController {
+class NewTrendingController extends GetxController {
   // HistoryController();
   //CategoriesController categoriesController = Get.put(CategoriesController());
   //Rx<HistoryModel> historyModelObj;
-  RxList<Content> listHistory = (List<Content>.of([])).obs;
+  //RxList<Data> listTrending = (List<Data>.of([])).obs;
   //List<Content> listHistory = <Content>[].obs;
   TextEditingController searchController = TextEditingController();
 //Rx<NewsDetailModel> newsModelObj = NewsDetailModel().obs;
@@ -68,31 +68,31 @@ class HistoryController extends GetxController {
         AppRoutes.loginPageScreen,
       );
     }
-    listHistory.clear();
+    // listTrending.clear();
     if (res.statusCode == 200) {
       //Parses the string and returns the resulting Json object.
-      ListHistoryModel historiesList =
-          ListHistoryModel.fromJson(jsonDecode(res.body));
+      //   NewTrendingModel trendingList =
+      //       NewTrendingModel.fromJson(jsonDecode(res.body));
 
-      for (int i = 0; i < historiesList.data!.length; i++) {
-        Content itemHistory = new Content();
-        itemHistory.id = historiesList.data![i].content?.id;
-        itemHistory.category = historiesList.data![i].content?.category;
-        itemHistory.header = historiesList.data![i].content?.header;
-        itemHistory.publish = historiesList.data![i].content?.publish;
-        itemHistory.title = historiesList.data![i].content?.title;
+      //   for (int i = 0; i < trendingList.data!.length; i++) {
+      //     Data itemTrending = new Data();
+      //      itemTrending.id = trendingList.data![i].id;
+      //      itemTrending.category = trendingList.data![i].category;
+      //      itemTrending.header = trendingList.data![i].header;
+      //     itemTrending.publish = trendingList.data![i].publish;
+      //     itemTrending.title = trendingList.data![i].title;
 
-        listHistory.add(itemHistory);
-      }
-      print(listHistory);
-      //listHistory.refresh();
-      isLoading.value = false;
-      update();
-    } else {
-      isLoading.value = false;
-      //categoryNotFound.value = true;
-      update();
+      //    listTrending.add(itemTrending);
     }
+    // print(listTrending);
+    //listHistory.refresh();
+    isLoading.value = false;
+    update();
+    //} else {
+    isLoading.value = false;
+    //categoryNotFound.value = true;
+    update();
+    //   }
   }
 /*
   SearchNews(var categoryId, [String searchText = '']) async {

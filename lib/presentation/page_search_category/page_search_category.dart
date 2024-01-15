@@ -3,6 +3,7 @@ import 'package:new_agg/core/controllers/news_controller.dart';
 import 'package:new_agg/core/models/content_per_category.dart';
 import 'package:new_agg/presentation/home_page/widgets/side_drawer.dart';
 import 'package:new_agg/presentation/news_screen/news_screen.dart';
+import 'package:new_agg/core/models/category.dart';
 import '../../core/controllers/news_per_cagory_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -13,13 +14,13 @@ import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
 
 // ignore_for_file: must_be_immutable
-class PageSearchCategory extends StatelessWidget {
+class PageSearchCategory extends GetView {
   PageSearchCategory({Key? key}) : super(key: key);
 
   NewsPerCategoryController controller = Get.put(NewsPerCategoryController());
   CategoriesController categoriesController = Get.put(CategoriesController());
   //NewsController newsController = Get.put(NewsController());
-
+  var selectedCategory = 1;
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -52,10 +53,17 @@ class PageSearchCategory extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.only(left: 25.h, right: 24.h),
                       child: CustomSearchView(
-                          controller: controller.searchController,
-                          hintText: "lbl_search".tr)),
+                        controller: controller.searchController,
+                        hintText: "lbl_search".tr,
+                        onSubmitted: (p0) {
+                          SearchContent(
+                              1, controller.searchController.text.toString());
+                        },
+                        onChanged: (p0) {},
+                      )),
                   SizedBox(height: 10.v),
                   //Obx(() =>  _buildListSearchResult()),
+                  //_buildListCategoryButton(),
                   SingleChildScrollView(
                     child: Column(
                         // padding: EdgeInsets.only(left: 20.h, right: 23.h),
@@ -67,11 +75,11 @@ class PageSearchCategory extends StatelessWidget {
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 children: List.generate(
-                                    controller.allNewsPerCategory
+                                    controller.allNewsPerCategory.value
                                         .length, // .allNewsPerCategory.value.length,
                                     (index) {
-                                  return _buildCardNewsColumn(
-                                      controller.allNewsPerCategory[index]);
+                                  return _buildCardNewsColumn(controller
+                                      .allNewsPerCategory.value[index]);
                                 }),
                               ),
                             ),
@@ -80,6 +88,53 @@ class PageSearchCategory extends StatelessWidget {
                   ),
                   SizedBox(height: 17.v),
                 ]))));
+  }
+
+  Widget _buildListCategoryButton() {
+    // ScrollController _controller = new ScrollController();
+    //categoriesController.getCategories();
+    return Obx(() => Container(
+          width: 300.h,
+          child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(), // new
+              //controller: _controller,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: List.generate(
+                  categoriesController
+                      .allCategory.length, //   .allCategory!.length,
+                  (index) {
+                return _buildButtonCategory(
+                  categoriesController.allCategory[index],
+                );
+              })),
+        ));
+  }
+
+  void SearchContent(int categoryId, String searchText) {
+    controller.SearchNews(categoryId, searchText);
+  }
+
+  Widget _buildButtonCategory(Category category) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: appTheme.gray600),
+      child: Text(category.category.toString(),
+          style: TextStyle(
+            fontSize: 10,
+            color: appTheme.blueGray50,
+          )),
+      onPressed: () {
+        //Navigator.pop(context);
+        // newsperCategoryController.getNewsPerCategories(category.id);
+        // Get.to(() => PageSearchCategory(), arguments: [
+        //   {"idcategory": category.id}
+        // ]);
+
+        selectedCategory = category.id!;
+
+        print(category.category.toString());
+      },
+    );
   }
 
   /// Section Widget
@@ -168,7 +223,8 @@ class PageSearchCategory extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10), // Image border
                         child: SizedBox.fromSize(
                           size: Size.fromRadius(48), // Image radius
-                          child: Image.network(theNews.header.toString(),
+                          child: CustomImageView(
+                              imagePath: theNews.header.toString(),
                               fit: BoxFit.cover),
                         ),
                       ))
@@ -183,9 +239,7 @@ class PageSearchCategory extends StatelessWidget {
     // if (newsController.isLoading.value) {
     //} else {
     //newsController.getNewsDetail(idnews);
-    Get.toNamed(AppRoutes.newsScreen, arguments: [
-      {"id": idnews}
-    ]);
+    Get.toNamed(AppRoutes.newsOneScreen);
 
     //Get.to(() => NewsScreen(), arguments: [
     //  {"id": idnews}
@@ -197,6 +251,77 @@ class PageSearchCategory extends StatelessWidget {
   onTapMdiBellNotification() {
     Get.toNamed(
       AppRoutes.notificationScreen,
+    );
+  }
+/*
+  Widget _buildListCategoryButton() {
+    ScrollController _controller = new ScrollController();
+    return Obx(() => Container(
+          child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(), // new
+              controller: _controller,
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: List.generate(
+                  categoriesController.allChipsCategory!.length, (index) {
+                return _chipsCategory(
+                    categoriesController.allChipsCategory![index]);
+              })),
+        ));
+  }
+*/
+/*
+  Widget _buildButtonCategory(Category category) {
+    return ElevatedButton(
+      child: Text(category.category.toString()),
+      onPressed: () {},
+    );
+  }
+*/
+
+  Widget _chipsCategory(ChipsCategory chipcategory) {
+    return RawChip(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.h,
+        vertical: 2.v,
+      ),
+      showCheckmark: false,
+      labelPadding: EdgeInsets.zero,
+      label: Text(
+        chipcategory.category.toString(),
+        style: TextStyle(
+          color: (chipcategory.selected! ?? false)
+              ? appTheme.whiteA700
+              : appTheme.green900,
+          fontSize: 12.fSize,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      selected: (chipcategory.selected! ?? false),
+      backgroundColor: appTheme.green7007f,
+      selectedColor: theme.colorScheme.onError,
+      shape: (chipcategory.selected! ?? false)
+          ? RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(
+                9.h,
+              ),
+            )
+          : RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(
+                9.h,
+              ),
+            ),
+      onSelected: (value) {
+        chipcategory.selected = value;
+      },
+      onPressed: () {
+        Get.to(() => PageSearchCategory(), arguments: [
+          {"idcategory": chipcategory.id}
+        ]);
+      },
     );
   }
 }

@@ -10,12 +10,18 @@ class SplashScreen extends GetWidget<SplashController> {
       : super(
           key: key,
         );
+  final splashController = Get.put(SplashController());
+/*
   static Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token') ?? '';
   }
-
+static Future<String> getFirstOpen() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('Session') ?? '';
+  }
   var strToken = getToken().toString();
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class SplashScreen extends GetWidget<SplashController> {
                 imagePath: ImageConstant.imgLogo3,
                 height: 92.v,
                 width: 157.h,
+                /*
                 onTap: () {
                   if (strToken != "") {
                     //homePageWithTabPage
@@ -45,7 +52,25 @@ class SplashScreen extends GetWidget<SplashController> {
                     );
                   }
                 },
+                */
               ),
+
+              /*
+              Obx(
+                () => AnimatedPositioned(
+                  duration: const Duration(milliseconds: 2000),
+                  top: 80,
+                  left: splashController.animate.value ? 0 : -80,
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 2000),
+                    opacity: splashController.animate.value ? 1 : 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                  ),
+                ),
+              ),
+            */
             ],
           ),
         ),

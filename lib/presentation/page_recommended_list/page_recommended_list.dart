@@ -168,8 +168,8 @@ class PageRecommendedList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10), // Image border
                         child: SizedBox.fromSize(
                           size: Size.fromRadius(48), // Image radius
-                          child: Image.network(theNews.header.toString(),
-                              fit: BoxFit.cover),
+                          child: CustomImageView(
+                              imagePath: theNews.header.toString()),
                         ),
                       ))
                 ]),

@@ -1,3 +1,5 @@
+import 'package:new_agg/presentation/history_page/binding/history_binding.dart';
+import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/binding/home_page_with_tab_page_binding.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
 import 'package:new_agg/presentation/page_recommended_list/binding/rrecommended_list_binding.dart';
@@ -30,9 +32,10 @@ import 'package:new_agg/presentation/settings_screen/settings_screen.dart';
 import 'package:new_agg/presentation/settings_screen/binding/settings_binding.dart';
 import 'package:new_agg/presentation/register_page_screen/register_page_screen.dart';
 import 'package:new_agg/presentation/register_page_screen/binding/register_page_binding.dart';
-//import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
-//import 'package:new_agg/presentation/select_fav_category_screen/binding/select_fav_category_binding.dart';
+import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
+import 'package:new_agg/presentation/select_fav_category_screen/binding/select_fav_category_binding.dart';
 import 'package:new_agg/presentation/filter_search_screen/filter_search_screen.dart';
+import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/filter_search_screen/binding/filter_search_binding.dart';
 import 'package:new_agg/presentation/notification_screen/notification_screen.dart';
 import 'package:new_agg/presentation/notification_screen/binding/notification_binding.dart';
@@ -247,7 +250,6 @@ class AppRoutes {
         RegisterPageBinding(),
       ],
     ),
-    /*
     GetPage(
       name: selectFavCategoryScreen,
       page: () => SelectFavCategoryScreen(),
@@ -255,7 +257,6 @@ class AppRoutes {
         SelectFavCategoryBinding(),
       ],
     ),
-    */
     GetPage(
       name: filterSearchScreen,
       page: () => FilterSearchScreen(),
@@ -345,6 +346,13 @@ class AppRoutes {
       page: () => SplashScreen(),
       bindings: [
         SplashBinding(),
+      ],
+    ),
+    GetPage(
+      name: historyPage,
+      page: () => HistoryPage(),
+      bindings: [
+        HistoryBinding(),
       ],
     )
   ];

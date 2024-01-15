@@ -9,7 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoriesController extends GetxController {
   // for list view
-  List<Category> allCategory = <Category>[];
+  List<Category> allCategory = <Category>[].obs;
+  List<ChipsCategory> allChipsCategory = <ChipsCategory>[].obs;
   // for carousel
 
   ScrollController scrollController = ScrollController();
@@ -57,8 +58,15 @@ class CategoriesController extends GetxController {
         category.id = categories.data![i].id!;
         category.icon = categories.data![i].icon!;
         category.category = categories.data![i].category!;
-
         allCategory!.add(category);
+        /*
+        ChipsCategory chipscategory = new ChipsCategory();
+        chipscategory.id = categories.data![i].id!;
+        chipscategory.icon = categories.data![i].icon!;
+        chipscategory.category = categories.data![i].category!;
+        chipscategory.selected = false;
+        allChipsCategory!.add(chipscategory);
+*/
       }
 
       isLoading.value = false;
