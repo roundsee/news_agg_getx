@@ -20,6 +20,11 @@ class ProfileScreen extends GetWidget<ProfileController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
+      //appBar:
+      //AppBar(
+      //    leading: BackButton(
+      //  onPressed: () {},
+      //)),
       body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(horizontal: 26.h, vertical: 33.v),
@@ -32,13 +37,15 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 onTap: () {
                   onTapImgImage();
                 }),
-            SizedBox(height: 45.v),
-            CustomImageView(
+            SizedBox(height: 40.v),
+            /*
+            Obx(() => CustomImageView(
                 imagePath: profileController.photo
                     .toString(), //ImageConstant.imgEllipse2,
                 height: 139.adaptSize,
                 width: 139.adaptSize,
-                radius: BorderRadius.circular(69.h)),
+                radius: BorderRadius.circular(69.h))),
+            */
             SizedBox(height: 15.v),
             Obx(
               () => Text(profileController.name.toString(),
@@ -55,7 +62,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 child: Text("lbl_edit_profile".tr,
                     style: CustomTextStyles.titleSmallErrorContainer
                         .copyWith(decoration: TextDecoration.underline))),
-            SizedBox(height: 28.v),
+            SizedBox(height: 20.v),
             _buildProfileList()
           ])),
       //bottomNavigationBar: _buildBottomBar()
@@ -70,7 +77,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             separatorBuilder: (context, index) {
-              return SizedBox(height: 17.v);
+              return SizedBox(height: 15.v);
             },
             itemCount: profileController
                 .profileModelObj.value.profilelistItemList.value.length,

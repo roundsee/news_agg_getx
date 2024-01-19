@@ -57,9 +57,10 @@ class Category {
 }
 
 class ChipsCategory {
-  int? id;
-  String? icon;
-  String? category;
-  bool? selected;
-  ChipsCategory({this.id, this.icon, this.category, this.selected});
+  int id;
+  String icon;
+  String category;
+  bool selected;
+  ChipsCategory(
+      {this.id = 0, this.icon = "", this.category = "", this.selected = false});
 }

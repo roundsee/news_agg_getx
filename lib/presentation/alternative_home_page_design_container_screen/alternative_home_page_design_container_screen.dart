@@ -1,4 +1,5 @@
 import 'package:new_agg/presentation/history_page/history_page.dart';
+import 'package:new_agg/presentation/new_trending_page/newtrending_page.dart';
 import 'package:new_agg/presentation/profile_screen/profile_screen.dart';
 
 import 'controller/alternative_home_page_design_container_controller.dart';
@@ -17,14 +18,17 @@ class AlternativeHomePageDesignContainerScreen
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
-        child: Scaffold(
-            body: Navigator(
-                key: Get.nestedKey(1),
-                initialRoute: AppRoutes.homePageWithTabPage,
-                onGenerateRoute: (routeSetting) => GetPageRoute(
-                    page: () => getCurrentPage(routeSetting.name!),
-                    transition: Transition.noTransition)),
-            bottomNavigationBar: _buildBottomBar()));
+        child: PopScope(
+      canPop: false,
+      child: Scaffold(
+          body: Navigator(
+              key: Get.nestedKey(1),
+              initialRoute: AppRoutes.homePageWithTabPage,
+              onGenerateRoute: (routeSetting) => GetPageRoute(
+                  page: () => getCurrentPage(routeSetting.name!),
+                  transition: Transition.noTransition)),
+          bottomNavigationBar: _buildBottomBar()),
+    ));
   }
 
   /// Section Widget
@@ -53,12 +57,31 @@ class AlternativeHomePageDesignContainerScreen
 
   ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
+    var _shared = new PrefUtils();
     switch (currentRoute) {
       case AppRoutes.homePageWithTabPage:
         return HomePageWithTabPage();
       case AppRoutes.trendingPageTabContainerPage:
-        return HistoryPage(); //return TrendingPageTabContainerPage();
+        return NewTrendingPage(); //return TrendingPageTabContainerPage();
       case AppRoutes.historyPage:
+        var token = _shared.getUserToken();
+        if (token ==
+            "1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d") {
+          AlertDialog(
+            title: const Text('History'),
+            content: const Text('Login Required. Continue Login ?'),
+            actions: [
+              TextButton(
+                child: const Text("No"),
+                onPressed: () => Get.back(),
+              ),
+              TextButton(
+                child: const Text("Yes"),
+                onPressed: () => Get.back(),
+              ),
+            ],
+          );
+        }
         return HistoryPage();
       case AppRoutes.profileScreen:
         return ProfileScreen();

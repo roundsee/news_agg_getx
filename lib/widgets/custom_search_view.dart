@@ -94,9 +94,9 @@ class CustomSearchView extends StatelessWidget {
           onFieldSubmitted: (String value) {
             onSubmitted!.call(value);
           },
-          onChanged: (String value) {
-            onChanged!.call(value);
-          },
+          //onChanged: (String value) {
+          //  onChanged!.call(value);
+          //},
         ),
       );
   InputDecoration get decoration => InputDecoration(

@@ -8,18 +8,62 @@ import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
 import 'package:new_agg/widgets/custom_text_form_field.dart';
 
-class NewsOneScreen extends GetView<NewsOneController> {
+class NewsOneScreen extends StatelessWidget {
   NewsOneScreen({Key? key}) : super(key: key);
 
-//NewsOneController Detailcontroller = Get.put(NewsOneController());
+  NewsOneController controller = Get.put(NewsOneController());
   @override
   Widget build(BuildContext context) {
-    Get.put(NewsOneController());
+    // Get.put(NewsOneController());
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: _buildAppBar(),
+            appBar:
+                //_buildAppBar(),
+                AppBar(
+              leadingWidth: 49.h,
+              leading: BackButton(
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+              actions: [
+                AppbarTrailingImage(
+                    imagePath: ImageConstant.imgMdiSortAlphabeticalVariant,
+                    margin:
+                        EdgeInsets.only(left: 25.h, top: 14.v, right: 14.h)),
+                AppbarTrailingImage(
+                    imagePath: ImageConstant.imgPhTranslateFill,
+                    margin: EdgeInsets.only(left: 16.h, top: 14.v, right: 39.h))
+              ],
+              //  title: Text('My App'),
+            ),
+            /*
+                AppBar(
+              leadingWidth: 49.h,
+              leading: AppbarLeadingImage(
+                  imagePath: ImageConstant.imgArrowLeft,
+                  margin: EdgeInsets.only(left: 25.h, top: 14.v, bottom: 14.v),
+                  onTap: () {
+                    //onTapArrowLeft();
+                    //Navigator.pop(context);
+
+                    Get.to(Get.previousRoute);
+                  }),
+              actions: [
+                AppbarTrailingImage(
+                    imagePath: ImageConstant.imgMdiSortAlphabeticalVariant,
+                    margin:
+                        EdgeInsets.only(left: 25.h, top: 14.v, right: 14.h)),
+                AppbarTrailingImage(
+                    imagePath: ImageConstant.imgPhTranslateFill,
+                    margin: EdgeInsets.only(left: 16.h, top: 14.v, right: 39.h))
+              ],
+              //styleType: Style.bgFill
+            ),
+            */
+//============
             body: SizedBox(
                 width: mediaQueryData.size.width,
                 child: SingleChildScrollView(

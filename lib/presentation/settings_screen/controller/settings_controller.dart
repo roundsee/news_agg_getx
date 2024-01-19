@@ -31,7 +31,7 @@ class SettingsController extends GetxController {
         Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logout);
     //_SimpleUri (https://a1c1-103-124-115-148.ngrok-free.app/api/contents/single/bad3762c-9d48-4ecc-aad4-310b26d7b219)
 
-    http.Response res = await http.get(url, headers: headers);
+    http.Response res = await http.post(url, headers: headers);
     if (res.statusCode == 401) {
       Get.toNamed(
         AppRoutes.loginPageScreen,

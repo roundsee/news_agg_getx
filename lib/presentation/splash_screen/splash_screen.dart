@@ -11,11 +11,12 @@ class SplashScreen extends GetWidget<SplashController> {
           key: key,
         );
   final splashController = Get.put(SplashController());
-/*
+
   static Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token') ?? '';
   }
+/*
 static Future<String> getFirstOpen() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('Session') ?? '';

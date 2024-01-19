@@ -27,6 +27,7 @@ class SplashController extends GetxController {
   Future startSplash() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var appsession = prefs!.getString('appsession').toString();
+    //appsession = appsession ?? '1';
     var token = prefs!.getString('token').toString();
 
     // await Future.delayed(const Duration(milliseconds: 500));
@@ -34,9 +35,13 @@ class SplashController extends GetxController {
     // await Future.delayed(const Duration(milliseconds: 5000));
     // Check Session
     // if empty = first time open app show start page
-    if (appsession == "") {
-      Get.to(StartpageScreen());
+    if (appsession == 'null') {
+      prefs!.setString('appsession', "2");
+      prefs!.setString('token', "1111111");
+      Get.to(() => StartpageScreen());
+      //Get.to(StartpageScreen());
     } else {
+      //Get.to(() => Home());
       Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
     }
   }

@@ -1,3 +1,5 @@
+import 'package:new_agg/core/models/category.dart';
+import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/model/categorychipitems_item_model.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/widget/categorychipitem_item_widget.dart';
 import 'controller/select_fav_category_controller.dart';
@@ -7,10 +9,13 @@ import 'package:new_agg/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
-  const SelectFavCategoryScreen({Key? key})
+  SelectFavCategoryScreen({Key? key})
       : super(
           key: key,
         );
+
+  SelectFavCategoryController selFavCatController =
+      Get.put(SelectFavCategoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(
             horizontal: 25.h,
-            vertical: 47.v,
+            vertical: 35.v,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,63 +52,16 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
                   textAlign: TextAlign.left,
                 ),
               ),
-              SizedBox(height: 14.v),
+              SizedBox(height: 5.v),
               Text(
                 "msg_pilih_5_kategori".tr,
                 style: CustomTextStyles.bodyLargePoppinsPrimaryContainer,
               ),
-              SizedBox(height: 2.v),
-              Padding(
-                padding: EdgeInsets.only(right: 9.h),
-                child: CustomTextFormField(
-                  controller: controller.ionsearchcircleController,
-                  hintText: "lbl_bisnis".tr,
-                  textInputAction: TextInputAction.done,
-                  prefix: Container(
-                    margin: EdgeInsets.all(10.h),
-                    child: CustomImageView(
-                      imagePath: ImageConstant.imgIonsearchcircle,
-                      height: 24.adaptSize,
-                      width: 24.adaptSize,
-                    ),
-                  ),
-                  prefixConstraints: BoxConstraints(
-                    maxHeight: 44.v,
-                  ),
-                  contentPadding: EdgeInsets.only(
-                    top: 13.v,
-                    right: 30.h,
-                    bottom: 13.v,
-                  ),
-                ),
-              ),
-              SizedBox(height: 15.v),
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 12.h,
-                    right: 19.h,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "lbl_bisnis".tr,
-                        style: CustomTextStyles.bodyMediumPoppinsGray900,
-                      ),
-                      CustomImageView(
-                        imagePath: ImageConstant.imgTypcnPlus,
-                        height: 24.adaptSize,
-                        width: 24.adaptSize,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 25.v),
+              SizedBox(height: 10.v),
+              //_buildCategoryChipItems(),
+              //_buildCategoryGridItems(),
               _buildCategoryChipItems(),
-              SizedBox(height: 55.v),
+              SizedBox(height: 20.v),
               _buildFrameTwentySeven(),
             ],
           ),
@@ -114,26 +72,99 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
 
   /// Section Widget
   Widget _buildCategoryChipItems() {
+    //controller.GetCategoryChipsItems();
     return Obx(
       () => Wrap(
-        runSpacing: 14.v,
-        spacing: 14.h,
+        runSpacing: 5.v,
+        spacing: 5.h,
         children: List<Widget>.generate(
-          controller.selectFavCategoryModelObj.value.categorychipitemsItemList
-              .value.length,
+          selFavCatController.allChipsCategory.length,
           (index) {
-            CategorychipitemsItemModel model = controller
-                .selectFavCategoryModelObj
-                .value
-                .categorychipitemsItemList
-                .value[index];
-
-            return CategorychipitemsItemWidget(
-              model,
-            );
+            return _buildButtonCategory(
+                selFavCatController.allChipsCategory[index]);
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildCategoryGridItems() {
+    //controller.GetCategoryChipsItems();
+    return Obx(
+      () => ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        children: List.generate(
+            selFavCatController
+                .allChipsCategory.length, // .allNewsPerCategory.value.length,
+            (index) {
+          return _buildButtonCategory(
+              selFavCatController.allChipsCategory[index]);
+        }),
+      ),
+    );
+  }
+
+  Widget _buildButtonCategory(ChipsCategory chipItem) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.green;
+            } else {
+              return Colors.lightGreen;
+            }
+            //return null; // Use the component's default.
+          },
+        ),
+      ),
+      child: Text(chipItem.category.toString()),
+    );
+  }
+
+  Widget _buildChipscategory(ChipsCategory chipItems) {
+    return RawChip(
+      /*
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.h,
+        vertical: 2.v,
+      ),
+      */
+      //showCheckmark: false,
+      //labelPadding: EdgeInsets.zero,
+      label: Text(
+        chipItems.category,
+        style: TextStyle(
+          color: (chipItems.selected) ? appTheme.whiteA700 : appTheme.green900,
+          //fontSize: 12.fSize,
+          //fontFamily: 'Inter',
+          //fontWeight: FontWeight.w400,
+        ),
+      ),
+      selected: (chipItems.selected),
+      backgroundColor: appTheme.gray100,
+      selectedColor: appTheme.green7007f,
+      shape: (chipItems.selected)
+          ? RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(
+                9.h,
+              ),
+            )
+          : RoundedRectangleBorder(
+              side: BorderSide.none,
+              borderRadius: BorderRadius.circular(
+                9.h,
+              ),
+            ),
+      onPressed: () {
+        //selFavCatController.selectCategory(chipItems.id);
+      },
+      onSelected: (value) {
+        //chipItems.selected = !value;
+      },
     );
   }
 
@@ -146,13 +177,23 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "lbl_later".tr,
-              style: CustomTextStyles.bodyLargeGray50001,
+            InkWell(
+              child: Text(
+                "lbl_later".tr,
+                style: CustomTextStyles.bodyLargeGray50001,
+              ),
+              onTap: () {
+                Get.to(AlternativeHomePageDesignContainerScreen());
+              },
             ),
-            Text(
-              "lbl_next".tr,
-              style: CustomTextStyles.bodyLargeOnError,
+            InkWell(
+              child: Text(
+                "lbl_next".tr,
+                style: CustomTextStyles.bodyLargeOnError,
+              ),
+              onTap: () {
+                selFavCatController.submitFavCategory();
+              },
             ),
           ],
         ),

@@ -142,6 +142,65 @@ class CustomImageView extends StatelessWidget {
     }
     return SizedBox();
   }
+
+  Widget _buildImagexView() {
+    if (imagePath != null) {
+      switch (imagePath!.imageType) {
+        case ImageType.svg:
+          return Container(
+            height: height,
+            width: width,
+            child: SvgPicture.asset(
+              imagePath!,
+              height: height,
+              width: width,
+              fit: fit ?? BoxFit.contain,
+              color: color,
+            ),
+          );
+        case ImageType.file:
+          return Image.file(
+            File(imagePath!),
+            height: height,
+            width: width,
+            fit: fit ?? BoxFit.cover,
+            color: color,
+          );
+        case ImageType.network:
+          return CachedNetworkImage(
+            height: height,
+            width: width,
+            fit: fit,
+            imageUrl: imagePath!,
+            color: color,
+            placeholder: (context, url) => Container(
+              height: 30,
+              width: 30,
+              child: LinearProgressIndicator(
+                color: Colors.grey.shade200,
+                backgroundColor: Colors.grey.shade100,
+              ),
+            ),
+            errorWidget: (context, url, error) => Image.asset(
+              placeHolder,
+              height: height,
+              width: width,
+              fit: fit ?? BoxFit.cover,
+            ),
+          );
+        case ImageType.png:
+        default:
+          return Image.asset(
+            imagePath!,
+            height: height,
+            width: width,
+            fit: fit ?? BoxFit.cover,
+            color: color,
+          );
+      }
+    }
+    return SizedBox();
+  }
 }
 
 extension ImageTypeExtension on String {

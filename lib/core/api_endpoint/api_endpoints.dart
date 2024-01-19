@@ -15,7 +15,7 @@ class _AuthEndPoints {
   final String registerSSO = 'readers/registersso';
   final String loginEmail = 'readers/login';
   final String loginSSO = 'readers/loginsso';
-  final String logout = 'readers/loginout';
+  final String logout = 'readers/logout';
   final String profile = 'readers/profile';
 }
 

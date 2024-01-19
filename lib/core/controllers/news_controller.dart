@@ -32,7 +32,7 @@ class NewsController extends GetxController with StateMixin {
   @override
   void onInit() {
     if (argumentData == null) {
-      getNewsDetail("bad3762c-9d48-4ecc-aad4-310b26d7b219");
+      // getNewsDetail("bad3762c-9d48-4ecc-aad4-310b26d7b219");
     } else {
       getNewsDetail(argumentData[0]['id']);
     }

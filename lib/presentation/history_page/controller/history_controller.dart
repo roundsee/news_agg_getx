@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:new_agg/core/app_export.dart';
 //import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/models/history_model.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 //import 'package:new_agg/presentation/history_page/models/history_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -78,7 +79,15 @@ class HistoryController extends GetxController {
         Content itemHistory = new Content();
         itemHistory.id = historiesList.data![i].content?.id;
         itemHistory.category = historiesList.data![i].content?.category;
-        itemHistory.header = historiesList.data![i].content?.header;
+
+        var imageurl = historiesList.data![i].content?.header;
+        //imageurl = content.header;
+        if (await isValidUrl(imageurl!)) {
+          itemHistory.header = imageurl;
+        } else {
+          itemHistory.header =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
         itemHistory.publish = historiesList.data![i].content?.publish;
         itemHistory.title = historiesList.data![i].content?.title;
 

@@ -35,4 +35,28 @@ class PrefUtils {
       return 'primary';
     }
   }
+
+  String getUserToken() {
+    try {
+      return _sharedPreferences!.getString('token')!;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  String getStatusUser() {
+    try {
+      return _sharedPreferences!.getString('status')!;
+    } catch (e) {
+      return '0';
+    }
+  }
+
+  String getfcmToken() {
+    try {
+      return _sharedPreferences!.getString('fcm')!;
+    } catch (e) {
+      return '0';
+    }
+  }
 }

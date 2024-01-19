@@ -1,15 +1,13 @@
 import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/models/category.dart';
-import 'package:new_agg/core/models/history_model.dart';
+
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
-import 'package:new_agg/core/models/newtrending_model.dart';
-//import '../history_page/widgets/historypage_item_widget.dart';
+
 import 'controller/new_trending_controller.dart';
-import 'models/history_model.dart';
-import 'models/historypage_item_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
@@ -57,7 +55,7 @@ class NewTrendingPage extends StatelessWidget {
                     SizedBox(height: 5.v),
                     Container(height: 25, child: _buildListCategoryButton()),
                     SizedBox(height: 5.v),
-                    _buildListHistory()
+                    _buildListTrending()
                   ]),
                 ))));
   }
@@ -87,7 +85,7 @@ class NewTrendingPage extends StatelessWidget {
   }
 */
 // ==============
-  Widget _buildListHistory() {
+  Widget _buildListTrending() {
     ScrollController _controller = new ScrollController();
     return Padding(
         padding: EdgeInsets.only(left: 20.h, right: 23.h),
@@ -98,15 +96,14 @@ class NewTrendingPage extends StatelessWidget {
                   controller: _controller,
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  children: []
-                  //    List.generate(controller.listTrending!.length, (index) {
-                  //  return _buildCardHistory(controller.listTrending[index]);
-                  // }
-                  )),
+                  children:
+                      List.generate(controller.listTrending!.length, (index) {
+                    return _buildCardTrending(controller.listTrending[index]);
+                  }))),
         ));
   }
 
-  Widget _buildCardHistory(itemHistory) {
+  Widget _buildCardTrending(itemHistory) {
     return GestureDetector(
       onTap: () {
         onTapCardNews!.call(itemHistory.id);

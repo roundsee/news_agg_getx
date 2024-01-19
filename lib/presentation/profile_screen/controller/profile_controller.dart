@@ -1,6 +1,7 @@
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/user_profile_model.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/presentation/profile_screen/models/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -43,11 +44,9 @@ class ProfileController extends GetxController {
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    //https://sandbox-nooz.digiprimatera.co.id/api/readers/profile
     var url =
         Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.profile);
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
@@ -63,7 +62,15 @@ class ProfileController extends GetxController {
       status.value = userProfile.data!.status.toString();
       birthday.value = userProfile.data!.birthday.toString();
       gender.value = userProfile.data!.gender.toString();
-      photo.value = userProfile.data!.photo.toString();
+
+      var imageurl = userProfile.data!.photo.toString();
+      //imageurl = content.header;
+      if (await isValidUrl(imageurl)) {
+        photo.value = imageurl;
+      } else {
+        photo.value =
+            "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+      }
     } else {
       update();
     }

@@ -14,9 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// current historyModelObj
 class NewTrendingController extends GetxController {
   // HistoryController();
-  //CategoriesController categoriesController = Get.put(CategoriesController());
+  // CategoriesController categoriesController = Get.put(CategoriesController());
   //Rx<HistoryModel> historyModelObj;
-  //RxList<Data> listTrending = (List<Data>.of([])).obs;
+  RxList<Content> listTrending = (List<Content>.of([])).obs;
   //List<Content> listHistory = <Content>[].obs;
   TextEditingController searchController = TextEditingController();
 //Rx<NewsDetailModel> newsModelObj = NewsDetailModel().obs;
@@ -25,12 +25,12 @@ class NewTrendingController extends GetxController {
 
   @override
   void onInit() {
-    getNewsHistory();
+    getNewsTrending();
     super.onInit();
   }
 
   //getNewsHistory(var categoryId, [String searchText = '']) async {
-  getNewsHistory() async {
+  getNewsTrending() async {
     //Creates a new Uri object by parsing a URI string.
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -44,14 +44,14 @@ class NewTrendingController extends GetxController {
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
-    http.Response res;
-    bool isSearch = false;
+
+    // bool isSearch = false;
     //if (searchText == "") {
-    var url =
-        Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.historyEndpoints.history);
+    var url = Uri.parse(
+        ApiEndPoints.baseUrl + ApiEndPoints.contentEndpoints.TrendingContent);
     //    "/" +
     //    categoryId.toString());
-    res = await http.get(url, headers: headers);
+    //res = await http.get(url, headers: headers);
     //} else {
     //  isSearch = true;
     //  var url = Uri.parse(
@@ -62,7 +62,7 @@ class NewTrendingController extends GetxController {
     // res = await http.post(url, headers: headers, body: strbody);
     //}
 
-    ///http.Response res = await http.get(url, headers: headers);
+    http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
       Get.toNamed(
         AppRoutes.loginPageScreen,
@@ -71,29 +71,31 @@ class NewTrendingController extends GetxController {
     // listTrending.clear();
     if (res.statusCode == 200) {
       //Parses the string and returns the resulting Json object.
-      //   NewTrendingModel trendingList =
-      //       NewTrendingModel.fromJson(jsonDecode(res.body));
+      NewTrendingModel trendingList =
+          NewTrendingModel.fromJson(jsonDecode(res.body));
 
-      //   for (int i = 0; i < trendingList.data!.length; i++) {
-      //     Data itemTrending = new Data();
-      //      itemTrending.id = trendingList.data![i].id;
-      //      itemTrending.category = trendingList.data![i].category;
-      //      itemTrending.header = trendingList.data![i].header;
-      //     itemTrending.publish = trendingList.data![i].publish;
-      //     itemTrending.title = trendingList.data![i].title;
+      for (int i = 0; i < trendingList.data!.length; i++) {
+        Content itemTrending = new Content();
+        itemTrending.id = trendingList.data![i].content?.id.toString();
+        itemTrending.category =
+            trendingList.data![i].content?.category.toString();
+        itemTrending.header = trendingList.data![i].content?.header.toString();
+        itemTrending.publish =
+            trendingList.data![i].content?.publish.toString();
+        itemTrending.title = trendingList.data![i].content?.title.toString();
 
-      //    listTrending.add(itemTrending);
+        listTrending.add(itemTrending);
+      }
+      print(listTrending);
+      listTrending.refresh();
+      isLoading.value = false;
+      update();
+      //} else {
+      isLoading.value = false;
+      //categoryNotFound.value = true;
+      update();
+      //   }
     }
-    // print(listTrending);
-    //listHistory.refresh();
-    isLoading.value = false;
-    update();
-    //} else {
-    isLoading.value = false;
-    //categoryNotFound.value = true;
-    update();
-    //   }
-  }
 /*
   SearchNews(var categoryId, [String searchText = '']) async {
     //Creates a new Uri object by parsing a URI string.
@@ -149,4 +151,5 @@ class NewTrendingController extends GetxController {
     }
   }
   */
+  }
 }

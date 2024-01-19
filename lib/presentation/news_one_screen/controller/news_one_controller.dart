@@ -2,6 +2,7 @@ import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/interaction_model.dart';
 import 'package:new_agg/core/models/news_detail.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/presentation/news_one_screen/models/news_one_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -100,20 +101,27 @@ class NewsOneController extends GetxController {
       NewsDetailModel detailNews =
           NewsDetailModel.fromJson(jsonDecode(res.body));
       // newsDetail.value = detailNews;
-
+      var imageurl;
       title.value = detailNews.data!.content!.title.toString();
       description.value = detailNews.data!.content!.body.toString();
-      imgUrl.value = detailNews.data!.content!.header.toString();
+      imageurl = detailNews.data!.content!.header.toString();
+      //imageurl = content.header;
+      if (await isValidUrl(imageurl)) {
+        imgUrl.value = imageurl;
+      } else {
+        imgUrl.value =
+            "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+      }
+      //imgUrl.value = imageurl;
+      //detailNews.data!.content!.header.toString();
       author.value = detailNews.data!.content!.author.toString();
       publish.value = detailNews.data!.content!.publish.toString();
       like.value = detailNews.data!.content!.interaction!.like.toString();
       save.value = detailNews.data!.content!.interaction!.save.toString();
-      jlike.value =
-          detailNews.data!.content!.statistics!.like.toString() as int;
-      jsave.value =
-          detailNews.data!.content!.statistics!.save.toString() as int;
-      jshare.value =
-          detailNews.data!.content!.statistics!.share.toString() as int;
+      jlike.value = detailNews.data!.content!.statistics!.like!;
+      jsave.value = detailNews.data!.content!.statistics!.save!;
+      //detailNews.data!.content!.statistics!.save.toString() as int;
+      jshare.value = detailNews.data!.content!.statistics!.share!;
       idn.value = idNews;
       isLoading.value = false;
       //change(null, status: RxStatus.success());

@@ -35,13 +35,14 @@ class RegisterPageController extends GetxController {
     confirmPasswordController.dispose();
   }
 
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<void> registerWithEmail() async {
     try {
       var headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'admin@news-aggregator.com'
+        'Authorization':
+            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d'
       };
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.registerEmail);
@@ -56,6 +57,36 @@ class RegisterPageController extends GetxController {
       print(response);
       if (response.statusCode == 201) {
         final json = jsonDecode(response.body);
+        //showAutoDismissAlert(Get.context,"Registration","Succes Registration, Please")
+        //void openDialog() {
+        Get.snackbar(
+          "Success Registration",
+          "Congratulation, your account has been successfully created, We have sent activation email to " +
+              emailController.text +
+              ". Click 'Activate Now' to confirm registraton",
+          icon: Icon(Icons.person, color: Colors.white),
+          duration: const Duration(seconds: 7),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        //}
+/*
+        showDialog(
+            context: Get.context!,
+            builder: (context) {
+              return SimpleDialog(
+                title: Text('Registration'),
+                contentPadding: EdgeInsets.all(20),
+                children: [
+                  Text(
+                      "Success registration, Congratulation, your account has been successfully created, We have sent activation email to " +
+                          emailController.text +
+                          ". Click 'Activate Now' to confirm registraton")
+                ],
+              );
+            });
+*/
+        Get.offAll(LoginPageScreen());
+        /*
         if (json['code'] == 0) {
           var token = json['data']['Token'];
           print(token);
@@ -65,11 +96,13 @@ class RegisterPageController extends GetxController {
           nameController.clear();
           emailController.clear();
           passwordController.clear();
-          Get.off(LoginPageScreen());
-        } else {
           Get.off(SelectFavCategoryScreen());
+
+        } else {
+          //Get.off(SelectFavCategoryScreen());
           throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
         }
+        */
       } else {
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
@@ -85,5 +118,22 @@ class RegisterPageController extends GetxController {
             );
           });
     }
+  }
+
+  void showAutoDismissAlert(BuildContext context, String title, String msg) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        // Schedule a delayed dismissal of the alert dialog after 3 seconds
+        Future.delayed(Duration(seconds: 3), () {
+          Navigator.of(context).pop(); // Close the dialog
+        });
+        // Return the AlertDialog widget
+        return AlertDialog(
+          title: Text(title),
+          content: Text(msg),
+        );
+      },
+    );
   }
 }

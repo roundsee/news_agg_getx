@@ -18,123 +18,128 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Form(
-                key: _formKey,
-                child: Container(
-                    width: double.maxFinite,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 39.h, vertical: 21.v),
-                    child: Column(children: [
-                      SizedBox(height: 38.v),
-                      SizedBox(
-                          height: 78.v,
-                          width: 134.h,
-                          child: Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Container(
-                                        height: 78.adaptSize,
-                                        width: 78.adaptSize,
-                                        decoration: BoxDecoration(
-                                            color: appTheme.gray900,
-                                            borderRadius:
-                                                BorderRadius.circular(39.h)))),
-                                Align(
-                                    alignment: Alignment(0.4, 0.0),
-                                    child: RichText(
-                                        text: TextSpan(children: [
-                                          TextSpan(
-                                              text: "lbl_ne".tr,
-                                              style: CustomTextStyles
-                                                  .titleLargeWhiteA700_1),
-                                          TextSpan(
-                                              text: "lbl_ws".tr,
-                                              style: CustomTextStyles
-                                                  .titleLargeGray900),
-                                          TextSpan(
-                                              text: "lbl_a".tr,
-                                              style: theme.textTheme.titleLarge)
-                                        ]),
-                                        textAlign: TextAlign.left))
-                              ])),
-                      SizedBox(height: 52.v),
-                      Text("msg_sign_in_to_your".tr,
-                          style: theme.textTheme.titleMedium),
-                      SizedBox(height: 27.v),
-                      _buildSignInWithGoogle(),
-                      SizedBox(height: 23.v),
-                      Padding(
-                          padding: EdgeInsets.only(left: 1.h),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 7.v, bottom: 6.v),
-                                    child: SizedBox(
-                                        width: 86.h, child: Divider())),
-                                Text("msg_or_continue_with".tr,
-                                    style: CustomTextStyles
-                                        .bodySmallPoppinsGray50001),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 7.v, bottom: 6.v),
-                                    child:
-                                        SizedBox(width: 86.h, child: Divider()))
-                              ])),
-                      SizedBox(height: 21.v),
-                      _buildEmail(),
-                      SizedBox(height: 9.v),
-                      _buildPassword(),
-                      SizedBox(height: 7.v),
-                      Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                              padding: EdgeInsets.only(right: 3.h),
-                              child: Text("msg_passwords_or_email".tr,
-                                  style: CustomTextStyles
-                                      .bodySmallPoppinsRed700))),
-                      SizedBox(height: 17.v),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                              onTap: () {
-                                onTapTxtForgotPassword();
-                              },
-                              child: Padding(
-                                  padding: EdgeInsets.only(left: 3.h),
-                                  child: Text("msg_forgot_password2".tr,
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  child: Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 39.h, vertical: 21.v),
+                      child: Column(children: [
+                        SizedBox(height: 38.v),
+                        SizedBox(
+                            height: 78.v,
+                            width: 134.h,
+                            child: Stack(
+                                alignment: Alignment.centerRight,
+                                children: [
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                          height: 78.adaptSize,
+                                          width: 78.adaptSize,
+                                          decoration: BoxDecoration(
+                                              color: appTheme.gray900,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      39.h)))),
+                                  Align(
+                                      alignment: Alignment(0.4, 0.0),
+                                      child: RichText(
+                                          text: TextSpan(children: [
+                                            TextSpan(
+                                                text: "lbl_ne".tr,
+                                                style: CustomTextStyles
+                                                    .titleLargeWhiteA700_1),
+                                            TextSpan(
+                                                text: "lbl_ws".tr,
+                                                style: CustomTextStyles
+                                                    .titleLargeGray900),
+                                            TextSpan(
+                                                text: "lbl_a".tr,
+                                                style:
+                                                    theme.textTheme.titleLarge)
+                                          ]),
+                                          textAlign: TextAlign.left))
+                                ])),
+                        SizedBox(height: 52.v),
+                        Text("msg_sign_in_to_your".tr,
+                            style: theme.textTheme.titleMedium),
+                        SizedBox(height: 27.v),
+                        _buildSignInWithGoogle(),
+                        SizedBox(height: 23.v),
+                        Padding(
+                            padding: EdgeInsets.only(left: 1.h),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 7.v, bottom: 6.v),
+                                      child: SizedBox(
+                                          width: 86.h, child: Divider())),
+                                  Text("msg_or_continue_with".tr,
                                       style: CustomTextStyles
-                                          .bodySmallPoppinsGray50001
-                                          .copyWith(
-                                              decoration:
-                                                  TextDecoration.underline))))),
-                      SizedBox(height: 7.v),
-                      _buildSignIn(),
-                      SizedBox(height: 78.v),
-                      Align(
-                          alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                              onTap: () {
-                                onTapTxtDonthaveanaccount();
-                              },
-                              child: RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                        text: "msg_don_t_have_an_account2".tr,
-                                        style:
-                                            CustomTextStyles.labelLargePoppins),
-                                    TextSpan(
-                                        text: "lbl_create_account".tr,
+                                          .bodySmallPoppinsGray50001),
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 7.v, bottom: 6.v),
+                                      child: SizedBox(
+                                          width: 86.h, child: Divider()))
+                                ])),
+                        SizedBox(height: 21.v),
+                        _buildEmail(),
+                        SizedBox(height: 9.v),
+                        _buildPassword(),
+                        SizedBox(height: 7.v),
+                        Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                                padding: EdgeInsets.only(right: 3.h),
+                                child: Text("msg_passwords_or_email".tr,
+                                    style: CustomTextStyles
+                                        .bodySmallPoppinsRed700))),
+                        SizedBox(height: 17.v),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                                onTap: () {
+                                  onTapTxtForgotPassword();
+                                },
+                                child: Padding(
+                                    padding: EdgeInsets.only(left: 3.h),
+                                    child: Text("msg_forgot_password2".tr,
                                         style: CustomTextStyles
-                                            .bodySmallPoppinsIndigo700)
-                                  ]),
-                                  textAlign: TextAlign.left)))
-                    ])))));
+                                            .bodySmallPoppinsGray50001
+                                            .copyWith(
+                                                decoration: TextDecoration
+                                                    .underline))))),
+                        SizedBox(height: 7.v),
+                        _buildSignIn(),
+                        SizedBox(height: 78.v),
+                        Align(
+                            alignment: Alignment.centerRight,
+                            child: GestureDetector(
+                                onTap: () {
+                                  onTapTxtDonthaveanaccount();
+                                },
+                                child: RichText(
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                          text: "msg_don_t_have_an_account2".tr,
+                                          style: CustomTextStyles
+                                              .labelLargePoppins),
+                                      TextSpan(
+                                          text: "lbl_create_account".tr,
+                                          style: CustomTextStyles
+                                              .bodySmallPoppinsIndigo700)
+                                    ]),
+                                    textAlign: TextAlign.left)))
+                      ]))),
+            )));
   }
 
   /// Section Widget

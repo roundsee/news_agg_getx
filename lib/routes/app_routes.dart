@@ -6,6 +6,8 @@ import 'package:new_agg/presentation/page_recommended_list/binding/rrecommended_
 import 'package:new_agg/presentation/page_recommended_list/page_recommended_list.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
 import 'package:new_agg/presentation/page_search_category/binding/page_search_category_binding.dart';
+import 'package:new_agg/presentation/search_result_screen/binding/search_result_binding.dart';
+import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
 import 'package:new_agg/presentation/splash_screen/splash_screen.dart';
 import 'package:new_agg/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:new_agg/presentation/forgot_pass_two_screen/forgot_pass_two_screen.dart';
@@ -117,6 +119,7 @@ class AppRoutes {
   static const String storyNewsScreen = '/story_news_screen';
 
   static const String searchPageScreen = '/search_page_screen';
+  static const String searchResultScreen = '/search_result_screen';
 
   static const String ukuranTextScreen = '/ukuran_text_screen';
 
@@ -297,6 +300,13 @@ class AppRoutes {
       page: () => SearchPageScreen(),
       bindings: [
         SearchPageBinding(),
+      ],
+    ),
+    GetPage(
+      name: searchResultScreen,
+      page: () => SearchResultScreen(),
+      bindings: [
+        SearchResultBinding(),
       ],
     ),
     GetPage(

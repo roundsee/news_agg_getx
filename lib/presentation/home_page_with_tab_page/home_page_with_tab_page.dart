@@ -4,7 +4,7 @@ import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/controllers/news_per_cagory_controller.dart';
 import 'package:new_agg/core/models/category.dart';
 //import 'package:new_agg/presentation/home_page/widgets/side_drawer.dart';
-import 'package:new_agg/presentation/home_page_with_tab_page/webview.dart';
+//import 'package:new_agg/presentation/home_page_with_tab_page/webview.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
 //import 'package:new_agg/widgets/custom_elevated_button.dart';
@@ -131,13 +131,16 @@ class HomePageWithTabPage extends GetView {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(top: 1.v),
+                              padding: EdgeInsets.only(top: 1.v, left: 25),
                               child: Text("msg_recommend_for_you".tr,
                                   style:
                                       CustomTextStyles.titleSmallBlack900Bold)),
                           GestureDetector(
-                            child: Text("lbl_see_all".tr,
-                                style: theme.textTheme.bodyMedium),
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 25),
+                              child: Text("lbl_see_all".tr,
+                                  style: theme.textTheme.bodyMedium),
+                            ),
                             onTap: () => {
                               //onTapSeeAllRecommended()
                               onTapSeeAllNew()
@@ -152,13 +155,16 @@ class HomePageWithTabPage extends GetView {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(top: 10.v),
+                              padding: EdgeInsets.only(top: 1.v, left: 25),
                               child: Text("msg_recommend_for_you".tr,
                                   style:
                                       CustomTextStyles.titleSmallBlack900Bold)),
                           GestureDetector(
-                            child: Text("lbl_see_all".tr,
-                                style: theme.textTheme.bodyMedium),
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 25),
+                              child: Text("lbl_see_all".tr,
+                                  style: theme.textTheme.bodyMedium),
+                            ),
                             onTap: () => {
                               //onTapSeeAllRecommended()
                               onTapSeeAllRecommended()
@@ -551,16 +557,19 @@ class HomePageWithTabPage extends GetView {
           onTapCardNewsColumn(theNews.id.toString());
         },
         child: Container(
-            height: 110,
-            margin: EdgeInsets.only(left: 15.h, right: 15.h),
-            padding: EdgeInsets.symmetric(horizontal: 11.h, vertical: 10.v),
+            height: 130,
+            margin: EdgeInsets.only(left: 2.h, right: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 10.v),
             decoration: BoxDecoration(
               color: Colors.white,
+              /*
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(5),
                   topRight: Radius.circular(5),
                   bottomLeft: Radius.circular(5),
                   bottomRight: Radius.circular(5)),
+              */
+              /*
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -569,10 +578,12 @@ class HomePageWithTabPage extends GetView {
                   offset: Offset(0, 3), // changes position of shadow
                 ),
               ],
+            */
             ),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Container(
-                width: 250.h,
+                //color: appTheme.gray500,
+                width: 300.h,
                 margin: EdgeInsets.only(right: 2.h),
                 padding: EdgeInsets.symmetric(horizontal: 2.h, vertical: 2.v),
                 child: Row(
@@ -581,35 +592,41 @@ class HomePageWithTabPage extends GetView {
                       Container(
                           decoration: AppDecoration.fillBlueGray.copyWith(
                               borderRadius: BorderRadiusStyle.roundedBorder10),
-                          width: 75,
-                          height: 75,
+                          width: 100,
+                          height: 100,
                           child: ClipRRect(
                             borderRadius:
-                                BorderRadius.circular(5), // Image border
+                                BorderRadius.circular(10), // Image border
                             child: SizedBox.fromSize(
                               size: Size.fromRadius(30), // Image radius
                               child: CustomImageView(
-                                  imagePath: theNews.header.toString()),
+                                imagePath: theNews.header.toString(),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           )),
                       Container(
+                        margin: EdgeInsets.only(left: 5),
                         decoration: AppDecoration.fillWhiteA7001.copyWith(
                             borderRadius: BorderRadiusStyle.roundedBorder10),
-                        width: 200,
+                        width: 175,
                         child: Column(children: [
                           Text(theNews.title.toString(),
                               style: theme.textTheme.labelLarge),
-                          Row(children: [
-                            Text(theNews.publish.toString(),
-                                style: theme.textTheme.labelSmall),
-                            Text(theNews.category.toString(),
-                                style: theme.textTheme.labelSmall),
-                          ]),
+                          Row(
+                              // mainAxisAlignment: MainAxisAlignment.end,
+                              //crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(theNews.publish.toString(),
+                                    style: theme.textTheme.labelSmall),
+                                Text(theNews.category.toString(),
+                                    style: theme.textTheme.labelSmall),
+                              ]),
                         ]),
                       ),
                     ]),
               ),
-              SizedBox(height: 6.v)
+              SizedBox(height: 3.v)
             ])));
   }
 

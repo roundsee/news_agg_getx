@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:new_agg/core/models/category.dart';
 import 'package:new_agg/core/models/content_per_category.dart';
 import 'package:new_agg/core/models/trending.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 //import 'package:new_agg/presentation/home_page/models/news_per_category.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/models/home_page_with_tab_model.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class HomePageWithTabController extends GetxController
   List<Category>? listCategory = <Category>[].obs;
   List<Trend>? listTrend = <Trend>[].obs;
   RxList<Content>? listRecommended = <Content>[].obs;
-
+  // RxString searchCategories = "".obs;
+  //RxString searchKeyword = "".obs;
   late TabController tabviewController =
       Get.put(TabController(vsync: this, length: 4));
   RxBool categoryNotFound = false.obs;
@@ -86,12 +88,19 @@ class HomePageWithTabController extends GetxController
       //Parses the string and returns the resulting Json object.
       ContentPerCategory contentCategoryData =
           ContentPerCategory.fromJson(jsonDecode(res.body));
-
+      var imageurl;
       for (int i = 0; i < contentCategoryData.data!.length; i++) {
         Content content = new Content();
         content.category = contentCategoryData.data![i].content!.category;
         content.description = contentCategoryData.data![i].content!.category;
-        content.header = contentCategoryData.data![i].content!.header;
+        imageurl = contentCategoryData.data![i].content!.header;
+        //imageurl = content.header;
+        if (await isValidUrl(imageurl)) {
+          content.header = imageurl;
+        } else {
+          content.header =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
         content.id = contentCategoryData.data![i].content!.id;
         content.interaction = contentCategoryData.data![i].content!.interaction;
         content.statistics = contentCategoryData.data![i].content!.statistics;
@@ -243,12 +252,19 @@ class HomePageWithTabController extends GetxController
       //Parses the string and returns the resulting Json object.
       ContentPerCategory contentCategoryData =
           ContentPerCategory.fromJson(jsonDecode(res.body));
-
+      var imageurl;
       for (int i = 0; i < contentCategoryData.data!.length; i++) {
         Content content = new Content();
         content.category = contentCategoryData.data![i].content!.category;
         content.description = contentCategoryData.data![i].content!.category;
-        content.header = contentCategoryData.data![i].content!.header;
+        imageurl = contentCategoryData.data![i].content!.header;
+        //imageurl = content.header;
+        if (await isValidUrl(imageurl)) {
+          content.header = imageurl;
+        } else {
+          content.header =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
         content.id = contentCategoryData.data![i].content!.id;
         content.interaction = contentCategoryData.data![i].content!.interaction;
         content.statistics = contentCategoryData.data![i].content!.statistics;

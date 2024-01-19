@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_agg/firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/app_export.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -72,7 +73,13 @@ main() async {
     }
   });
   final fcmToken = await FirebaseMessaging.instance.getToken();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove("FCMToken");
+  prefs.setString("FCMToken", fcmToken!);
+  //var token = prefs!.getString('token').toString();
+  final fcmlocal = prefs.getString("FCMToken");
   log("FCMToken $fcmToken");
+  log("FCMTokenlocal $fcmlocal");
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((value) async {

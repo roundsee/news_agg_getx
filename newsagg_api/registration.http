@@ -1,0 +1,9 @@
+POST https://sandbox-nooz.digiprimatera.co.id/api/readers/register HTTP/1.1
+Content-Type: application/json
+Authorization: 1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d
+
+{
+    "name": "Luthfi Imron",
+    "email": "a2l083d@gmail.com",
+    "password": "password123"
+}

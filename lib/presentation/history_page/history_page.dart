@@ -1,7 +1,9 @@
 import 'package:new_agg/core/controllers/categories_controller.dart';
+import 'package:new_agg/core/controllers/news_per_cagory_controller.dart';
 import 'package:new_agg/core/models/category.dart';
 import 'package:new_agg/core/models/history_model.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
+import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
@@ -20,6 +22,8 @@ class HistoryPage extends StatelessWidget {
   HistoryController controller = Get.put(HistoryController());
   CategoriesController categoriesController = Get.put(CategoriesController());
 
+  NewsPerCategoryController newsperCategoryController =
+      Get.put(NewsPerCategoryController());
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -43,6 +47,61 @@ class HistoryPage extends StatelessWidget {
                         onTapMdiBellNotification();
                       })
                 ]),
+//====================
+            drawer: Drawer(
+              backgroundColor: appTheme.gray100,
+              child: ListView(
+                children: <Widget>[
+                  DrawerHeader(
+                      child: Text("Category"),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                      )),
+                  GetBuilder<CategoriesController>(
+                    builder: (controller) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: appTheme.whiteA700,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            )),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(
+                              categoriesController.allCategory.length, (index) {
+                            return ListTile(
+                              leading: ImageIcon(NetworkImage(
+                                  categoriesController.allCategory[index].icon
+                                      .toString())),
+                              title: Text(categoriesController
+                                  .allCategory[index].category
+                                  .toString()),
+                              onTap: () {
+                                Navigator.pop(context);
+                                newsperCategoryController.getNewsPerCategories(
+                                    categoriesController.allCategory[index].id);
+                                Get.to(() => PageSearchCategory(), arguments: [
+                                  {
+                                    "idcategory": categoriesController
+                                        .allCategory[index].id
+                                  }
+                                ]);
+                              },
+                            );
+                            //Text(categoriesController.allCategory[index].category.toString());
+                          }),
+                        ),
+                      );
+                    },
+                    init: CategoriesController(),
+                  ),
+                ],
+              ),
+            ),
+//====================
             body: Container(
                 width: double.maxFinite,
                 decoration: AppDecoration.fillWhiteA,
@@ -107,7 +166,11 @@ class HistoryPage extends StatelessWidget {
   Widget _buildCardHistory(Content itemHistory) {
     return GestureDetector(
       onTap: () {
-        onTapCardNews!.call(itemHistory.id);
+        // onTapCardNews!.call(itemHistory.id);
+
+        Get.to(() => NewsOneScreen(), arguments: [
+          {"id": itemHistory.id.toString()}
+        ]);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -238,8 +301,7 @@ class HistoryPage extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomImageView(
-                        imagePath: itemHistory
-                            .header, // ImageConstant.imgPhBookmarkSimpleFill,
+                        imagePath: ImageConstant.imgPhBookmarkSimpleFill,
                         height: 20.adaptSize,
                         width: 20.adaptSize,
                       ),
