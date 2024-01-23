@@ -2,11 +2,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/controllers/news_per_cagory_controller.dart';
+import 'package:new_agg/core/controllers/search_result_controller.dart';
 import 'package:new_agg/core/models/category.dart';
 //import 'package:new_agg/presentation/home_page/widgets/side_drawer.dart';
 //import 'package:new_agg/presentation/home_page_with_tab_page/webview.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
+import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
 //import 'package:new_agg/widgets/custom_elevated_button.dart';
 //import 'package:new_agg/widgets/custom_icon_button.dart';
 //import 'package:toggle_switch/toggle_switch.dart';
@@ -29,10 +31,11 @@ class HomePageWithTabPage extends GetView {
 
   HomePageWithTabController controller = Get.put(HomePageWithTabController());
   CategoriesController categoriesController = Get.put(CategoriesController());
-
+  SearchResultController searchController = Get.put(SearchResultController());
   NewsPerCategoryController newsperCategoryController =
       Get.put(NewsPerCategoryController());
 
+  var searchCategories = "";
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -119,7 +122,14 @@ class HomePageWithTabPage extends GetView {
                     padding: EdgeInsets.only(left: 25.h, right: 24.h),
                     child: CustomSearchView(
                         controller: controller.searchController,
-                        hintText: "lbl_search".tr)),
+                        hintText: "lbl_search".tr,
+                        onSubmitted: (p0) {
+                          searchController.SearchNews(searchCategories, p0);
+
+                          Get.to(() => SearchResultScreen(), arguments: [
+                            {"idcategories": searchCategories, "keyword": p0}
+                          ]);
+                        })),
                 SizedBox(height: 5.v),
                 Container(height: 25, child: _buildListCategoryButton()),
                 SizedBox(height: 5.v),

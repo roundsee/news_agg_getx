@@ -5,6 +5,7 @@ import 'package:new_agg/core/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/search_result.dart';
+import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/widgets/app_bar/appbar_leading_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
@@ -54,6 +55,12 @@ class SearchResultScreen extends StatelessWidget {
                     child: Column(
                         // padding: EdgeInsets.only(left: 20.h, right: 23.h),
                         children: [
+                          Text("Search Result",
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: appTheme.green900,
+                              )),
+                          SizedBox(height: 10.v),
                           Obx(
                             () => Container(
                               height: 500,
@@ -61,11 +68,11 @@ class SearchResultScreen extends StatelessWidget {
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 children: List.generate(
-                                    controller.searchResult
+                                    controller.searchResult.value
                                         .length, // .allNewsPerCategory.value.length,
                                     (index) {
                                   return _buildCardNewsColumn(
-                                      controller.searchResult[index]);
+                                      controller.searchResult.value[index]);
                                 }),
                               ),
                             ),
@@ -96,9 +103,9 @@ class SearchResultScreen extends StatelessWidget {
                 );
               })),
         ));
-  }
+  }Treninet5758--
 */
-  void SearchContent(int categoryId, String searchText) {
+  void SearchContent(String categoryId, String searchText) {
     controller.SearchNews(categoryId, searchText);
   }
 
@@ -158,13 +165,14 @@ class SearchResultScreen extends StatelessWidget {
 */
   Widget _buildCardNewsColumn(ContentSearchResult theNews) {
     return GestureDetector(
-        onTap: () {
-          onTapCardNewsColumn(theNews.id.toString());
-        },
+        onTap: () => Get.to(() => NewsOneScreen(), arguments: [
+              {"id": theNews.id}
+            ]),
         child: Container(
-            height: 150,
+            height: 140,
             margin: EdgeInsets.only(left: 28.h, right: 21.h),
             padding: EdgeInsets.symmetric(horizontal: 11.h, vertical: 10.v),
+            /*
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -181,25 +189,38 @@ class SearchResultScreen extends StatelessWidget {
                 ),
               ],
             ),
+            */
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Container(
-                width: 287.h,
+                width: 300.h,
                 margin: EdgeInsets.only(right: 2.h),
-                padding: EdgeInsets.symmetric(horizontal: 6.h, vertical: 8.v),
+                padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 8.v),
                 child: Row(children: [
                   Container(
                     decoration: AppDecoration.fillWhiteA7001.copyWith(
                         borderRadius: BorderRadiusStyle.roundedBorder10),
                     width: 200,
                     child: Column(children: [
-                      Text(theNews.title.toString(),
-                          style: theme.textTheme.labelLarge),
-                      Row(children: [
-                        Text(theNews.datePublish.toString(),
-                            style: theme.textTheme.labelSmall),
-                        Text(theNews.category.toString(),
-                            style: theme.textTheme.labelSmall)
-                      ]),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Text(theNews.title.toString(),
+                            style: theme.textTheme.labelLarge),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Text(theNews.datePublish.toString(),
+                                  style: theme.textTheme.labelSmall),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Text(theNews.category.toString(),
+                                  style: theme.textTheme.labelSmall),
+                            )
+                          ]),
                     ]),
                   ),
                   Container(
@@ -218,7 +239,7 @@ class SearchResultScreen extends StatelessWidget {
                       ))
                 ]),
               ),
-              SizedBox(height: 6.v)
+              SizedBox(height: 2.v)
             ])));
   }
 
@@ -227,7 +248,7 @@ class SearchResultScreen extends StatelessWidget {
     // if (newsController.isLoading.value) {
     //} else {
     //newsController.getNewsDetail(idnews);
-    Get.toNamed(AppRoutes.newsOneScreen);
+    //Get.toNamed(AppRoutes.newsOneScreen);
 
     //Get.to(() => NewsScreen(), arguments: [
     //  {"id": idnews}

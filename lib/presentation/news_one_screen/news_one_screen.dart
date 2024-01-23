@@ -101,6 +101,9 @@ class NewsOneScreen extends StatelessWidget {
                                       style: CustomTextStyles
                                           .bodySmallGray70002))),
                               SizedBox(height: 5.v),
+                              _buildOneStack(),
+                              SizedBox(height: 5.v),
+                              //_buildOneStack(),
                               Align(
                                   alignment: Alignment.center,
                                   child: Container(
@@ -110,12 +113,10 @@ class NewsOneScreen extends StatelessWidget {
                                       child: Obx(() => Text(
                                           controller.description.value
                                               .toString(),
-                                          maxLines: 5,
-                                          overflow: TextOverflow.ellipsis,
+                                          // maxLines: 5,
+                                          //overflow: TextOverflow.ellipsis,
                                           style: CustomTextStyles
                                               .labelLargeMedium)))),
-                              SizedBox(height: 14.v),
-                              _buildOneStack(),
                               SizedBox(height: 14.v),
                               Align(
                                   alignment: Alignment.center,
