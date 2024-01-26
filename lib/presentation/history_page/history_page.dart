@@ -1,17 +1,15 @@
 import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/controllers/news_per_cagory_controller.dart';
+import 'package:new_agg/core/controllers/search_result_controller.dart';
 import 'package:new_agg/core/models/category.dart';
 import 'package:new_agg/core/models/history_model.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
+import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
-
-import '../history_page/widgets/historypage_item_widget.dart';
 import 'controller/history_controller.dart';
-import 'models/history_model.dart';
-import 'models/historypage_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 
@@ -21,9 +19,11 @@ class HistoryPage extends StatelessWidget {
 
   HistoryController controller = Get.put(HistoryController());
   CategoriesController categoriesController = Get.put(CategoriesController());
-
+  SearchResultController searchController = Get.put(SearchResultController());
   NewsPerCategoryController newsperCategoryController =
       Get.put(NewsPerCategoryController());
+
+  var searchCategories = "";
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -112,7 +112,17 @@ class HistoryPage extends StatelessWidget {
                         padding: EdgeInsets.only(left: 25.h, right: 24.h),
                         child: CustomSearchView(
                             controller: controller.searchController,
-                            hintText: "lbl_search".tr)),
+                            hintText: "lbl_search".tr,
+                            onSubmitted: (p0) {
+                              searchController.SearchNews(searchCategories, p0);
+
+                              Get.to(() => SearchResultScreen(), arguments: [
+                                {
+                                  "idcategories": searchCategories,
+                                  "keyword": p0
+                                }
+                              ]);
+                            })),
                     SizedBox(height: 5.v),
                     Container(height: 25, child: _buildListCategoryButton()),
                     SizedBox(height: 5.v),

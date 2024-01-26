@@ -45,7 +45,7 @@ class AlternativeHomePageDesignContainerScreen
         return AppRoutes.homePageWithTabPage;
       case BottomBarEnum.Trending:
         //return AppRoutes.trendingPageTabContainerPage;
-        return AppRoutes.historyPage; //
+        return AppRoutes.trendingPage; //
       case BottomBarEnum.History:
         return AppRoutes.historyPage;
       case BottomBarEnum.Profile:
@@ -61,7 +61,7 @@ class AlternativeHomePageDesignContainerScreen
     switch (currentRoute) {
       case AppRoutes.homePageWithTabPage:
         return HomePageWithTabPage();
-      case AppRoutes.trendingPageTabContainerPage:
+      case AppRoutes.trendingPage:
         return NewTrendingPage(); //return TrendingPageTabContainerPage();
       case AppRoutes.historyPage:
         var token = _shared.getUserToken();

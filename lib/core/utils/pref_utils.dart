@@ -59,4 +59,36 @@ class PrefUtils {
       return '0';
     }
   }
+
+  String getLanguage() {
+    try {
+      return _sharedPreferences!.getString('lang')!;
+    } catch (e) {
+      return '0';
+    }
+  }
+
+  String getTextSize() {
+    try {
+      return _sharedPreferences!.getString('size')!;
+    } catch (e) {
+      return '0';
+    }
+  }
+
+  Future<void> setStatusUser(String value) {
+    return _sharedPreferences!.setString('status', value);
+  }
+
+  Future<void> setfcmToken(String value) {
+    return _sharedPreferences!.setString('fcm', value);
+  }
+
+  Future<void> setLanguage(String value) {
+    return _sharedPreferences!.setString('lang', value);
+  }
+
+  Future<void> setTextSize(String value) {
+    return _sharedPreferences!.setString('size', value);
+  }
 }

@@ -1,19 +1,23 @@
+import 'package:new_agg/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
+import 'package:new_agg/presentation/news_stat_screen/news_stat_screen.dart';
+import 'package:new_agg/widgets/custom_text_form_field.dart';
 
 import '../profile_screen/widgets/profilelist_item_widget.dart';
 import 'controller/profile_controller.dart';
 import 'models/profilelist_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
-import 'package:new_agg/presentation/berita_yang_di_sukai_page/berita_yang_di_sukai_page.dart';
+//import 'package:new_agg/presentation/berita_yang_di_sukai_page/berita_yang_di_sukai_page.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
-import 'package:new_agg/presentation/trending_page_tab_container_page/trending_page_tab_container_page.dart';
+//import 'package:new_agg/presentation/trending_page_tab_container_page/trending_page_tab_container_page.dart';
 import 'package:new_agg/widgets/custom_bottom_bar.dart';
 
 class ProfileScreen extends GetWidget<ProfileController> {
   ProfileScreen({Key? key}) : super(key: key);
 
   ProfileController profileController = Get.put(ProfileController());
+  EditProfileController editController = Get.put(EditProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +42,16 @@ class ProfileScreen extends GetWidget<ProfileController> {
                   onTapImgImage();
                 }),
             SizedBox(height: 40.v),
-            /*
+
             Obx(() => CustomImageView(
-                imagePath: profileController.photo
-                    .toString(), //ImageConstant.imgEllipse2,
+                imagePath: profileController.photo.toString() == ""
+                    ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46"
+                    : profileController.photo.toString(),
+                // .toString(), //ImageConstant.imgEllipse2,
                 height: 139.adaptSize,
                 width: 139.adaptSize,
                 radius: BorderRadius.circular(69.h))),
-            */
+
             SizedBox(height: 15.v),
             Obx(
               () => Text(profileController.name.toString(),
@@ -55,6 +61,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
             Obx(() => Text(profileController.email.toString(),
                 style: CustomTextStyles.titleSmallGray70005)),
             SizedBox(height: 13.v),
+
             GestureDetector(
                 onTap: () {
                   onTapTxtEditProfile();
@@ -63,7 +70,37 @@ class ProfileScreen extends GetWidget<ProfileController> {
                     style: CustomTextStyles.titleSmallErrorContainer
                         .copyWith(decoration: TextDecoration.underline))),
             SizedBox(height: 20.v),
-            _buildProfileList()
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                print('Button pressed!');
+              },
+              child: Text("msg_berita_yang_di_sukai".tr),
+            ),
+            ElevatedButton(
+                onPressed: () => Get.to(() => NewsStatScreen(), arguments: [
+                      {"statType": "like"}
+                    ]),
+                child: Text(
+                  "msg_berita_yang_di_sukai".tr,
+                  style: TextStyle(color: appTheme.gray100),
+                ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 1,
+                )),
+            ElevatedButton(
+                onPressed: () => Get.to(() => NewsStatScreen(), arguments: [
+                      {"statType": "save"}
+                    ]),
+                child: Text(
+                  "msg_berita_yang_di_simpan".tr,
+                  style: TextStyle(color: appTheme.gray100),
+                ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 1,
+                )) //_buildProfileList()
           ])),
       //bottomNavigationBar: _buildBottomBar()
     ));
@@ -134,6 +171,11 @@ class ProfileScreen extends GetWidget<ProfileController> {
 
   /// Navigates to the editProfileScreen when the action is triggered.
   onTapTxtEditProfile() {
+    editController.SetProfile(
+        controller.name.value.toString(),
+        controller.birthday.value.toString(),
+        controller.gender.value..toString(),
+        controller.photo.value..toString());
     Get.toNamed(
       AppRoutes.editProfileScreen,
     );

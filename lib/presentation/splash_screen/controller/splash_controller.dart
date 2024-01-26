@@ -31,10 +31,11 @@ class SplashController extends GetxController {
     var token = prefs!.getString('token').toString();
 
     // await Future.delayed(const Duration(milliseconds: 500));
-    animate.value = true;
+    //animate.value = true;
     // await Future.delayed(const Duration(milliseconds: 5000));
     // Check Session
     // if empty = first time open app show start page
+
     if (appsession == 'null') {
       prefs!.setString('appsession', "2");
       prefs!.setString('token', "1111111");
@@ -42,7 +43,14 @@ class SplashController extends GetxController {
       //Get.to(StartpageScreen());
     } else {
       //Get.to(() => Home());
-      Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
+      Timer(
+        const Duration(seconds: 5),
+        () => Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen
+            //LoginScreen(),
+            ),
+      );
+
+      //Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
     }
   }
 

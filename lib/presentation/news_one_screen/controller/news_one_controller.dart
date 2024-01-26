@@ -2,6 +2,8 @@ import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/interaction_model.dart';
 import 'package:new_agg/core/models/news_detail.dart';
+import 'package:new_agg/core/models/suggestion_model.dart';
+import 'package:new_agg/core/models/suggestion_model_show.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/presentation/news_one_screen/models/news_one_model.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ class NewsOneController extends GetxController {
   TextEditingController frameFiftyNineController = TextEditingController();
 
   Rx<NewsOneModel> newsOneModelObj = NewsOneModel().obs;
+  RxList<SuggestionModel> listSuggestion = (List<SuggestionModel>.of([])).obs;
+
   //Rx<Content> newsDetail = Rx<Content>().obs;
   //final newsDetail = Rxn<Content>();
   //var newsDetail = Content().obs;
@@ -26,7 +30,7 @@ class NewsOneController extends GetxController {
   RxBool newsNotFound = false.obs;
   RxBool isLoading = false.obs;
 
-  RxString test = "".obs;
+  //RxString theNews = "".obs;
 
   var title = "".obs;
   var description = "".obs;
@@ -63,7 +67,7 @@ class NewsOneController extends GetxController {
   getNewsDetail(var idNews) async {
     //Creates a new Uri object by parsing a URI string.
     isLoading.value = true;
-
+    Suggested(idNews);
     //change(null, status: RxStatus.loading());
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs!.getString('token').toString();
@@ -80,6 +84,7 @@ class NewsOneController extends GetxController {
         ApiEndPoints.contentEndpoints.DetailContent +
         "/" +
         idNews.toString());
+
     //_SimpleUri (https://a1c1-103-124-115-148.ngrok-free.app/api/contents/single/bad3762c-9d48-4ecc-aad4-310b26d7b219)
     Map body = {
       'token': token,
@@ -126,9 +131,10 @@ class NewsOneController extends GetxController {
       isLoading.value = false;
       //change(null, status: RxStatus.success());
       newsNotFound.value = true;
+
       update();
     }
-    test.value = "Helloooooo";
+
     print(newsModelObj.value);
     newsModelObj.refresh();
     isLoading.value = false;
@@ -217,12 +223,81 @@ class NewsOneController extends GetxController {
       isLoading.value = false;
       //change(null, status: RxStatus.success());
       newsNotFound.value = true;
+
       update();
     }
-    test.value = "Helloooooo";
+
     print(newsModelObj.value);
     newsModelObj.refresh();
     isLoading.value = false;
     update();
+  }
+
+  Suggested(String newsId) async {
+    //Creates a new Uri object by parsing a URI string.
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs!.getString('token').toString();
+    //token =
+    //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
+
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      'Accept-Language': 'ID',
+      'User-Agent': 'LENOVO ideapad 3'
+    };
+    http.Response res;
+
+    var url = Uri.parse(ApiEndPoints.baseUrl +
+        ApiEndPoints.contentEndpoints.SuggestedContent +
+        "/" +
+        newsId);
+    //Map body = {'categories': categoryId.toString(), 'key': searchText};
+
+    //var strbody = jsonEncode(body);
+    res = await http.get(url, headers: headers);
+
+    ///http.Response res = await http.get(url, headers: headers);
+    if (res.statusCode == 401) {
+      Get.toNamed(
+        AppRoutes.loginPageScreen,
+      );
+    }
+    listSuggestion.clear();
+    if (res.statusCode == 200) {
+      //Parses the string and returns the resulting Json object.
+      SuggestionNews newsSuggestion =
+          SuggestionNews.fromJson(jsonDecode(res.body));
+      var imageurl;
+      for (int i = 0; i < newsSuggestion.data!.length; i++) {
+        SuggestionModel newsContent = new SuggestionModel();
+        newsContent.id = newsSuggestion.data![i].content!.id.toString();
+        newsContent.category =
+            newsSuggestion.data![i].content!.category.toString();
+        newsContent.datePublish =
+            newsSuggestion.data![i].content!.datePublish.toString();
+        newsContent.title = newsSuggestion.data![i].content!.title.toString();
+        newsContent.like = newsSuggestion.data![i].statistics!.like;
+        newsContent.save = newsSuggestion.data![i].statistics!.save;
+        newsContent.share = newsSuggestion.data![i].statistics!.share;
+        imageurl = newsSuggestion.data![i].content!.header.toString();
+
+        if (await isValidUrl(imageurl)) {
+          newsContent.header = imageurl;
+        } else {
+          newsContent.header =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
+
+        listSuggestion.value.add(newsContent);
+      }
+      listSuggestion.refresh();
+      print(listSuggestion.value);
+
+      update();
+    } else {
+      update();
+    }
   }
 }

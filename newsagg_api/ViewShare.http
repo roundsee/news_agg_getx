@@ -1,0 +1,5 @@
+GET https://sandbox-nooz.digiprimatera.co.id/api/interaction/save  HTTP/1.1
+Content-Type: application/json
+Authorization: 1705057042_a6k9qy1aFiddJRJ441pXdf2VwgUXuGdtd25TIvDA_83312963-44ef-42f2-86c5-cd8c21067bd5
+User-Agent: Android
+Accept-Language: ID

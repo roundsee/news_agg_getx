@@ -3,9 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
+import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/category.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/routes/app_routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoriesController extends GetxController {
   // for list view
@@ -26,22 +28,22 @@ class CategoriesController extends GetxController {
   getCategories() async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //var token = prefs!.getString('token').toString();
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
-    var headers = {
+    var headers = getHeaders("req");
+    /*
+    {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
+
     var url = Uri.parse(
         ApiEndPoints.baseUrl + ApiEndPoints.categoryEndpoints.categories);
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {

@@ -88,6 +88,8 @@ class ImageConstant {
 
   // Common images
   static String imgLogo3 = '$imagePath/img_logo_3.png';
+  static String imgLogoAnix = '$imagePath/logoani.gif';
+  static String imgLogoAni = '$imagePath/logolagi.gif';
 
   static String imgFrame40 = '$imagePath/img_frame_40.png';
 

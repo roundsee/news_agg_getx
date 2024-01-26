@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:new_agg/core/app_export.dart';
 //import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/models/newtrending_model.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 //import 'package:new_agg/presentation/history_page/models/history_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,7 +45,7 @@ class NewTrendingController extends GetxController {
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
-
+//Dashboard Outstanding DO against Invoice
     // bool isSearch = false;
     //if (searchText == "") {
     var url = Uri.parse(
@@ -83,6 +84,14 @@ class NewTrendingController extends GetxController {
         itemTrending.publish =
             trendingList.data![i].content?.publish.toString();
         itemTrending.title = trendingList.data![i].content?.title.toString();
+        var imageurl = trendingList.data![i].content?.header.toString();
+        //imageurl = content.header;
+        if (await isValidUrl(imageurl!)) {
+          itemTrending.header = imageurl;
+        } else {
+          itemTrending.header =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
 
         listTrending.add(itemTrending);
       }

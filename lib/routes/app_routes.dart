@@ -2,6 +2,10 @@ import 'package:new_agg/presentation/history_page/binding/history_binding.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/binding/home_page_with_tab_page_binding.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
+import 'package:new_agg/presentation/new_trending_page/binding/history_binding.dart';
+import 'package:new_agg/presentation/new_trending_page/newtrending_page.dart';
+import 'package:new_agg/presentation/news_stat_screen/binding/news_stat_binding.dart';
+import 'package:new_agg/presentation/news_stat_screen/news_stat_screen.dart';
 import 'package:new_agg/presentation/page_recommended_list/binding/rrecommended_list_binding.dart';
 import 'package:new_agg/presentation/page_recommended_list/page_recommended_list.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
@@ -101,6 +105,7 @@ class AppRoutes {
   static const String blokirCommentScreen = '/blokir_comment_screen';
 
   static const String profileScreen = '/profile_screen';
+  static const String statScreen = '/news_stat_screen';
 
   static const String settingsScreen = '/settings_screen';
 
@@ -240,6 +245,13 @@ class AppRoutes {
       ],
     ),
     GetPage(
+      name: statScreen,
+      page: () => NewsStatScreen(),
+      bindings: [
+        NewsStatBinding(),
+      ],
+    ),
+    GetPage(
       name: settingsScreen,
       page: () => SettingsScreen(),
       bindings: [
@@ -363,6 +375,13 @@ class AppRoutes {
       page: () => HistoryPage(),
       bindings: [
         HistoryBinding(),
+      ],
+    ),
+    GetPage(
+      name: trendingPage,
+      page: () => NewTrendingPage(), // TrenPage(),
+      bindings: [
+        NewTrendingBinding(),
       ],
     )
   ];

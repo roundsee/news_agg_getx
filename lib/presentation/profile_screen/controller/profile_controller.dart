@@ -60,7 +60,9 @@ class ProfileController extends GetxController {
       name.value = userProfile.data!.name.toString();
       email.value = userProfile.data!.email.toString();
       status.value = userProfile.data!.status.toString();
-      birthday.value = userProfile.data!.birthday.toString();
+      birthday.value = userProfile.data!.birthday.toString() == "null"
+          ? "2000-01-01"
+          : userProfile.data!.birthday.toString();
       gender.value = userProfile.data!.gender.toString();
 
       var imageurl = userProfile.data!.photo.toString();

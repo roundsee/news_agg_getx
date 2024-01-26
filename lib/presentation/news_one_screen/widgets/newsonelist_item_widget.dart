@@ -1,3 +1,6 @@
+import 'package:new_agg/core/models/suggestion_model.dart';
+import 'package:new_agg/core/models/suggestion_model_show.dart';
+
 import '../controller/news_one_controller.dart';
 import '../models/newsonelist_item_model.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +9,13 @@ import 'package:new_agg/core/app_export.dart';
 // ignore: must_be_immutable
 class NewsonelistItemWidget extends StatelessWidget {
   NewsonelistItemWidget(
-    this.newsonelistItemModelObj, {
+    this.suggestionContent, {
     Key? key,
   }) : super(
           key: key,
         );
 
-  NewsonelistItemModel newsonelistItemModelObj;
+  SuggestionModel suggestionContent;
 
   var controller = Get.find<NewsOneController>();
 
@@ -44,7 +47,8 @@ class NewsonelistItemWidget extends StatelessWidget {
                   SizedBox(height: 2.v),
                   Obx(
                     () => Text(
-                      newsonelistItemModelObj.oneHundred!.value,
+                      suggestionContent.like.toString(),
+                      //suggestionContent.oneHundred!.value,
                       style: theme.textTheme.bodySmall,
                     ),
                   ),
@@ -69,7 +73,9 @@ class NewsonelistItemWidget extends StatelessWidget {
                   SizedBox(height: 3.v),
                   Obx(
                     () => Text(
-                      newsonelistItemModelObj.oneHundred1!.value,
+                      suggestionContent.save.toString(),
+
+                      //suggestionContent.oneHundred!.value,
                       style: theme.textTheme.bodySmall,
                     ),
                   ),
@@ -94,7 +100,8 @@ class NewsonelistItemWidget extends StatelessWidget {
                   SizedBox(height: 3.v),
                   Obx(
                     () => Text(
-                      newsonelistItemModelObj.oneHundred2!.value,
+                      suggestionContent.share.toString(),
+                      //suggestionContent.oneHundred!.value,
                       style: theme.textTheme.bodySmall,
                     ),
                   ),
@@ -145,7 +152,7 @@ class NewsonelistItemWidget extends StatelessWidget {
                                 ),
                                 child: Obx(
                                   () => Text(
-                                    newsonelistItemModelObj.politik!.value,
+                                    suggestionContent.title.toString(),
                                     style:
                                         CustomTextStyles.bodySmallWhiteA700_1,
                                   ),
@@ -181,8 +188,7 @@ class NewsonelistItemWidget extends StatelessWidget {
                                       ),
                                       child: Obx(
                                         () => Text(
-                                          newsonelistItemModelObj
-                                              .politik1!.value,
+                                          suggestionContent.category.toString(),
                                           style: CustomTextStyles
                                               .bodySmallWhiteA700_1,
                                         ),
@@ -202,7 +208,7 @@ class NewsonelistItemWidget extends StatelessWidget {
                       margin: EdgeInsets.only(right: 290.h),
                       child: Obx(
                         () => Text(
-                          newsonelistItemModelObj.keputusanPrabowo!.value,
+                          suggestionContent.title.toString(),
                           maxLines: null,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.labelLarge,
@@ -214,7 +220,7 @@ class NewsonelistItemWidget extends StatelessWidget {
                       width: 201.h,
                       child: Obx(
                         () => Text(
-                          newsonelistItemModelObj.description!.value,
+                          suggestionContent.title.toString(),
                           maxLines: null,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.bodySmall,
@@ -224,7 +230,7 @@ class NewsonelistItemWidget extends StatelessWidget {
                     SizedBox(height: 11.v),
                     Obx(
                       () => Text(
-                        newsonelistItemModelObj.jamYangLalu!.value,
+                        suggestionContent.header.toString(),
                         style: CustomTextStyles.bodySmallGray600,
                       ),
                     ),

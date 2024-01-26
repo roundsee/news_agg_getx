@@ -1,22 +1,19 @@
-import 'package:new_agg/core/controllers/search_result_controller.dart';
-import 'package:new_agg/core/models/content_per_category.dart';
+import 'package:new_agg/core/controllers/news_stat_controller.dart';
 import 'package:new_agg/core/models/category.dart';
-
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
-import 'package:new_agg/core/models/search_result.dart';
+import 'package:new_agg/core/models/news_interaction.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/widgets/app_bar/appbar_leading_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
-import 'package:new_agg/widgets/custom_search_view.dart';
 
 // ignore_for_file: must_be_immutable
-class SearchResultScreen extends StatelessWidget {
-  SearchResultScreen({Key? key}) : super(key: key);
+class NewsStatScreen extends StatelessWidget {
+  NewsStatScreen({Key? key}) : super(key: key);
 
-  SearchResultController controller = Get.put(SearchResultController());
+  NewsStatController controller = Get.put(NewsStatController());
   //CategoriesController categoriesController = Get.put(CategoriesController());
   //NewsController newsController = Get.put(NewsController());
   var selectedCategory = 1;
@@ -68,11 +65,11 @@ class SearchResultScreen extends StatelessWidget {
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 children: List.generate(
-                                    controller.searchResult.value
+                                    controller.newsStatistic.value
                                         .length, // .allNewsPerCategory.value.length,
                                     (index) {
                                   return _buildCardNewsColumn(
-                                      controller.searchResult.value[index]);
+                                      controller.newsStatistic.value[index]);
                                 }),
                               ),
                             ),
@@ -105,9 +102,6 @@ class SearchResultScreen extends StatelessWidget {
         ));
   }Treninet5758--
 */
-  void SearchContent(String categoryId, String searchText) {
-    controller.SearchNews(categoryId, searchText);
-  }
 
   Widget _buildButtonCategory(Category category) {
     return ElevatedButton(
@@ -163,7 +157,7 @@ class SearchResultScreen extends StatelessWidget {
             })));
   }
 */
-  Widget _buildCardNewsColumn(ContentSearchResult theNews) {
+  Widget _buildCardNewsColumn(ContentStat theNews) {
     return GestureDetector(
         onTap: () => Get.to(() => NewsOneScreen(), arguments: [
               {"id": theNews.id}
@@ -212,7 +206,7 @@ class SearchResultScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: Text(theNews.datePublish.toString(),
+                              child: Text(theNews.publish.toString(),
                                   style: theme.textTheme.labelSmall),
                             ),
                             Padding(

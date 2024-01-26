@@ -26,6 +26,7 @@ final Map<String, String> enUs = {
 
   // Berita yang di sukai Screen
   "msg_berita_yang_di_simpan": "Berita Yang di Simpan",
+  "msg_berita_yang_di_sukai": "Berita Yang di Sukai",
 
   // StartPage Screen
   "lbl_skip": "Skip",

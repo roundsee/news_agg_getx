@@ -1,3 +1,8 @@
+import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:new_agg/core/models/suggestion_model.dart';
+import 'package:new_agg/core/models/suggestion_model_show.dart';
+
 import '../news_one_screen/widgets/newsonelist_item_widget.dart';
 import 'controller/news_one_controller.dart';
 import 'models/newsonelist_item_model.dart';
@@ -28,15 +33,20 @@ class NewsOneScreen extends StatelessWidget {
                   Get.back();
                 },
               ),
+              /*
               actions: [
                 AppbarTrailingImage(
                     imagePath: ImageConstant.imgMdiSortAlphabeticalVariant,
+                    //onTap: WidgetsBinding.instance.addPostFrameCallback((_){
+
+                    //},
                     margin:
                         EdgeInsets.only(left: 25.h, top: 14.v, right: 14.h)),
                 AppbarTrailingImage(
                     imagePath: ImageConstant.imgPhTranslateFill,
                     margin: EdgeInsets.only(left: 16.h, top: 14.v, right: 39.h))
               ],
+*/
               //  title: Text('My App'),
             ),
             /*
@@ -67,12 +77,32 @@ class NewsOneScreen extends StatelessWidget {
             body: SizedBox(
                 width: mediaQueryData.size.width,
                 child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: 19.v),
+                    padding: EdgeInsets.only(top: 10.v),
                     child: Padding(
                         padding: EdgeInsets.only(bottom: 5.v),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                //crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      //WidgetsBinding.instance.addPostFrameCallback((_) {
+                                      _showListAlert(context);
+                                      //});
+                                    },
+                                    child: CustomImageView(
+                                        imagePath: ImageConstant
+                                            .imgMdiSortAlphabeticalVariant),
+                                  ),
+                                  CustomImageView(
+                                      margin: EdgeInsets.only(right: 30),
+                                      imagePath:
+                                          ImageConstant.imgPhTranslateFill),
+                                ],
+                              ),
                               Container(
                                   width: 238.h,
                                   margin: EdgeInsets.only(left: 28.h),
@@ -124,10 +154,7 @@ class NewsOneScreen extends StatelessWidget {
                                       width: 307.h,
                                       margin: EdgeInsets.only(
                                           left: 25.h, right: 28.h),
-                                      child: Text(
-                                          "lanjutan...." +
-                                              controller.description.value
-                                                  .toString(),
+                                      child: Text("lanjutan....",
                                           maxLines: 26,
                                           overflow: TextOverflow.ellipsis,
                                           style: CustomTextStyles
@@ -286,6 +313,7 @@ class NewsOneScreen extends StatelessWidget {
 
   /// Section Widget
   Widget _buildNewsOneList() {
+    //controller.Suggested(controller.theNews.value.toString());
     return SizedBox(
         height: 199.v,
         child: Obx(() => ListView.separated(
@@ -293,13 +321,107 @@ class NewsOneScreen extends StatelessWidget {
             separatorBuilder: (context, index) {
               return SizedBox(width: 10.h);
             },
-            itemCount: controller
-                .newsOneModelObj.value.newsonelistItemList.value.length,
+            itemCount: controller.listSuggestion.value.length,
             itemBuilder: (context, index) {
-              NewsonelistItemModel model = controller
-                  .newsOneModelObj.value.newsonelistItemList.value[index];
-              return NewsonelistItemWidget(model);
+              SuggestionModel model = controller.listSuggestion.value[index];
+              return _listSuggestion(model);
             })));
+  }
+
+  Widget _listSuggestion(SuggestionModel Sugg) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.v),
+      decoration: AppDecoration.fillBlueGray.copyWith(
+        borderRadius: BorderRadiusStyle.roundedBorder10,
+      ),
+      width: 300.h,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Column(
+            children: [
+              //Sugg.header.toString(),
+              CustomImageView(
+                imagePath: Sugg.header.toString(),
+                height: 100.v,
+                width: 200.h,
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                width: 200,
+                child: Text(
+                  Sugg.title.toString(),
+                  //suggestionContent.oneHundred!.value,
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ),
+
+              Row(
+                //crossAxisAlignment: CrossAxisAlignment.stretch,
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    Sugg.datePublish.toString(),
+                    //suggestionContent.oneHundred!.value,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  Column(
+                    children: [
+                      CustomImageView(
+                        imagePath: ImageConstant.imgSolarHeartBold,
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                      ),
+                      SizedBox(height: 2.v),
+                      //  Obx(
+                      //() =>
+                      Text(
+                        Sugg.like.toString(),
+                        //suggestionContent.oneHundred!.value,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CustomImageView(
+                        imagePath: ImageConstant.imgPhBookmarkSimpleFill,
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                      ),
+                      SizedBox(height: 3.v),
+                      Text(
+                        Sugg.save.toString(),
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CustomImageView(
+                        imagePath: ImageConstant.imgMajesticonsShareCircle,
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                      ),
+                      SizedBox(height: 3.v),
+                      Text(
+                        Sugg.share.toString(),
+
+                        //suggestionContent.oneHundred!.value,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              //  ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   /// Common widget
@@ -398,4 +520,57 @@ class NewsOneScreen extends StatelessWidget {
   onTapArrowLeft() {
     Get.back();
   }
+
+//=======================
+  _showListAlert(BuildContext context) {
+    showPlatformDialog(
+      context: context,
+      builder: (_) => BasicDialogAlert(
+        title: Text("Rubah Ukuran Text",
+            style: CustomTextStyles.bodyMediumGray900),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildListItem("Kecil"),
+              _buildListItem("Medium"),
+              _buildListItem("Besar"),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: Text("OK"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListItem(String title) {
+    return Column(
+      children: [
+        Container(
+          height: 48,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: InkWell(
+                child: Text(title),
+                onTap: () {
+                  print("tap : " + title);
+                },
+              )),
+            ],
+          ),
+        ),
+        const Divider(height: 0.5),
+      ],
+    );
+  }
+//=======================
 }

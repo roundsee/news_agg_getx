@@ -36,6 +36,9 @@ static Future<String> getFirstOpen() async {
           child: Column(
             children: [
               SizedBox(height: 5.v),
+              Image.asset(ImageConstant.imgLogoAni),
+              //Image.asset("images/logoani.gif", height: 200.0, width: 200.0)
+              /*
               CustomImageView(
                 imagePath: ImageConstant.imgLogo3,
                 height: 92.v,
@@ -55,7 +58,7 @@ static Future<String> getFirstOpen() async {
                 },
                 */
               ),
-
+            */
               /*
               Obx(
                 () => AnimatedPositioned(

@@ -13,7 +13,6 @@ import 'package:new_agg/presentation/search_result_screen/search_result_screen.d
 //import 'package:new_agg/widgets/custom_icon_button.dart';
 //import 'package:toggle_switch/toggle_switch.dart';
 import 'controller/home_page_with_tab_controller.dart';
-import 'models/home_page_with_tab_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 //import 'package:new_agg/presentation/home_page/home_page.dart';

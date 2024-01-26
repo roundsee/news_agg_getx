@@ -25,13 +25,18 @@ class SuggestionNews {
 }
 
 class Data {
-  Content? content;
+  SuggestionContent? content;
+  Statistics? statistics;
 
-  Data({this.content});
+  Data({this.content, this.statistics});
 
   Data.fromJson(Map<String, dynamic> json) {
-    content =
-        json['content'] != null ? new Content.fromJson(json['content']) : null;
+    content = json['content'] != null
+        ? new SuggestionContent.fromJson(json['content'])
+        : null;
+    statistics = json['statistics'] != null
+        ? new Statistics.fromJson(json['statistics'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -39,37 +44,40 @@ class Data {
     if (this.content != null) {
       data['content'] = this.content!.toJson();
     }
+    if (this.statistics != null) {
+      data['statistics'] = this.statistics!.toJson();
+    }
     return data;
   }
 }
 
-class Content {
+class SuggestionContent {
   String? id;
-  String? source;
   String? datePublish;
   String? author;
+  String? header;
   String? category;
   String? title;
   String? slug;
   String? tag;
-  double? similarity;
+  num? similarity;
 
-  Content(
+  SuggestionContent(
       {this.id,
-      this.source,
       this.datePublish,
       this.author,
+      this.header,
       this.category,
       this.title,
       this.slug,
       this.tag,
       this.similarity});
 
-  Content.fromJson(Map<String, dynamic> json) {
+  SuggestionContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    source = json['source'];
     datePublish = json['date_publish'];
     author = json['author'];
+    header = json['header'];
     category = json['category'];
     title = json['title'];
     slug = json['slug'];
@@ -80,14 +88,36 @@ class Content {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['source'] = this.source;
     data['date_publish'] = this.datePublish;
     data['author'] = this.author;
+    data['header'] = this.header;
     data['category'] = this.category;
     data['title'] = this.title;
     data['slug'] = this.slug;
     data['tag'] = this.tag;
     data['similarity'] = this.similarity;
+    return data;
+  }
+}
+
+class Statistics {
+  int? like;
+  int? save;
+  int? share;
+
+  Statistics({this.like, this.save, this.share});
+
+  Statistics.fromJson(Map<String, dynamic> json) {
+    like = json['like'];
+    save = json['save'];
+    share = json['share'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['like'] = this.like;
+    data['save'] = this.save;
+    data['share'] = this.share;
     return data;
   }
 }

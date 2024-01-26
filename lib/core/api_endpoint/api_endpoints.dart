@@ -8,6 +8,7 @@ class ApiEndPoints {
   static _SearchEndPoints searchEndpoints = _SearchEndPoints();
   static _HistoryEndPoints historyEndpoints = _HistoryEndPoints();
   static _InteractionEndPoints interactionEndpoints = _InteractionEndPoints();
+  static _ReaderEndPoints readersEndpoints = _ReaderEndPoints();
 }
 
 class _AuthEndPoints {
@@ -17,6 +18,12 @@ class _AuthEndPoints {
   final String loginSSO = 'readers/loginsso';
   final String logout = 'readers/logout';
   final String profile = 'readers/profile';
+}
+
+class _ReaderEndPoints {
+  final String updateProfile = 'readers/change-profile';
+  final String changePhoto = 'readers/change-photo';
+  final String changePassword = 'readers/change-password';
 }
 
 class _SearchEndPoints {
