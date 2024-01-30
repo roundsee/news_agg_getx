@@ -183,7 +183,9 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
                 style: CustomTextStyles.bodyLargeGray50001,
               ),
               onTap: () {
-                Get.to(AlternativeHomePageDesignContainerScreen());
+                //Get.to(AlternativeHomePageDesignContainerScreen());
+
+                Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
               },
             ),
             InkWell(

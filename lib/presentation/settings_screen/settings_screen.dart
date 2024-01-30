@@ -45,10 +45,6 @@ class SettingsScreen extends GetWidget<SettingsController> {
                                 child: Text("lbl_masuk".tr,
                                     style:
                                         CustomTextStyles.bodySmallGray70003)),
-                            Align(
-                                alignment: Alignment.center,
-                                child: Text("lbl_masuk".tr,
-                                    style: CustomTextStyles.bodySmallGray70003))
                           ]))),
                   //_buildLogout(),
                   SizedBox(
@@ -81,65 +77,81 @@ class SettingsScreen extends GetWidget<SettingsController> {
                               );
                               //onTapFrameSixtyNine!.call();
                             }),
+
                         //_buildFrameSixtyNine(notificationText: "lbl_keluar".tr)
+                        /*
                         GestureDetector(
-                            onTap: () {
-                              CoolAlert.show(
-                                context: context,
-                                type: CoolAlertType.confirm,
-                                text: 'Do you want to logout',
-                                confirmBtnText: 'Yes',
-                                cancelBtnText: 'No',
-                                confirmBtnColor: Colors.green,
-                              );
-                              /*
-                              AwesomeDialog(
-                                context: context,
-                                keyboardAware: true,
-                                dismissOnBackKeyPress: false,
-                                dialogType: DialogType.warning,
-                                animType: AnimType.bottomSlide,
-                                btnCancelText: "Tidak",
-                                btnOkText: "Keluar",
-                                title: 'Keluar Aplikasi',
-                                // padding: const EdgeInsets.all(5.0),
-                                desc: 'Apakah Anda ingin keluar',
-                                btnCancelOnPress: () {},
-                                btnOkOnPress: () {
-                                  controller.Logout();
-                                  Get.toNamed(
-                                    AppRoutes.loginPageScreen,
-                                  );
-                                },
-                              ).show();
-        */
-                              //onTapFrameSixtyNine!.call();
-                            },
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-/*
-                                  Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 4.v),
-                                      child: Text(notificationText,
-                                          style: CustomTextStyles.labelLargeMedium
-                                              .copyWith(color: appTheme.black900))),
-*/
-                                  CustomImageView(
-                                      imagePath: ImageConstant.imgArrowRight,
-                                      height: 24.adaptSize,
-                                      width: 24.adaptSize)
-                                ]))
+                          onTap: () {
+                            CoolAlert.show(
+                              context: context,
+                              type: CoolAlertType.confirm,
+                              text: 'Do you want to logout',
+                              confirmBtnText: 'Yes',
+                              cancelBtnText: 'No',
+                              confirmBtnColor: Colors.green,
+                            );
+                          },
+                        )
+                        */
                       ])),
                   SizedBox(height: 10.v),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("lbl_hapus_akun".tr,
-                          style: CustomTextStyles.labelLargeMedium)),
-                  SizedBox(height: 9.v),
-                  _buildFrameSixtyNine(
-                      notificationText: "msg_aktifkan_ulang_akun".tr),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("lbl_hapus_akun".tr,
+                              style: CustomTextStyles.labelLargeMedium)),
+                      GestureDetector(
+                        onTap: () {
+                          CoolAlert.show(
+                            context: context,
+                            title: "Hapus Akun",
+                            type: CoolAlertType.confirm,
+                            text:
+                                'Apakah Anda yakin ingin menghapus akun anda ?',
+                            confirmBtnText: 'Yes',
+                            cancelBtnText: 'No',
+                            confirmBtnColor: Colors.lightBlue,
+                            onConfirmBtnTap: () {
+                              controller.Logout();
+                              // Get.off(LoginPageScreen());
+                            },
+                          );
+                        },
+                        child: CustomImageView(
+                            imagePath: ImageConstant.imgArrowRight,
+                            height: 24.adaptSize,
+                            width: 24.adaptSize,
+                            alignment: Alignment.centerRight),
+                      ),
+                    ],
+                  ),
+//=====================
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("lbl_change_password".tr,
+                              style: CustomTextStyles.labelLargeMedium)),
+                      GestureDetector(
+                        onTap: () {
+                          //_ChangePassword()
+                        },
+                        child: CustomImageView(
+                            imagePath: ImageConstant.imgArrowRight,
+                            height: 24.adaptSize,
+                            width: 24.adaptSize,
+                            alignment: Alignment.centerRight),
+                      ),
+                    ],
+                  ),
+
+//=====================
+//                  SizedBox(height: 9.v),
+//                  _buildFrameSixtyNine(
+//                      notificationText: "msg_aktifkan_ulang_akun".tr),
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -165,7 +177,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
             imagePath: ImageConstant.imgArrowLeft,
             margin: EdgeInsets.only(left: 25.h, top: 14.v, bottom: 14.v),
             onTap: () {
-              onTapArrowLeft();
+              Get.back();
             }),
         centerTitle: true,
         title: AppbarSubtitle(text: "lbl_settings".tr));
@@ -224,4 +236,8 @@ class SettingsScreen extends GetWidget<SettingsController> {
       AppRoutes.editProfileScreen,
     );
   }
+
+//===============================
+
+//===============================
 }

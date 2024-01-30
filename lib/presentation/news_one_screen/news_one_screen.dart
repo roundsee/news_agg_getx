@@ -1,22 +1,47 @@
-import 'package:cool_alert/cool_alert.dart';
+//import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
-import 'package:new_agg/core/models/suggestion_model.dart';
+//import 'package:new_agg/core/models/suggestion_model.dart';
 import 'package:new_agg/core/models/suggestion_model_show.dart';
-
-import '../news_one_screen/widgets/newsonelist_item_widget.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+//import '../news_one_screen/widgets/newsonelist_item_widget.dart';
 import 'controller/news_one_controller.dart';
-import 'models/newsonelist_item_model.dart';
+//import 'models/newsonelist_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/widgets/app_bar/appbar_leading_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
-import 'package:new_agg/widgets/custom_text_form_field.dart';
+//import 'package:new_agg/widgets/custom_text_form_field.dart';
+//import 'package:file_picker/file_picker.dart';
 
 class NewsOneScreen extends StatelessWidget {
   NewsOneScreen({Key? key}) : super(key: key);
 
   NewsOneController controller = Get.put(NewsOneController());
+  var xoption = "";
+  String text = '';
+  String subject = '';
+  String uri = '';
+  List<String> imageNames = [];
+  List<String> imagePaths = [];
+
+  String groupLink = ""; //https://chat.whatsapp.com/HMudsgtHEzS7xLmHrN8El/
+  String numberWithCode = ""; //https://wa.me/9779812345678/
+  void wa(String host) async {
+    Uri url =
+        Uri.parse("$host?text=Follow 30FlutterTips With Lakshydeep Vikram");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      throw "Can't launch link";
+    }
+  }
+
+  //var xFontSize = "small";
   @override
   Widget build(BuildContext context) {
     // Get.put(NewsOneController());
@@ -90,6 +115,7 @@ class NewsOneScreen extends StatelessWidget {
                                   GestureDetector(
                                     onTap: () {
                                       //WidgetsBinding.instance.addPostFrameCallback((_) {
+                                      xoption = "1";
                                       _showListAlert(context);
                                       //});
                                     },
@@ -97,10 +123,16 @@ class NewsOneScreen extends StatelessWidget {
                                         imagePath: ImageConstant
                                             .imgMdiSortAlphabeticalVariant),
                                   ),
-                                  CustomImageView(
-                                      margin: EdgeInsets.only(right: 30),
-                                      imagePath:
-                                          ImageConstant.imgPhTranslateFill),
+                                  GestureDetector(
+                                    onTap: () {
+                                      xoption = "2";
+                                      _showListAlert(context);
+                                    },
+                                    child: CustomImageView(
+                                        margin: EdgeInsets.only(right: 30),
+                                        imagePath:
+                                            ImageConstant.imgPhTranslateFill),
+                                  ),
                                 ],
                               ),
                               Container(
@@ -145,8 +177,9 @@ class NewsOneScreen extends StatelessWidget {
                                               .toString(),
                                           // maxLines: 5,
                                           //overflow: TextOverflow.ellipsis,
-                                          style: CustomTextStyles
-                                              .labelLargeMedium)))),
+                                          style: controller.myStyle.value
+                                          //CustomTextStyles.labelLargeMedium
+                                          )))),
                               SizedBox(height: 14.v),
                               Align(
                                   alignment: Alignment.center,
@@ -202,59 +235,30 @@ class NewsOneScreen extends StatelessWidget {
                                         Padding(
                                             padding:
                                                 EdgeInsets.only(left: 10.h),
-                                            child: _buildFrameThirtySeven(
-                                                bookmarkImage: ImageConstant
-                                                    .imgMajesticonsShareCircle,
-                                                bookmarkLabel: controller
-                                                    .jshare.value
-                                                    .toString()))
+                                            child: GestureDetector(
+                                              onTap: () async {
+                                                final box =
+                                                    context.findRenderObject()
+                                                        as RenderBox?;
+                                                await Share.share(
+                                                  controller.slug.value,
+                                                  subject:
+                                                      controller.title.value,
+                                                  sharePositionOrigin: box!
+                                                          .localToGlobal(
+                                                              Offset.zero) &
+                                                      box.size,
+                                                );
+                                              },
+                                              child: _buildFrameThirtySeven(
+                                                  bookmarkImage: ImageConstant
+                                                      .imgMajesticonsShareCircle,
+                                                  bookmarkLabel: controller
+                                                      .jshare.value
+                                                      .toString()),
+                                            ))
                                       ]))),
                               SizedBox(height: 19.v),
-/*
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: CustomTextFormField(
-                                      controller:
-                                          controller.frameFiftyNineController,
-                                      hintText: "msg_tambahkan_komentar".tr,
-                                      hintStyle:
-                                          CustomTextStyles.bodySmallGray60003,
-                                      textInputAction: TextInputAction.done,
-                                      alignment: Alignment.center,
-                                      borderDecoration:
-                                          TextFormFieldStyleHelper.fillBlueGray,
-                                      fillColor: appTheme.blueGray100)),
-                              SizedBox(height: 16.v),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: _buildFrameSixtySix(
-                                      userName: "lbl_ronsi".tr,
-                                      hCounter: "lbl_6_h".tr,
-                                      apakahTidakMasalah:
-                                          "msg_apakah_tidak_masalah".tr,
-                                      wpfLike: ImageConstant.imgWpfLike,
-                                      likesCounter: "lbl_40_likes".tr,
-                                      reply: "lbl_reply".tr,
-                                      viewMoreReplies:
-                                          "msg_view_more_54_replies".tr)),
-                              SizedBox(height: 17.v),
-                              Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 25.h, right: 28.h),
-                                  child: _buildFrameSixtySix(
-                                      userName: "lbl_ronsi".tr,
-                                      hCounter: "lbl_6_h".tr,
-                                      apakahTidakMasalah:
-                                          "msg_apakah_tidak_masalah".tr,
-                                      wpfLike: ImageConstant.imgWpfLikeGray900,
-                                      likesCounter: "lbl_40_likes".tr,
-                                      reply: "lbl_reply".tr,
-                                      viewMoreReplies:
-                                          "msg_view_more_54_replies".tr)),
-*/
-                              SizedBox(height: 31.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 20.h),
                                   child: Text("lbl_berita_serupa".tr,
@@ -526,15 +530,21 @@ class NewsOneScreen extends StatelessWidget {
     showPlatformDialog(
       context: context,
       builder: (_) => BasicDialogAlert(
-        title: Text("Rubah Ukuran Text",
+        title: Text(xoption == "1" ? "Rubah Ukuran Text" : "Rubah Bahasa",
             style: CustomTextStyles.bodyMediumGray900),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              _buildListItem("Kecil"),
-              _buildListItem("Medium"),
-              _buildListItem("Besar"),
+              xoption == "1"
+                  ? _buildListItem("Kecil")
+                  : _buildListItem("Indonesia"),
+              xoption == "1"
+                  ? _buildListItem("Medium")
+                  : _buildListItem("English"),
+              xoption == "1" ? _buildListItem("Besar") : _buildListItem(""),
+              //_buildListItem("Medium"),
+              //_buildListItem("Besar"),
             ],
           ),
         ),
@@ -562,6 +572,7 @@ class NewsOneScreen extends StatelessWidget {
                   child: InkWell(
                 child: Text(title),
                 onTap: () {
+                  controller.saveOptions(title);
                   print("tap : " + title);
                 },
               )),
@@ -573,4 +584,32 @@ class NewsOneScreen extends StatelessWidget {
     );
   }
 //=======================
+
+  void _onShare(BuildContext context) async {
+    // A builder is used to retrieve the context immediately
+    // surrounding the ElevatedButton.
+    //
+    // The context's `findRenderObject` returns the first
+    // RenderObject in its descendent tree when it's not
+    // a RenderObjectWidget. The ElevatedButton's RenderObject
+    // has its position and size after it's built.
+    final box = context.findRenderObject() as RenderBox?;
+
+    if (uri.isNotEmpty) {
+      await Share.shareUri(Uri.parse(uri));
+    } else if (imagePaths.isNotEmpty) {
+      final files = <XFile>[];
+      for (var i = 0; i < imagePaths.length; i++) {
+        files.add(XFile(imagePaths[i], name: imageNames[i]));
+      }
+      await Share.shareXFiles(files,
+          text: text,
+          subject: subject,
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+    } else {
+      await Share.share(text,
+          subject: subject,
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+    }
+  }
 }

@@ -25,11 +25,22 @@ Map<String, String> getHeaders(String reqType) {
   var token = pref.getUserToken();
   var lang = pref.getLanguage();
   var theHeader;
+
   switch (reqType) {
     case "req":
       theHeader = {
         'Content-Type': 'application/json',
         'Authorization': token,
+        'Accept-Language': lang,
+        'User-Agent': 'LENOVO ideapad 3'
+      };
+
+      break;
+    case "defaulttoken":
+      theHeader = {
+        'Content-Type': 'application/json',
+        'Authorization':
+            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
         'Accept-Language': lang,
         'User-Agent': 'LENOVO ideapad 3'
       };
@@ -53,5 +64,6 @@ Map<String, String> getHeaders(String reqType) {
 
     default:
   }
+
   return theHeader;
 }

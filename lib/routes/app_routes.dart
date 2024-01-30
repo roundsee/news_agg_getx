@@ -1,3 +1,4 @@
+import 'package:new_agg/presentation/forgot_pass_two_screen/binding/input_otp_binding.dart';
 import 'package:new_agg/presentation/history_page/binding/history_binding.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/binding/home_page_with_tab_page_binding.dart';
@@ -14,13 +15,17 @@ import 'package:new_agg/presentation/search_result_screen/binding/search_result_
 import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
 import 'package:new_agg/presentation/splash_screen/splash_screen.dart';
 import 'package:new_agg/presentation/splash_screen/binding/splash_binding.dart';
+
+import 'package:new_agg/presentation/forgot_pass_one_screen/forgot_pass_one_screen.dart';
+import 'package:new_agg/presentation/forgot_pass_one_screen/binding/forgot_pass_one_binding.dart';
+
 import 'package:new_agg/presentation/forgot_pass_two_screen/forgot_pass_two_screen.dart';
 import 'package:new_agg/presentation/forgot_pass_two_screen/binding/forgot_pass_two_binding.dart';
-import 'package:new_agg/presentation/forgot_pass_screen/forgot_pass_screen.dart';
-import 'package:new_agg/presentation/forgot_pass_screen/binding/forgot_pass_binding.dart';
+import 'package:new_agg/presentation/forgot_pass_two_screen/input_otp_screen.dart';
+
 import 'package:new_agg/presentation/push_notification_screen/push_notification_screen.dart';
 import 'package:new_agg/presentation/push_notification_screen/binding/push_notification_binding.dart';
-import 'package:new_agg/presentation/forgot_pass_one_screen/forgot_pass_one_screen.dart';
+
 import 'package:new_agg/presentation/forgot_pass_one_screen/binding/forgot_pass_one_binding.dart';
 import 'package:new_agg/presentation/startpage_screen/startpage_screen.dart';
 import 'package:new_agg/presentation/startpage_screen/binding/startpage_binding.dart';
@@ -41,7 +46,7 @@ import 'package:new_agg/presentation/register_page_screen/binding/register_page_
 import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/binding/select_fav_category_binding.dart';
 import 'package:new_agg/presentation/filter_search_screen/filter_search_screen.dart';
-import 'package:new_agg/presentation/history_page/history_page.dart';
+
 import 'package:new_agg/presentation/filter_search_screen/binding/filter_search_binding.dart';
 import 'package:new_agg/presentation/notification_screen/notification_screen.dart';
 import 'package:new_agg/presentation/notification_screen/binding/notification_binding.dart';
@@ -73,6 +78,8 @@ class AppRoutes {
   static const String forgotPassTwoScreen = '/forgot_pass_two_screen';
 
   static const String forgotPassScreen = '/forgot_pass_screen';
+  static const String inputOTPScreen = '/input_otp_screen';
+  static const String inputPassScreen = '/input_pass_screen';
 
   static const String pushNotificationScreen = '/push_notification_screen';
 
@@ -158,10 +165,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: forgotPassScreen,
-      page: () => ForgotPassScreen(),
+      name: inputOTPScreen,
+      page: () => InputOTPScreen(),
       bindings: [
-        ForgotPassBinding(),
+        InputOTPBinding(),
       ],
     ),
     GetPage(

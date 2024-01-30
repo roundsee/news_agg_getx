@@ -235,9 +235,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
 
   /// Navigates to the forgotPassOneScreen when the action is triggered.
   onTapTxtForgotPassword() {
-    Get.toNamed(
-      AppRoutes.forgotPassOneScreen,
-    );
+    Get.toNamed(AppRoutes.forgotPassOneScreen);
   }
 
   /// Navigates to the alternativeHomePageDesignContainerScreen when the action is triggered.

@@ -9,6 +9,7 @@ class ApiEndPoints {
   static _HistoryEndPoints historyEndpoints = _HistoryEndPoints();
   static _InteractionEndPoints interactionEndpoints = _InteractionEndPoints();
   static _ReaderEndPoints readersEndpoints = _ReaderEndPoints();
+  static _ResponseEndPoints ResponseEndPoints = _ResponseEndPoints();
 }
 
 class _AuthEndPoints {
@@ -24,10 +25,17 @@ class _ReaderEndPoints {
   final String updateProfile = 'readers/change-profile';
   final String changePhoto = 'readers/change-photo';
   final String changePassword = 'readers/change-password';
+  final String forgetpasschange = 'readers/forget-change';
+  final String forgetverifotp = 'readers/forget-verification-otp';
+  final String forgetrequest = 'readers/forget-request-otp';
 }
 
 class _SearchEndPoints {
   final String searchtext = 'search';
+}
+
+class _ResponseEndPoints {
+  final String delete = 'response/delete';
 }
 
 class _InteractionEndPoints {

@@ -37,7 +37,7 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                         _buildScreenTitle(
                           screenTitle: "Forgot Pass Two".tr,
                           onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.forgotPassTwoScreen),
+                              onTapScreenTitle(AppRoutes.forgotPassScreen),
                         ),
                         _buildScreenTitle(
                           screenTitle: "Forgot Pass".tr,

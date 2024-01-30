@@ -1,0 +1,5 @@
+DELETE https://sandbox-nooz.digiprimatera.co.id/api/response/delete HTTP/1.1
+Content-Type: application/json
+Authorization: 1706251729_Jkycte6RUobnR9ji3Q87pTgljOqTwGdDizseTgxg_ae4eee8e-5b89-44a0-8853-214a7ed9b795
+User-Agent: Android
+fcm: fFPzpuOMRyuZFssOv080a0:APA91bGSd99NBBOkjqi_0Waz9J0Cm6haHYLrtuu2ZCS2CEBlsefoYJrPH7gpfPIUnrdzJvwTryMHCN29glRh84dOBdFsmdi1b7qgOWPTNjdL2seFd9I2Vv9nLgHk8eb7QwVgqrpz2ua

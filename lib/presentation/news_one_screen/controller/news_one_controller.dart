@@ -24,7 +24,8 @@ class NewsOneController extends GetxController {
   //Rx<Content> newsDetail = Rx<Content>().obs;
   //final newsDetail = Rxn<Content>();
   //var newsDetail = Content().obs;
-
+  Rx<TextStyle> myStyle = TextStyle().obs;
+  RxString myLang = "ID".obs;
   dynamic argumentData = Get.arguments;
   Rx<NewsDetailModel> newsModelObj = NewsDetailModel().obs;
   RxBool newsNotFound = false.obs;
@@ -44,9 +45,11 @@ class NewsOneController extends GetxController {
   var jshare = 0.obs;
   var jsave = 0.obs;
   var idn = "".obs;
+  var slug = "".obs;
 
   @override
   void onInit() {
+    getStyle();
     if (argumentData == null) {
       getNewsDetail("bad3762c-9d48-4ecc-aad4-310b26d7b219");
     } else {
@@ -127,8 +130,10 @@ class NewsOneController extends GetxController {
       jsave.value = detailNews.data!.content!.statistics!.save!;
       //detailNews.data!.content!.statistics!.save.toString() as int;
       jshare.value = detailNews.data!.content!.statistics!.share!;
+      slug.value = detailNews.data!.content!.slug.toString();
       idn.value = idNews;
       isLoading.value = false;
+
       //change(null, status: RxStatus.success());
       newsNotFound.value = true;
 
@@ -299,5 +304,66 @@ class NewsOneController extends GetxController {
     } else {
       update();
     }
+  }
+
+  saveOptions(String myOption) {
+    var prefs = new PrefUtils();
+    switch (myOption) {
+      case "Small":
+        prefs.setTextSize(myOption);
+        getStyle();
+        break;
+      case "Kecil":
+        prefs.setTextSize("Small");
+        getStyle();
+        break;
+
+      case "Medium":
+        prefs.setTextSize(myOption);
+        getStyle();
+        break;
+
+      case "Besar":
+        prefs.setTextSize("Large");
+        getStyle();
+        break;
+
+      case "Large":
+        prefs.setTextSize(myOption);
+        getStyle();
+        break;
+
+      case "Indonesia":
+        prefs.setLanguage(myOption);
+        break;
+
+      case "English":
+        prefs.setLanguage(myOption);
+        break;
+
+      default:
+    }
+  }
+
+  getStyle() {
+    //var myStyle; // = new CustomTextStyles();
+    var iStyle;
+    var prefs = new PrefUtils();
+    iStyle = prefs.getTextSize();
+    switch (iStyle) {
+      case "Small":
+        myStyle.value = CustomTextStyles.bodySmall10;
+        break;
+      case "Medium":
+        myStyle.value = CustomTextStyles.bodyMediumGray900;
+        break;
+      case "Large":
+        myStyle.value = CustomTextStyles.bodyLargeGray50001;
+        break;
+
+      default:
+    }
+    myStyle.refresh();
+    // return myStyle;
   }
 }

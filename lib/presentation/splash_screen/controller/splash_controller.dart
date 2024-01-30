@@ -25,6 +25,8 @@ class SplashController extends GetxController {
   }
 
   Future startSplash() async {
+    var myPref = new PrefUtils();
+
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var appsession = prefs!.getString('appsession').toString();
     //appsession = appsession ?? '1';
@@ -43,6 +45,13 @@ class SplashController extends GetxController {
       //Get.to(StartpageScreen());
     } else {
       //Get.to(() => Home());
+      if (myPref.getTextSize() == "") {
+        myPref.setTextSize("small");
+      }
+      if (myPref.getLanguage() == "") {
+        myPref.setLanguage("ID");
+      }
+
       Timer(
         const Duration(seconds: 5),
         () => Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen

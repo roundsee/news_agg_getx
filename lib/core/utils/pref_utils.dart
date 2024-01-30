@@ -64,7 +64,7 @@ class PrefUtils {
     try {
       return _sharedPreferences!.getString('lang')!;
     } catch (e) {
-      return '0';
+      return 'ID';
     }
   }
 
@@ -72,8 +72,12 @@ class PrefUtils {
     try {
       return _sharedPreferences!.getString('size')!;
     } catch (e) {
-      return '0';
+      return "";
     }
+  }
+
+  Future<void> setUserToken(String value) {
+    return _sharedPreferences!.setString('token', value);
   }
 
   Future<void> setStatusUser(String value) {
