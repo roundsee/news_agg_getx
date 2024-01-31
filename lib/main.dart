@@ -74,8 +74,8 @@ main() async {
   });
   final fcmToken = await FirebaseMessaging.instance.getToken();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.remove("FCMToken");
-  prefs.setString("FCMToken", fcmToken!);
+  prefs.remove("fcm");
+  prefs.setString("fcm", fcmToken!);
   //var token = prefs!.getString('token').toString();
   final fcmlocal = prefs.getString("FCMToken");
   log("FCMToken $fcmToken");

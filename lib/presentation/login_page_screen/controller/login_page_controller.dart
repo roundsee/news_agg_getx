@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 //import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
 import 'package:new_agg/presentation/home_page/home_page.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
@@ -34,21 +35,30 @@ class LoginPageController extends GetxController {
 //================================================//
 
   Future<void> loginWithEmail() async {
-    var headers = {
+    var headers = getHeaders("defaulttoken");
+    /* var headers = {
       'Content-Type': 'application/json',
       'Authorization':
           '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
+    var prefx = new PrefUtils();
     try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      var fcmtoken = prefs!.getString('FCMToken').toString();
+      //final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      var fcmtoken = prefx.getfcmToken();
+      // prefs!.getString('FCMToken').toString();
       if (fcmtoken == "") {
         fcmtoken = (await FirebaseMessaging.instance.getToken())!;
-        prefs!.setString('FCMToken', fcmtoken);
+        //prefs!.setString('FCMToken', fcmtoken);
+        prefx.setfcmToken(fcmtoken);
       }
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.loginEmail);
+
+      var headers = getHeaders("defaulttoken");
+      /*
       var headers = {
         'Content-Type': 'application/json',
         'User-Agent': 'LENOVO ideapad 3',
@@ -56,6 +66,7 @@ class LoginPageController extends GetxController {
             '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
         'fcm': fcmtoken
       };
+      */
       Map body = {
         'email': emailController.text.trim(),
         'password': passwordController.text
@@ -67,22 +78,28 @@ class LoginPageController extends GetxController {
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         var token = json['data']['access_token'];
-        final SharedPreferences? prefs = await _prefs;
-        await prefs?.setString('token', token);
+        Logger.log("token:" + token);
+        prefx.setUserToken(token);
+        //final SharedPreferences? prefs = await _prefs;
+        //await prefs?.setString('token', token);
 
         emailController.clear();
         passwordController.clear();
 
         if (json['data']['user']['status'] == 2) {
-          var token = json['data']['access_token'];
-          final SharedPreferences? prefs = await _prefs;
-          await prefs?.setString('token', token);
-          await prefs?.setString('statuscode', "2");
+          //  var token = json['data']['access_token'];
+          //  prefx.setUserToken(token);
+          prefx.setStatusUser("2");
+          //final SharedPreferences? prefs = await _prefs;
+          //await prefs?.setString('token', token);
+          //await prefs?.setString('statuscode', "2");
           Get.to((HomePage));
         }
 
         if (json['data']['user']['status'] == 1) {
-          await prefs?.setString('statuscode', "1");
+          //prefx.setUserToken(token);
+          prefx.setStatusUser("1");
+          //await prefs?.setString('statuscode', "1");
           // Get.off(SelectFavCategoryScreen());
           Get.to(() => SelectFavCategoryScreen());
           //Get.to((SelectFavCategoryScreen()));

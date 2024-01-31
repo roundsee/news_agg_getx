@@ -50,8 +50,8 @@ class _HistoryEndPoints {
 
 class _CategoryEndPoints {
   final String categories = 'categories';
-  final String saveFavouriteCategory = 'reader-category';
-  final String readersCategory = 'readers';
+  final String saveFavouriteCategory = 'categories/reader-category';
+  final String readersCategory = 'categories/readers';
 }
 
 class _ContentEndPoints {

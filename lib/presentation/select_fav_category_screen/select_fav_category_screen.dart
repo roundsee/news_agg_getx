@@ -107,11 +107,14 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
 
   Widget _buildButtonCategory(ChipsCategory chipItem) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        controller.selectCategory(chipItem.id);
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
-            if (states.contains(MaterialState.pressed)) {
+            if (controller.categorySelected(chipItem.id)) {
+              //if (states.contains(MaterialState.pressed)) {
               return Colors.green;
             } else {
               return Colors.lightGreen;
@@ -120,7 +123,8 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
           },
         ),
       ),
-      child: Text(chipItem.category.toString()),
+      child: Text(chipItem.category.toString(),
+          style: CustomTextStyles.titleSmallBold),
     );
   }
 
@@ -184,8 +188,8 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
               ),
               onTap: () {
                 //Get.to(AlternativeHomePageDesignContainerScreen());
-
-                Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
+                Get.off(AlternativeHomePageDesignContainerScreen());
+                //Get.off(alternativeHomePageDesignContainerScreen());
               },
             ),
             InkWell(

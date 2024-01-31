@@ -1,6 +1,7 @@
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/category.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/model/select_fav_category_model.dart';
 import 'package:flutter/material.dart';
@@ -73,19 +74,26 @@ class SelectFavCategoryController extends GetxController {
     }
   }
 
+  bool categorySelected(int idcategory) {
+    final index =
+        allChipsCategory.indexWhere((element) => element.id == idcategory);
+    return allChipsCategory[index].selected;
+  }
+
   selectCategory(int idcategory) {
     final index =
         allChipsCategory.indexWhere((element) => element.id == idcategory);
     if (index >= 0) {
       allChipsCategory[index].selected = !allChipsCategory[index].selected;
+      allChipsCategory.refresh();
     }
   }
 
   submitFavCategory() async {
     // final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var _pref = new PrefUtils();
-    var token = _pref.getUserToken();
-    var strCategory;
+    //var _pref = new PrefUtils();
+    //var token = _pref.getUserToken();
+    var strCategory = "";
     for (int i = 0; i < allChipsCategory.length; i++) {
       if (allChipsCategory[i].selected) {
         if (strCategory == "") {
@@ -96,32 +104,37 @@ class SelectFavCategoryController extends GetxController {
       }
     }
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
-
-    var url = Uri.parse(
-        ApiEndPoints.baseUrl + ApiEndPoints.categoryEndpoints.readersCategory);
+    var headers = getHeaders("req");
+//"Authorization" -> "1706666101_Bh0RIIc7Na7j6acJsYNPpRAua8WxZtjpaPA7uqsz_83312963-44ef-42f2-86c5-cd8c21067bd5"
+//1705057042_a6k9qy1aFiddJRJ441pXdf2VwgUXuGdtd25TIvDA_83312963-44ef-42f2-86c5-cd8c21067bd5
+    var url = Uri.parse(ApiEndPoints.baseUrl +
+        ApiEndPoints.categoryEndpoints.saveFavouriteCategory);
     Map body = {"id_category": strCategory};
-
-    http.Response res = await http.post(url, headers: headers);
+    var strbody = jsonEncode(body);
+    http.Response res = await http.post(url, headers: headers, body: strbody);
+    var resp = jsonDecode(res.body);
     if (res.statusCode == 401) {
       Get.toNamed(
         AppRoutes.loginPageScreen,
       );
     }
-    if (res.statusCode == 200) {
+    if (res.statusCode == 201) {
       Get.snackbar(
         "Favourite Category",
         "Congratulation, Your Favourite Categories are saved ",
         icon: Icon(Icons.person, color: Colors.white),
-        duration: const Duration(seconds: 7),
+        duration: const Duration(seconds: 5),
         snackPosition: SnackPosition.BOTTOM,
       );
       Get.to(AlternativeHomePageDesignContainerScreen());
+    } else {
+      Get.snackbar(
+        "Favourite Category",
+        resp['message'],
+        icon: Icon(Icons.person, color: Colors.white),
+        duration: const Duration(seconds: 5),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
