@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import 'package:social_share/social_share.dart';
+
 /// A controller class for the NewsOneScreen.
 ///
 /// This class manages the state of the NewsOneScreen, including the
@@ -65,6 +67,12 @@ class NewsOneController extends GetxController {
   void onClose() {
     super.onClose();
     frameFiftyNineController.dispose();
+  }
+
+  getInstalledApps() async {
+    SocialShare.checkInstalledAppsForShare().then((data) {
+      print(data.toString());
+    });
   }
 
   getNewsDetail(var idNews) async {

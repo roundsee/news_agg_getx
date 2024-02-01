@@ -2,7 +2,6 @@
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 //import 'package:new_agg/core/models/suggestion_model.dart';
 import 'package:new_agg/core/models/suggestion_model_show.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import '../news_one_screen/widgets/newsonelist_item_widget.dart';
 import 'controller/news_one_controller.dart';
@@ -14,20 +13,18 @@ import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
 //import 'package:new_agg/widgets/custom_text_form_field.dart';
 //import 'package:file_picker/file_picker.dart';
+import 'package:social_share/social_share.dart';
 
 class NewsOneScreen extends StatelessWidget {
   NewsOneScreen({Key? key}) : super(key: key);
 
   NewsOneController controller = Get.put(NewsOneController());
   var xoption = "";
-  String text = '';
-  String subject = '';
-  String uri = '';
-  List<String> imageNames = [];
-  List<String> imagePaths = [];
 
   String groupLink = ""; //https://chat.whatsapp.com/HMudsgtHEzS7xLmHrN8El/
   String numberWithCode = ""; //https://wa.me/9779812345678/
+  String facebookId = "";
+  String filepath = "";
   void wa(String host) async {
     Uri url =
         Uri.parse("$host?text=Follow 30FlutterTips With Lakshydeep Vikram");
@@ -49,6 +46,7 @@ class NewsOneScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             resizeToAvoidBottomInset: false,
+            // floatingActionButton: MyFloatingActionButton(),
             appBar:
                 //_buildAppBar(),
                 AppBar(
@@ -58,46 +56,7 @@ class NewsOneScreen extends StatelessWidget {
                   Get.back();
                 },
               ),
-              /*
-              actions: [
-                AppbarTrailingImage(
-                    imagePath: ImageConstant.imgMdiSortAlphabeticalVariant,
-                    //onTap: WidgetsBinding.instance.addPostFrameCallback((_){
-
-                    //},
-                    margin:
-                        EdgeInsets.only(left: 25.h, top: 14.v, right: 14.h)),
-                AppbarTrailingImage(
-                    imagePath: ImageConstant.imgPhTranslateFill,
-                    margin: EdgeInsets.only(left: 16.h, top: 14.v, right: 39.h))
-              ],
-*/
-              //  title: Text('My App'),
             ),
-            /*
-                AppBar(
-              leadingWidth: 49.h,
-              leading: AppbarLeadingImage(
-                  imagePath: ImageConstant.imgArrowLeft,
-                  margin: EdgeInsets.only(left: 25.h, top: 14.v, bottom: 14.v),
-                  onTap: () {
-                    //onTapArrowLeft();
-                    //Navigator.pop(context);
-
-                    Get.to(Get.previousRoute);
-                  }),
-              actions: [
-                AppbarTrailingImage(
-                    imagePath: ImageConstant.imgMdiSortAlphabeticalVariant,
-                    margin:
-                        EdgeInsets.only(left: 25.h, top: 14.v, right: 14.h)),
-                AppbarTrailingImage(
-                    imagePath: ImageConstant.imgPhTranslateFill,
-                    margin: EdgeInsets.only(left: 16.h, top: 14.v, right: 39.h))
-              ],
-              //styleType: Style.bgFill
-            ),
-            */
 //============
             body: SizedBox(
                 width: mediaQueryData.size.width,
@@ -236,6 +195,10 @@ class NewsOneScreen extends StatelessWidget {
                                             padding:
                                                 EdgeInsets.only(left: 10.h),
                                             child: GestureDetector(
+                                              onTap: () {
+                                                _showShare(context);
+                                              },
+                                              /*
                                               onTap: () async {
                                                 final box =
                                                     context.findRenderObject()
@@ -249,14 +212,15 @@ class NewsOneScreen extends StatelessWidget {
                                                               Offset.zero) &
                                                       box.size,
                                                 );
-                                              },
+                                              }
+                                              */
                                               child: _buildFrameThirtySeven(
                                                   bookmarkImage: ImageConstant
                                                       .imgMajesticonsShareCircle,
                                                   bookmarkLabel: controller
                                                       .jshare.value
                                                       .toString()),
-                                            ))
+                                            )),
                                       ]))),
                               SizedBox(height: 19.v),
                               Padding(
@@ -560,6 +524,37 @@ class NewsOneScreen extends StatelessWidget {
     );
   }
 
+  _showShare(BuildContext context) {
+    showPlatformDialog(
+      context: context,
+      builder: (_) => BasicDialogAlert(
+        title: Text("Share News", style: CustomTextStyles.bodyMediumGray900),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildListItem("Copy"),
+              _buildListItem("WhatsApp"),
+              _buildListItem("Twitter"),
+              _buildListItem("Facebook"),
+              _buildListItem("Instagram"),
+              //_buildListItem("Medium"),
+              //_buildListItem("Besar"),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          BasicDialogAction(
+            title: Text("OK"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildListItem(String title) {
     return Column(
       children: [
@@ -571,9 +566,49 @@ class NewsOneScreen extends StatelessWidget {
               Expanded(
                   child: InkWell(
                 child: Text(title),
-                onTap: () {
-                  controller.saveOptions(title);
-                  print("tap : " + title);
+                onTap: () async {
+                  //controller.saveOptions(title);
+                  //print("tap : " + title);
+                  switch (title.toLowerCase()) {
+                    case "whatsapp":
+                      SocialShare.shareWhatsapp(
+                        "Hello World \n https://google.com",
+                      ).then((data) {
+                        print(data);
+                      });
+                      break;
+                    case "facebook":
+                      SocialShare.shareFacebookStory(
+                        appId: facebookId,
+                        imagePath: filepath,
+                        backgroundTopColor: "#ffffff",
+                        backgroundBottomColor: "#000000",
+                      ).then((data) {
+                        print(data);
+                      });
+                      break;
+                    case "instagram":
+                      SocialShare.shareInstagramStory(
+                        appId: facebookId,
+                        imagePath: filepath,
+                        backgroundResourcePath: filepath,
+                      ).then((data) {
+                        print(data);
+                      });
+                      break;
+                    case "twitter":
+                      SocialShare.shareTwitter(
+                        "This is Social Share twitter example with link.  ",
+                        hashtags: ["SocialSharePlugin", "world", "foo", "bar"],
+                        url: "https://google.com/hello",
+                        trailingText: "cool!!",
+                      ).then((data) {
+                        print(data);
+                      });
+
+                      break;
+                    default:
+                  }
                 },
               )),
             ],
@@ -584,7 +619,7 @@ class NewsOneScreen extends StatelessWidget {
     );
   }
 //=======================
-
+/*
   void _onShare(BuildContext context) async {
     // A builder is used to retrieve the context immediately
     // surrounding the ElevatedButton.
@@ -611,5 +646,22 @@ class NewsOneScreen extends StatelessWidget {
           subject: subject,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     }
+  }
+  */
+}
+
+class MyFloatingActionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showBottomSheet(
+            context: context,
+            builder: (context) => Container(
+                  height: 200,
+                  color: Colors.red,
+                ));
+      },
+    );
   }
 }

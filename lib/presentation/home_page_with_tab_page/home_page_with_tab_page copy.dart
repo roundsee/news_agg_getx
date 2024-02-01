@@ -16,8 +16,8 @@ import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
 import 'package:new_agg/widgets/custom_search_view.dart';
 
 // ignore_for_file: must_be_immutable
-class HomePageWithTabPage extends StatelessWidget {
-  HomePageWithTabPage({Key? key}) : super(key: key);
+class HomePageWithTabPagexx extends StatelessWidget {
+  HomePageWithTabPagexx({Key? key}) : super(key: key);
 
   HomePageWithTabController controller = Get.put(HomePageWithTabController());
   CategoriesController categoriesController = Get.put(CategoriesController());

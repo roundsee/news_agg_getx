@@ -1,6 +1,8 @@
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/new_trending_page/newtrending_page.dart';
 import 'package:new_agg/presentation/profile_screen/profile_screen.dart';
+import 'package:new_agg/presentation/startpage_screen/startpage_screen.dart';
 
 import 'controller/alternative_home_page_design_container_controller.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,14 @@ class AlternativeHomePageDesignContainerScreen
   /// Section Widget
   Widget _buildBottomBar() {
     return CustomBottomBar(onChanged: (BottomBarEnum type) {
-      Get.toNamed(getCurrentRoute(type), id: 1);
+      if (SharedPrefs().token == SharedPrefs().defaultToken) {
+        if (type == BottomBarEnum.Trending ||
+            type == BottomBarEnum.Profile ||
+            type == BottomBarEnum.History) {
+          Get.off(StartpageScreen());
+        }
+      } else
+        Get.toNamed(getCurrentRoute(type), id: 1);
     });
   }
 
@@ -57,16 +66,15 @@ class AlternativeHomePageDesignContainerScreen
 
   ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
-    var _shared = new PrefUtils();
     switch (currentRoute) {
       case AppRoutes.homePageWithTabPage:
         return HomePageWithTabPage();
       case AppRoutes.trendingPage:
         return NewTrendingPage(); //return TrendingPageTabContainerPage();
       case AppRoutes.historyPage:
-        var token = _shared.getUserToken();
-        if (token ==
-            "1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d") {
+        //if (SharedPrefs().token == SharedPrefs().defaultToken) {
+        //  return StartpageScreen();
+        /*
           AlertDialog(
             title: const Text('History'),
             content: const Text('Login Required. Continue Login ?'),
@@ -81,10 +89,33 @@ class AlternativeHomePageDesignContainerScreen
               ),
             ],
           );
-        }
+          */
+        // } else {
         return HistoryPage();
+      //}
+
       case AppRoutes.profileScreen:
+        //if (SharedPrefs().token == SharedPrefs().defaultToken) {
+        //  return StartpageScreen();
+        /*
+          AlertDialog(
+            title: const Text('Profile'),
+            content: const Text('Login Required. Continue Login ?'),
+            actions: [
+              TextButton(
+                child: const Text("No"),
+                onPressed: () => Get.back(),
+              ),
+              TextButton(
+                  child: const Text("Yes"),
+                  onPressed: () => Get.off(StartpageScreen())),
+            ],
+          );
+          */
+        //} else {
         return ProfileScreen();
+      //}
+
       default:
         return DefaultWidget();
     }

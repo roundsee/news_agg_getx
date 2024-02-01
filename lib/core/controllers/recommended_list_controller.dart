@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/models/content_per_category.dart';
 import 'package:new_agg/core/models/news_item_model.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
+import 'package:new_agg/core/utils/pref_utils.dart';
 import 'package:new_agg/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,17 +51,19 @@ class RecommendedListController extends GetxController
   getAllRecommendedList() async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
+    var headers = getHeaders("req");
+    /*
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
     var _endPoint = "";
 
     switch (_listType) {
@@ -92,10 +96,6 @@ class RecommendedListController extends GetxController
     }
 
     var url = Uri.parse(ApiEndPoints.baseUrl + _endPoint);
-
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {

@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:new_agg/core/utils/pref_utils.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 
 Future<List<String>> filterValidImages(List<String> urls) async {
   var validUrls = <String>[];
@@ -21,18 +22,18 @@ Future<bool> isValidUrl(String url) async {
 }
 
 Map<String, String> getHeaders(String reqType) {
-  var pref = new PrefUtils();
-  var token = pref.getUserToken();
-  var lang = pref.getLanguage();
-  var fcm = pref.getfcmToken();
+  //var pref = new PrefUtils();
+  //var token = pref.getUserToken();
+  //var lang = pref.getLanguage();
+  //var fcm = pref.getfcmToken();
   var theHeader;
 
   switch (reqType) {
     case "req":
       theHeader = {
         'Content-Type': 'application/json',
-        'Authorization': token,
-        'Accept-Language': lang,
+        'Authorization': SharedPrefs().token,
+        'Accept-Language': SharedPrefs().language,
         'User-Agent': 'LENOVO ideapad 3'
       };
 
@@ -42,8 +43,8 @@ Map<String, String> getHeaders(String reqType) {
         'Content-Type': 'application/json',
         'Authorization':
             '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
-        'Accept-Language': lang,
-        'fcm': fcm,
+        'Accept-Language': SharedPrefs().language,
+        'fcm': SharedPrefs().fcm,
         'User-Agent': 'LENOVO ideapad 3'
       };
 

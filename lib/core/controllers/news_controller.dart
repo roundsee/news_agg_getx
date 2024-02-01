@@ -5,6 +5,7 @@ import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/news_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -79,20 +80,13 @@ class NewsController extends GetxController with StateMixin {
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
+
     var url = Uri.parse(ApiEndPoints.baseUrl +
         ApiEndPoints.contentEndpoints.DetailContent +
         "/" +
         idNews.toString());
     //_SimpleUri (https://a1c1-103-124-115-148.ngrok-free.app/api/contents/single/bad3762c-9d48-4ecc-aad4-310b26d7b219)
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {

@@ -1,7 +1,7 @@
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
+import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/presentation/edit_profile_screen/models/edit_profile_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -53,17 +53,7 @@ class EditProfileController extends GetxController {
   }
 
   UpdateProfile(String xnama, String xbirtdate, String xgender) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
-    //token =
-    //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
 
     var url = Uri.parse(
         ApiEndPoints.baseUrl + ApiEndPoints.readersEndpoints.updateProfile);

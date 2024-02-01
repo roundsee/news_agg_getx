@@ -1,11 +1,10 @@
 import 'package:new_agg/core/app_export.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
+import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
+import 'package:new_agg/presentation/home_page/home_page.dart';
+import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
 import 'package:new_agg/presentation/splash_screen/models/splash_model.dart';
 import 'dart:async';
-import 'dart:developer' as developer;
-
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:new_agg/presentation/startpage_screen/startpage_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,44 +24,63 @@ class SplashController extends GetxController {
   }
 
   Future startSplash() async {
-    var myPref = new PrefUtils();
+    //var myPref = new PrefUtils();
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final isNew = SharedPrefs().token == ""; //  .getSession() == "null";
+    if (isNew) {
+      SharedPrefs().session = "1"; // .setString('appsession', "1");
+      SharedPrefs().token = SharedPrefs().defaultToken;
+      SharedPrefs().language = "ID";
+
+      // prefs.setString('token', default_token);
+      Timer(
+        const Duration(seconds: 5),
+        () => Get.off(() => StartpageScreen()),
+      );
+    } else {
+      if (SharedPrefs().token == "") {
+        SharedPrefs().token = SharedPrefs().defaultToken;
+      }
+      if (SharedPrefs().language == "") {
+        SharedPrefs().language = "ID";
+      }
+      Timer(
+        const Duration(seconds: 5),
+        () => Get.off(() => AlternativeHomePageDesignContainerScreen()),
+      );
+    }
+  }
+/*
     var appsession = prefs!.getString('appsession').toString();
     //appsession = appsession ?? '1';
     var token = prefs!.getString('token').toString();
 
-    // await Future.delayed(const Duration(milliseconds: 500));
-    //animate.value = true;
-    // await Future.delayed(const Duration(milliseconds: 5000));
-    // Check Session
-    // if empty = first time open app show start page
-
     if (appsession == 'null') {
       prefs!.setString('appsession', "2");
-      prefs!.setString('token', "1111111");
+      prefs!.setString('token',
+          "1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d");
+      Timer(
+        const Duration(seconds: 5),
+        () => Get.off(() => StartpageScreen()),
+      );
       Get.to(() => StartpageScreen());
-      //Get.to(StartpageScreen());
+
     } else {
-      //Get.to(() => Home());
+
       if (myPref.getTextSize() == "") {
         myPref.setTextSize("small");
       }
       if (myPref.getLanguage() == "") {
         myPref.setLanguage("ID");
       }
-
       Timer(
         const Duration(seconds: 5),
-        () => Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen
-            //LoginScreen(),
-            ),
+        () => Get.off(()=> AlternativeHomePageDesignContainerScreen()),
       );
-
-      //Get.toNamed(AppRoutes.alternativeHomePageDesignContainerScreen);
     }
   }
-
+*/
 /*
 static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};

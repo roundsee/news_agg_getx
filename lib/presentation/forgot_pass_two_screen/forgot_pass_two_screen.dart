@@ -18,82 +18,84 @@ class ForgotPassTwoScreen extends GetWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Form(
-                key: _formKey,
-                child: Container(
-                    width: double.maxFinite,
-                    padding:
-                        EdgeInsets.only(left: 42.h, top: 123.v, right: 42.h),
-                    child: Column(children: [
-                      Text("Reset Password", //"msg_forgot_password".tr,
-                          style: theme.textTheme.titleMedium),
-                      SizedBox(height: 8.v),
-                      SizedBox(
-                          width: 175.h,
-                          child: Text("Input New Password",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style:
-                                  CustomTextStyles.bodySmallPoppinsGray60002)),
-                      SizedBox(height: 8.v),
-                      CustomTextFormField(
-                        controller: controller.passText,
-                        //hintText: "lbl_email_address".tr,
-                        textInputAction: TextInputAction.done,
-                        //textInputType: TextInputType.emailAddress,
-                        //validator: (value) {
-                        //  if (value == null ||
-                        //      (!isValidEmail(value, isRequired: true))) {
-                        //    return "err_msg_please_enter_valid_email".tr;
-                        //  }
-                        //  return null;
-                        // }
-                      ),
-                      SizedBox(height: 22.v),
-                      SizedBox(
-                          width: 175.h,
-                          child: Text("Re-Type Password",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style:
-                                  CustomTextStyles.bodySmallPoppinsGray60002)),
-                      SizedBox(height: 14.v),
-                      CustomTextFormField(
-                          controller: controller.retypeText,
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  child: Container(
+                      width: double.maxFinite,
+                      padding:
+                          EdgeInsets.only(left: 42.h, top: 123.v, right: 42.h),
+                      child: Column(children: [
+                        Text("Reset Password", //"msg_forgot_password".tr,
+                            style: theme.textTheme.titleMedium),
+                        SizedBox(height: 8.v),
+                        SizedBox(
+                            width: 175.h,
+                            child: Text("Input New Password",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: CustomTextStyles
+                                    .bodySmallPoppinsGray60002)),
+                        SizedBox(height: 8.v),
+                        CustomTextFormField(
+                          controller: controller.passText,
                           //hintText: "lbl_email_address".tr,
                           textInputAction: TextInputAction.done,
-                          //textInputType: TextInputType.text,
+                          //textInputType: TextInputType.emailAddress,
+                          //validator: (value) {
+                          //  if (value == null ||
+                          //      (!isValidEmail(value, isRequired: true))) {
+                          //    return "err_msg_please_enter_valid_email".tr;
+                          //  }
+                          //  return null;
+                          // }
+                        ),
+                        SizedBox(height: 22.v),
+                        SizedBox(
+                            width: 175.h,
+                            child: Text("Re-Type Password",
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: CustomTextStyles
+                                    .bodySmallPoppinsGray60002)),
+                        SizedBox(height: 14.v),
+                        CustomTextFormField(
+                            controller: controller.retypeText,
+                            //hintText: "lbl_email_address".tr,
+                            textInputAction: TextInputAction.done,
+                            //textInputType: TextInputType.text,
 
-                          validator: (value) {
-                            if (value == null ||
-                                //(!isValidEmail(value, isRequired: true))
-                                passWord.text != retypepassword.text) {
-                              return "Enter Valid Password ";
-                            }
-                            return null;
-                          }),
-                      SizedBox(height: 21.v),
-                      CustomElevatedButton(
-                          text: "Submit",
-                          buttonStyle: CustomButtonStyles.fillPrimary,
-                          buttonTextStyle: CustomTextStyles
-                              .labelLargePoppinsWhiteA700SemiBold,
-                          onPressed: () {
-                            onTapSendEmail(controller.passText.text);
-                          }),
-                      SizedBox(height: 21.v),
-                      CustomElevatedButton(
-                          text: "Cancel Reset Password",
-                          buttonStyle: CustomButtonStyles.fillPrimary,
-                          buttonTextStyle: CustomTextStyles
-                              .labelLargePoppinsWhiteA700SemiBold,
-                          onPressed: () {
-                            Get.off(LoginPageScreen());
-                          })
-                    ])))));
+                            validator: (value) {
+                              if (value == null ||
+                                  //(!isValidEmail(value, isRequired: true))
+                                  passWord.text != retypepassword.text) {
+                                return "Enter Valid Password ";
+                              }
+                              return null;
+                            }),
+                        SizedBox(height: 21.v),
+                        CustomElevatedButton(
+                            text: "Submit",
+                            buttonStyle: CustomButtonStyles.fillPrimary,
+                            buttonTextStyle: CustomTextStyles
+                                .labelLargePoppinsWhiteA700SemiBold,
+                            onPressed: () {
+                              onTapSendEmail(controller.passText.text);
+                            }),
+                        SizedBox(height: 21.v),
+                        CustomElevatedButton(
+                            text: "Cancel Reset Password",
+                            buttonStyle: CustomButtonStyles.fillPrimary,
+                            buttonTextStyle: CustomTextStyles
+                                .labelLargePoppinsWhiteA700SemiBold,
+                            onPressed: () {
+                              Get.off(LoginPageScreen());
+                            })
+                      ]))),
+            )));
   }
 
   /// Navigates to the forgotPassScreen when the action is triggered.

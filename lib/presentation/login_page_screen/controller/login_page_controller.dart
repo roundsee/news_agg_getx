@@ -2,15 +2,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
-//import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
-import 'package:new_agg/presentation/home_page/home_page.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
-import 'package:new_agg/presentation/login_page_screen/models/login_page_model.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -43,16 +39,16 @@ class LoginPageController extends GetxController {
       'User-Agent': 'LENOVO ideapad 3'
     };
     */
-    var prefx = new PrefUtils();
+
     try {
       //final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      var fcmtoken = prefx.getfcmToken();
+      var fcmtoken = SharedPrefs().fcm;
       // prefs!.getString('FCMToken').toString();
       if (fcmtoken == "") {
         fcmtoken = (await FirebaseMessaging.instance.getToken())!;
         //prefs!.setString('FCMToken', fcmtoken);
-        prefx.setfcmToken(fcmtoken);
+        SharedPrefs().fcm = fcmtoken;
       }
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.loginEmail);
@@ -79,7 +75,7 @@ class LoginPageController extends GetxController {
         final json = jsonDecode(response.body);
         var token = json['data']['access_token'];
         Logger.log("token:" + token);
-        prefx.setUserToken(token);
+        SharedPrefs().token = token;
         //final SharedPreferences? prefs = await _prefs;
         //await prefs?.setString('token', token);
 
@@ -87,25 +83,36 @@ class LoginPageController extends GetxController {
         passwordController.clear();
 
         if (json['data']['user']['status'] == 2) {
+          SharedPrefs().status = "2";
           //  var token = json['data']['access_token'];
           //  prefx.setUserToken(token);
-          prefx.setStatusUser("2");
+          //prefx.setStatusUser("2");
           //final SharedPreferences? prefs = await _prefs;
           //await prefs?.setString('token', token);
           //await prefs?.setString('statuscode', "2");
-          Get.to((HomePage));
+          //Get.to((HomePage));
+          Get.to(() => HomePageWithTabPage());
         }
 
         if (json['data']['user']['status'] == 1) {
           //prefx.setUserToken(token);
-          prefx.setStatusUser("1");
+
+          SharedPrefs().status = "1";
           //await prefs?.setString('statuscode', "1");
           // Get.off(SelectFavCategoryScreen());
           Get.to(() => SelectFavCategoryScreen());
           //Get.to((SelectFavCategoryScreen()));
         }
       } else {
-        throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
+        final json = jsonDecode(response.body);
+        Get.snackbar(
+          "Login",
+          json['message'],
+          icon: Icon(Icons.person, color: Colors.white),
+          duration: const Duration(seconds: 7),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        //throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (error) {
       Get.back();

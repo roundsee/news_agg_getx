@@ -34,17 +34,7 @@ class HistoryController extends GetxController {
   getNewsHistory() async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
-    //token =
-    //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
     http.Response res;
     bool isSearch = false;
     //if (searchText == "") {

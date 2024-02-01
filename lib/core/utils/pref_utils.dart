@@ -60,6 +60,14 @@ class PrefUtils {
     }
   }
 
+  String getSession() {
+    try {
+      return _sharedPreferences!.getString('appsession')!;
+    } catch (e) {
+      return '0';
+    }
+  }
+
   String getLanguage() {
     try {
       return _sharedPreferences!.getString('lang')!;
@@ -94,5 +102,9 @@ class PrefUtils {
 
   Future<void> setTextSize(String value) {
     return _sharedPreferences!.setString('size', value);
+  }
+
+  Future<void> setSession(String value) {
+    return _sharedPreferences!.setString('appsession', value);
   }
 }

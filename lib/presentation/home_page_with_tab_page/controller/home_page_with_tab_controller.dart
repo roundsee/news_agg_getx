@@ -51,18 +51,20 @@ class HomePageWithTabController extends GetxController
 
   getAllContentCategoryFromApi() async {
     //Creates a new Uri object by parsing a URI string.
-
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //var prefs = new PrefUtils();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //var token = prefs.getUserToken(); // !.getString('token').toString();
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
+    var headers = getHeaders("req");
+    /*
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
     if (searchController.text.toString() == null) {
     } else {
       var url = Uri.parse(ApiEndPoints.baseUrl +
@@ -72,9 +74,6 @@ class HomePageWithTabController extends GetxController
     var url = Uri.parse(ApiEndPoints.baseUrl +
         ApiEndPoints.contentEndpoints.CategoryContent +
         "/1");
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
@@ -125,23 +124,23 @@ class HomePageWithTabController extends GetxController
 
   getAllCategoriesFromApi() async {
     //Creates a new Uri object by parsing a URI string.
-
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //var prefs = new PrefUtils();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // var token = prefs.getUserToken();
+    // prefs!.getString('token').toString();
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
+    var headers = getHeaders("req");
+    /*
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
     var url = Uri.parse(
         ApiEndPoints.baseUrl + ApiEndPoints.categoryEndpoints.categories);
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
@@ -174,20 +173,19 @@ class HomePageWithTabController extends GetxController
   getTendingsFromApi() async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    var headers = getHeaders("req");
+    /*
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'id',
       'User-Agent': 'LENOVO ideapad 3'
     };
+    */
     var url = Uri.parse(
         ApiEndPoints.baseUrl + ApiEndPoints.contentEndpoints.TrendingContent);
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
@@ -221,24 +219,22 @@ class HomePageWithTabController extends GetxController
   getAllRecommendedFromApi() async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+    //final SharedPreferences prefs = await SharedPreferences.getInstance();
+
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-
+    var headers = getHeaders("req");
+    /*
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token,
       'Accept-Language': 'ID',
       'User-Agent': 'LENOVO ideapad 3'
     };
-
+    */
     var url = Uri.parse(ApiEndPoints.baseUrl +
         ApiEndPoints.contentEndpoints.RecommendedContent +
         "/10/1");
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {

@@ -1,3 +1,5 @@
+import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
+
 import 'controller/startpage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -47,7 +49,15 @@ class StartpageScreen extends GetWidget<StartpageController> {
                               overflow: TextOverflow.ellipsis,
                               style: CustomTextStyles
                                   .labelMediumPoppinsBluegray400)),
-                      SizedBox(height: 5.v)
+                      SizedBox(height: 5.v),
+                      GestureDetector(
+                          onTap: () => Get.to(
+                              AlternativeHomePageDesignContainerScreen()),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 22.h),
+                            child: Text("lbl_skip".tr + " >>",
+                                style: CustomTextStyles.labelLargeGray800),
+                          ))
                     ])),
             bottomNavigationBar: _buildFrameEightyOne()));
   }
@@ -55,18 +65,12 @@ class StartpageScreen extends GetWidget<StartpageController> {
   /// Section Widget
   Widget _buildFrameSeventyEight() {
     return Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(horizontal: 31.h, vertical: 28.v),
-        decoration: AppDecoration.fillBlack.copyWith(
-            image: DecorationImage(
-                image: AssetImage(ImageConstant.imgFrame78),
-                fit: BoxFit.cover)),
-        child: GestureDetector(
-            onTap: () {
-              onTapTxtSkip();
-            },
-            child: Text("lbl_skip".tr,
-                style: CustomTextStyles.labelLargeWhiteA700)));
+      width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 31.h, vertical: 200.v),
+      decoration: AppDecoration.fillBlack.copyWith(
+          image: DecorationImage(
+              image: AssetImage(ImageConstant.imgFrame78), fit: BoxFit.cover)),
+    );
   }
 
   /// Section Widget
