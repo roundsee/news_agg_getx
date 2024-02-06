@@ -87,18 +87,25 @@ class HomePageWithTabController extends GetxController
       //Parses the string and returns the resulting Json object.
       ContentPerCategory contentCategoryData =
           ContentPerCategory.fromJson(jsonDecode(res.body));
-      var imageurl;
+      var imageurl = "";
+      print("home_page_with_tab_controllerr");
       for (int i = 0; i < contentCategoryData.data!.length; i++) {
         Content content = new Content();
         content.category = contentCategoryData.data![i].content!.category;
         content.description = contentCategoryData.data![i].content!.category;
-        imageurl = contentCategoryData.data![i].content!.header;
-        //imageurl = content.header;
-        if (await isValidUrl(imageurl)) {
-          content.header = imageurl;
-        } else {
+        imageurl = contentCategoryData.data![i].content!.header!;
+        if (!Uri.tryParse(imageurl)!.hasAbsolutePath) {
           content.header =
               "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        } else {
+          //imageurl = content.header;
+
+          if (await isValidUrl(imageurl)) {
+            content.header = imageurl;
+          } else {
+            content.header =
+                "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+          }
         }
         content.id = contentCategoryData.data![i].content!.id;
         content.interaction = contentCategoryData.data![i].content!.interaction;
@@ -255,6 +262,7 @@ class HomePageWithTabController extends GetxController
         content.description = contentCategoryData.data![i].content!.category;
         imageurl = contentCategoryData.data![i].content!.header;
         //imageurl = content.header;
+        print("Recommend news");
         if (await isValidUrl(imageurl)) {
           content.header = imageurl;
         } else {

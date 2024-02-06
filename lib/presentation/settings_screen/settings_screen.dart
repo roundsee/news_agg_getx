@@ -17,7 +17,16 @@ class SettingsScreen extends GetWidget<SettingsController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            appBar: _buildAppBar(),
+            appBar: AppBar(
+                leadingWidth: 49.h,
+                leading: BackButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                centerTitle: true,
+                title: AppbarSubtitle(text: "lbl_settings".tr)),
+            //_buildAppBar(),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(horizontal: 25.h, vertical: 5.v),
@@ -29,10 +38,14 @@ class SettingsScreen extends GetWidget<SettingsController> {
                   _buildFrameSixtyNine(
                       notificationText: "lbl_edit_profil".tr,
                       onTapFrameSixtyNine: () {
-                        // onTapFrameSixtyEight();
+                        onTapFrameSixtyEight();
                       }),
                   SizedBox(height: 10.v),
-                  _buildFrameSixtyNine(notificationText: "lbl_notifikasi".tr),
+                  _buildFrameSixtyNine(
+                      notificationText: "lbl_notifikasi".tr,
+                      onTapFrameSixtyNine: () {
+                        onTapNotifikasi();
+                      }),
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -158,14 +171,17 @@ class SettingsScreen extends GetWidget<SettingsController> {
                       child: Text("lbl_berita".tr,
                           style: CustomTextStyles.bodySmallGray70003)),
                   _buildFrameSixtyNine(
-                      notificationText: "msg_berita_yang_disarankan".tr),
+                      notificationText: "msg_berita_yang_disarankan".tr,
+                      onTapFrameSixtyNine: () {}),
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text("lbl_dukungan".tr,
                           style: CustomTextStyles.bodySmallGray70003)),
                   SizedBox(height: 5.v),
-                  _buildFrameSixtyNine(notificationText: "lbl_tentang".tr)
+                  _buildFrameSixtyNine(
+                      notificationText: "lbl_tentang".tr,
+                      onTapFrameSixtyNine: () {})
                 ]))));
   }
 
@@ -209,7 +225,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
   }) {
     return GestureDetector(
         onTap: () {
-          //onTapFrameSixtyNine!.call();
+          onTapFrameSixtyNine!.call();
         },
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -237,6 +253,11 @@ class SettingsScreen extends GetWidget<SettingsController> {
     );
   }
 
+  onTapNotifikasi() {
+    Get.toNamed(
+      AppRoutes.notificationScreen,
+    );
+  }
 //===============================
 
 //===============================

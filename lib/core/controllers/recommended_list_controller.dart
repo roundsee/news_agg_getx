@@ -36,8 +36,8 @@ class RecommendedListController extends GetxController
       _arg2 = 1;
     } else {
       _listType = argumentData[0]['id'];
-      _arg = argumentData[1]['arg'];
-      _arg2 = argumentData[2]['agr2'];
+      _arg = argumentData[0]['arg'];
+      _arg2 = argumentData[0]['arg2'];
     }
     // Get All List  (1: New News, 2: Recommended , 3. Trending, 4. General News)
     getAllRecommendedList();
@@ -69,12 +69,14 @@ class RecommendedListController extends GetxController
     switch (_listType) {
       case 1:
         // New News : contents/categories/2
-        _endPoint =
-            ApiEndPoints.contentEndpoints.CategoryContent + _arg.toString();
+        _endPoint = ApiEndPoints.contentEndpoints.CategoryContent +
+            "/" +
+            _arg.toString();
         break;
       case 2:
         // recommended : api/contents/recommendation/3/1
         _endPoint = ApiEndPoints.contentEndpoints.RecommendedContent +
+            "/" +
             _arg.toString() +
             "/" +
             _arg2.toString();
@@ -82,6 +84,7 @@ class RecommendedListController extends GetxController
       case 3:
         // Trend
         _endPoint = ApiEndPoints.contentEndpoints.TrendingContent +
+            "/" +
             _arg.toString() +
             "/" +
             _arg2.toString();
@@ -89,6 +92,7 @@ class RecommendedListController extends GetxController
       case 4:
         // suggested
         _endPoint = ApiEndPoints.contentEndpoints.SuggestedContent +
+            "/" +
             _arg.toString() +
             "/" +
             _arg2.toString();

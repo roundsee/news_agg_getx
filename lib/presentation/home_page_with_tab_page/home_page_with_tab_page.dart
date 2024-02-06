@@ -9,6 +9,7 @@ import 'package:new_agg/core/models/category.dart';
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
 import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
+import 'package:new_agg/presentation/splash_screen/splash_screen.dart';
 //import 'package:new_agg/widgets/custom_elevated_button.dart';
 //import 'package:new_agg/widgets/custom_icon_button.dart';
 //import 'package:toggle_switch/toggle_switch.dart';
@@ -49,7 +50,7 @@ class HomePageWithTabPage extends GetView {
                 //  margin:
                 //       EdgeInsets.only(left: 23.h, top: 14.v, bottom: 14.v)),
                 centerTitle: true,
-                title: AppbarTitleImage(imagePath: ImageConstant.imgLogo3),
+                title: AppbarTitleImage(imagePath: ImageConstant.imgLogoNooz),
                 actions: [
                   AppbarTrailingImage(
                       imagePath: ImageConstant.imgMdiBellNotification,

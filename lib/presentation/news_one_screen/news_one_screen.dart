@@ -1,4 +1,5 @@
 //import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 //import 'package:new_agg/core/models/suggestion_model.dart';
 import 'package:new_agg/core/models/suggestion_model_show.dart';
@@ -298,29 +299,35 @@ class NewsOneScreen extends StatelessWidget {
 
   Widget _listSuggestion(SuggestionModel Sugg) {
     return Container(
+      margin: EdgeInsets.only(left: 16),
       padding: EdgeInsets.symmetric(vertical: 10.v),
       decoration: AppDecoration.fillBlueGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder10,
       ),
       width: 300.h,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Column(
             children: [
-              //Sugg.header.toString(),
-              CustomImageView(
-                imagePath: Sugg.header.toString(),
-                height: 100.v,
-                width: 200.h,
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
+              //Sugg.header.toString()
+
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: CustomImageView(
+                  imagePath: Sugg.header.toString(),
+                  height: 100.v,
+                  width: 280.h,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                ),
               ),
               Container(
-                width: 200,
+                width: 280,
                 child: Text(
                   Sugg.title.toString(),
+                  overflow: TextOverflow.ellipsis,
                   //suggestionContent.oneHundred!.value,
                   style: theme.textTheme.bodyMedium,
                 ),
@@ -328,57 +335,65 @@ class NewsOneScreen extends StatelessWidget {
 
               Row(
                 //crossAxisAlignment: CrossAxisAlignment.stretch,
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    Sugg.datePublish.toString(),
-                    //suggestionContent.oneHundred!.value,
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  Column(
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgSolarHeartBold,
-                        height: 20.adaptSize,
-                        width: 20.adaptSize,
-                      ),
-                      SizedBox(height: 2.v),
-                      //  Obx(
-                      //() =>
-                      Text(
-                        Sugg.like.toString(),
-                        //suggestionContent.oneHundred!.value,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgPhBookmarkSimpleFill,
-                        height: 20.adaptSize,
-                        width: 20.adaptSize,
-                      ),
-                      SizedBox(height: 3.v),
-                      Text(
-                        Sugg.save.toString(),
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.imgMajesticonsShareCircle,
-                        height: 20.adaptSize,
-                        width: 20.adaptSize,
-                      ),
-                      SizedBox(height: 3.v),
-                      Text(
-                        Sugg.share.toString(),
 
-                        //suggestionContent.oneHundred!.value,
-                        style: theme.textTheme.bodySmall,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Text(
+                      Sugg.datePublish.toString(),
+                      //suggestionContent.oneHundred!.value,
+                      style: theme.textTheme.bodySmall,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.imgSolarHeartBold,
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                          ),
+                          SizedBox(height: 2.v),
+                          //  Obx(
+                          //() =>
+                          Text(
+                            Sugg.like.toString(),
+                            //suggestionContent.oneHundred!.value,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.imgPhBookmarkSimpleFill,
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                          ),
+                          SizedBox(height: 3.v),
+                          Text(
+                            Sugg.save.toString(),
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.imgMajesticonsShareCircle,
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                          ),
+                          SizedBox(height: 3.v),
+                          Text(
+                            Sugg.share.toString(),
+
+                            //suggestionContent.oneHundred!.value,
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -533,11 +548,11 @@ class NewsOneScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              _buildListItem("Copy"),
-              _buildListItem("WhatsApp"),
-              _buildListItem("Twitter"),
-              _buildListItem("Facebook"),
-              _buildListItem("Instagram"),
+              _buildListItemShare("Copy", "assets/images/logocopy.png"),
+              _buildListItemShare("WhatsApp", "assets/images/logowa.png"),
+              _buildListItemShare("Twitter", "assets/images/logotwit.png"),
+              _buildListItemShare("Facebook", "assets/images/logofb.png"),
+              _buildListItemShare("Instagram", "assets/images/logoig.png"),
               //_buildListItem("Medium"),
               //_buildListItem("Besar"),
             ],
@@ -567,45 +582,15 @@ class NewsOneScreen extends StatelessWidget {
                   child: InkWell(
                 child: Text(title),
                 onTap: () async {
-                  //controller.saveOptions(title);
-                  //print("tap : " + title);
                   switch (title.toLowerCase()) {
-                    case "whatsapp":
-                      SocialShare.shareWhatsapp(
-                        "Hello World \n https://google.com",
-                      ).then((data) {
-                        print(data);
-                      });
+                    case "kecil":
+                      controller.saveOptions(title);
                       break;
-                    case "facebook":
-                      SocialShare.shareFacebookStory(
-                        appId: facebookId,
-                        imagePath: filepath,
-                        backgroundTopColor: "#ffffff",
-                        backgroundBottomColor: "#000000",
-                      ).then((data) {
-                        print(data);
-                      });
+                    case "medium":
+                      controller.saveOptions(title);
                       break;
-                    case "instagram":
-                      SocialShare.shareInstagramStory(
-                        appId: facebookId,
-                        imagePath: filepath,
-                        backgroundResourcePath: filepath,
-                      ).then((data) {
-                        print(data);
-                      });
-                      break;
-                    case "twitter":
-                      SocialShare.shareTwitter(
-                        "This is Social Share twitter example with link.  ",
-                        hashtags: ["SocialSharePlugin", "world", "foo", "bar"],
-                        url: "https://google.com/hello",
-                        trailingText: "cool!!",
-                      ).then((data) {
-                        print(data);
-                      });
-
+                    case "besar":
+                      controller.saveOptions(title);
                       break;
                     default:
                   }
@@ -618,6 +603,94 @@ class NewsOneScreen extends StatelessWidget {
       ],
     );
   }
+
+  Widget _buildListItemShare(String title, String imgPath) {
+    return Column(children: [
+      Container(
+          height: 48,
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Expanded(
+                child: InkWell(
+                    child: Row(children: [
+                      CustomImageView(
+                          imagePath: imgPath,
+                          height: 20.adaptSize,
+                          width: 20.adaptSize,
+                          margin: EdgeInsets.only(left: 27.h, bottom: 6.v)),
+                      SizedBox(width: 10.v),
+                      Text(title)
+                    ]),
+                    onTap: () async {
+                      switch (title.toLowerCase()) {
+                        case "copy":
+                          Clipboard.setData(
+                              ClipboardData(text: controller.slug.value));
+                          Get.snackbar(
+                            "Share ews",
+                            "News has beeen copied",
+                            //icon: Icon(Icons.person, color: Colors.white),
+                            duration: const Duration(seconds: 5),
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                          controller.InteractionClick(
+                              controller.idn.value, "share");
+                          break;
+                        case "whatsapp":
+                          SocialShare.shareWhatsapp(
+                            controller.slug.toString(),
+                          ).then((data) {
+                            print(data);
+                          });
+                          controller.InteractionClick(
+                              controller.idn.value, "share");
+                          break;
+                        case "facebook":
+                          SocialShare.shareFacebookStory(
+                            appId: facebookId,
+                            imagePath: filepath,
+                            backgroundTopColor: "#ffffff",
+                            backgroundBottomColor: "#000000",
+                          ).then((data) {
+                            print(data);
+                          });
+                          controller.InteractionClick(
+                              controller.idn.value, "share");
+                          break;
+                        case "instagram":
+                          SocialShare.shareInstagramStory(
+                            appId: facebookId,
+                            imagePath: filepath,
+                            backgroundResourcePath: filepath,
+                          ).then((data) {
+                            print(data);
+                          });
+                          controller.InteractionClick(
+                              controller.idn.value, "share");
+                          break;
+                        case "twitter":
+                          SocialShare.shareTwitter(
+                            controller.slug.value,
+                            hashtags: [
+                              "SocialSharePlugin",
+                              "world",
+                              "foo",
+                              "bar"
+                            ],
+                            url: "https://google.com/hello",
+                            trailingText: "cool!!",
+                          ).then((data) {
+                            print(data);
+                          });
+                          controller.InteractionClick(
+                              controller.idn.value, "share");
+                          break;
+                        default:
+                      }
+                    }))
+          ]))
+    ]);
+  }
+
 //=======================
 /*
   void _onShare(BuildContext context) async {
@@ -648,6 +721,52 @@ class NewsOneScreen extends StatelessWidget {
     }
   }
   */
+
+  tapShare(String title) {
+    switch (title.toLowerCase()) {
+      case "copy":
+        Clipboard.setData(ClipboardData(text: controller.slug.value));
+        break;
+      case "whatsapp":
+        SocialShare.shareWhatsapp(
+          controller.slug.toString(),
+        ).then((data) {
+          print(data);
+        });
+        break;
+      case "facebook":
+        SocialShare.shareFacebookStory(
+          appId: facebookId,
+          imagePath: filepath,
+          backgroundTopColor: "#ffffff",
+          backgroundBottomColor: "#000000",
+        ).then((data) {
+          print(data);
+        });
+        break;
+      case "instagram":
+        SocialShare.shareInstagramStory(
+          appId: facebookId,
+          imagePath: filepath,
+          backgroundResourcePath: filepath,
+        ).then((data) {
+          print(data);
+        });
+        break;
+      case "twitter":
+        SocialShare.shareTwitter(
+          "This is Social Share twitter example with link.  ",
+          hashtags: ["SocialSharePlugin", "world", "foo", "bar"],
+          url: "https://google.com/hello",
+          trailingText: "cool!!",
+        ).then((data) {
+          print(data);
+        });
+
+        break;
+      default:
+    }
+  }
 }
 
 class MyFloatingActionButton extends StatelessWidget {

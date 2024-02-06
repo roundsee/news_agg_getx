@@ -88,8 +88,9 @@ class ImageConstant {
 
   // Common images
   static String imgLogo3 = '$imagePath/img_logo_3.png';
+  static String imgLogoNooz = '$imagePath/logo-no-bg.png';
   static String imgLogoAnix = '$imagePath/logoani.gif';
-  static String imgLogoAni = '$imagePath/logolagi.gif';
+  static String imgLogoAni = '$imagePath/nooz_001.gif'; //logolagi.gif';
 
   static String imgFrame40 = '$imagePath/img_frame_40.png';
 
@@ -170,4 +171,7 @@ class ImageConstant {
       '$imagePath/img_mdi_radio_button_unchecked.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+  static String imageIG = 'assets/images/logoig.png';
+  static String imageWA = 'assets/images/logowa.png';
+  static String imageX = 'assets/images/logotwit.png';
 }

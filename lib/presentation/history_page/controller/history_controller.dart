@@ -69,7 +69,7 @@ class HistoryController extends GetxController {
         Content itemHistory = new Content();
         itemHistory.id = historiesList.data![i].content?.id;
         itemHistory.category = historiesList.data![i].content?.category;
-
+        print("history_controller");
         var imageurl = historiesList.data![i].content?.header;
         //imageurl = content.header;
         if (await isValidUrl(imageurl!)) {

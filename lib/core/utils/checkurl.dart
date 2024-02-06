@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:new_agg/core/utils/pref_utils.dart';
+import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/utils/sharedprefs.dart';
 
 Future<List<String>> filterValidImages(List<String> urls) async {
@@ -17,8 +17,15 @@ Future<List<String>> filterValidImages(List<String> urls) async {
 }
 
 Future<bool> isValidUrl(String url) async {
-  final response = await http.head(Uri.parse(url));
-  return response.statusCode == 200;
+  print(url);
+  try {
+    final response = await http.head(Uri.parse(url));
+    return response.statusCode == 200;
+  } catch (e) {
+    return false;
+  }
+  //final response = await http.head(Uri.parse(url));
+  //return response.statusCode == 200;
 }
 
 Map<String, String> getHeaders(String reqType) {

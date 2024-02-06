@@ -80,27 +80,32 @@ class SearchResultController extends GetxController
     if (res.statusCode == 200) {
       //Parses the string and returns the resulting Json object.
       SearchResult newsResults = SearchResult.fromJson(jsonDecode(res.body));
-      var imageurl;
+      var imageUrl = "";
       for (int i = 0; i < newsResults.data!.content!.length; i++) {
         ContentSearchResult newsContent = new ContentSearchResult();
         newsContent.id = newsResults.data!.content![i].id;
         newsContent.category = newsResults.data!.content![i].category;
 
         newsContent.title = newsResults.data!.content![i].title;
-        imageurl = newsResults.data!.content![i].header;
-
-        if (await isValidUrl(imageurl)) {
-          newsContent.header = imageurl;
-        } else {
+        imageUrl = newsResults.data!.content![i].header!;
+        print("search_result_controller");
+        if (!Uri.tryParse(imageUrl)!.hasAbsolutePath) {
           newsContent.header =
               "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        } else {
+          if (await isValidUrl(imageUrl)) {
+            newsContent.header = imageUrl;
+          } else {
+            newsContent.header =
+                "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+          }
         }
         newsContent.datePublish = newsResults.data!.content![i].datePublish;
         newsContent.title = newsResults.data!.content![i].title;
         searchResult.value.add(newsContent);
       }
       print(searchResult.value);
-
+      searchResult.refresh();
       update();
     } else {
       update();

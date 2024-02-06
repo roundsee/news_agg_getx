@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -34,6 +36,33 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           //channel.description,
         ),
       ));
+}
+
+Future<void> GetDeviceInfo() async {
+  if (Platform.isAndroid) {
+    var androidInfo = await DeviceInfoPlugin().androidInfo;
+    var release = androidInfo.version.release;
+    var sdkInt = androidInfo.version.sdkInt;
+    var manufacturer = androidInfo.manufacturer;
+    var model = androidInfo.model;
+    print('Android $release (SDK $sdkInt), $manufacturer $model');
+    // Android 9 (SDK 28), Xiaomi Redmi Note 7
+  }
+
+  if (Platform.isIOS) {
+    var iosInfo = await DeviceInfoPlugin().iosInfo;
+    var systemName = iosInfo.systemName;
+    var version = iosInfo.systemVersion;
+    var name = iosInfo.name;
+    var model = iosInfo.model;
+    print('$systemName $version, $name $model');
+    // iOS 13.1, iPhone 11 Pro Max iPhone
+  }
+
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  AndroidDeviceInfo info = await deviceInfo.androidInfo;
+  SharedPrefs().brand = info.brand;
+  SharedPrefs().model = info.model;
 }
 
 main() async {
@@ -78,10 +107,14 @@ main() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove("fcm");
   prefs.setString("fcm", fcmToken!);
+
+  //final isAndroid = GetPlatform.isAndroid;
+  //final isAndroid = GetPlatform.isAndroid;
   //var token = prefs!.getString('token').toString();
   final fcmlocal = prefs.getString("FCMToken");
   log("FCMToken $fcmToken");
   log("FCMTokenlocal $fcmlocal");
+  GetDeviceInfo();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then((value) async {

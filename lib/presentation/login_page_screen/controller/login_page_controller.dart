@@ -3,6 +3,7 @@ import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
 import 'package:new_agg/core/utils/sharedprefs.dart';
+import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
 import 'package:new_agg/presentation/home_page_with_tab_page/home_page_with_tab_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -91,7 +92,7 @@ class LoginPageController extends GetxController {
           //await prefs?.setString('token', token);
           //await prefs?.setString('statuscode', "2");
           //Get.to((HomePage));
-          Get.to(() => HomePageWithTabPage());
+          Get.to(() => AlternativeHomePageDesignContainerScreen());
         }
 
         if (json['data']['user']['status'] == 1) {

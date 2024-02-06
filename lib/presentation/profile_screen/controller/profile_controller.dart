@@ -6,6 +6,8 @@ import 'package:new_agg/presentation/profile_screen/models/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
+import 'package:path/path.dart';
 
 /// A controller class for the ProfileScreen.
 ///
@@ -13,7 +15,7 @@ import 'dart:convert';
 /// current profileModelObj
 class ProfileController extends GetxController {
   Rx<ProfileModel> profileModelObj = ProfileModel().obs;
-
+  Rx<dynamic> upFile = new File('').obs;
   var id = "".obs;
   var name = "".obs;
   var email = "".obs;
@@ -32,19 +34,34 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
-  GetProfile() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
-    //token =
-    //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
+  UploadPic() async {
+    var headers = getHeaders("req");
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
-    //https://sandbox-nooz.digiprimatera.co.id/api/readers/profile
+    var url = Uri.parse(
+        ApiEndPoints.baseUrl + ApiEndPoints.readersEndpoints.changePhoto);
+
+    var length = await upFile.value.length();
+    var stream = http.ByteStream(upFile.value.openRead());
+    var multipartfile = http.MultipartFile("photo", stream, length,
+        filename: basename(upFile.value.path));
+    //request.upFiles.add(multipartfile);
+    http.Response res =
+        await http.post(url, headers: headers, body: multipartfile);
+
+    if (res.statusCode == 401) {
+      Get.toNamed(
+        AppRoutes.loginPageScreen,
+      );
+    }
+    if (res.statusCode == 200) {
+      GetProfile();
+    } else {
+      update();
+    }
+  }
+
+  GetProfile() async {
+    var headers = getHeaders("req");
     var url =
         Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.profile);
 
@@ -73,6 +90,7 @@ class ProfileController extends GetxController {
         photo.value =
             "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
       }
+      photo.refresh();
     } else {
       update();
     }

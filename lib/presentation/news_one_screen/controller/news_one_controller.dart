@@ -5,10 +5,11 @@ import 'package:new_agg/core/models/news_detail.dart';
 import 'package:new_agg/core/models/suggestion_model.dart';
 import 'package:new_agg/core/models/suggestion_model_show.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/presentation/news_one_screen/models/news_one_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'dart:convert';
 
 import 'package:social_share/social_share.dart';
@@ -80,26 +81,17 @@ class NewsOneController extends GetxController {
     isLoading.value = true;
     Suggested(idNews);
     //change(null, status: RxStatus.loading());
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
     var url = Uri.parse(ApiEndPoints.baseUrl +
         ApiEndPoints.contentEndpoints.DetailContent +
         "/" +
         idNews.toString());
 
     //_SimpleUri (https://a1c1-103-124-115-148.ngrok-free.app/api/contents/single/bad3762c-9d48-4ecc-aad4-310b26d7b219)
-    Map body = {
-      'token': token,
-    };
 
     http.Response res = await http.get(url, headers: headers);
     if (res.statusCode == 401) {
@@ -159,17 +151,11 @@ class NewsOneController extends GetxController {
     isLoading.value = true;
 
     //change(null, status: RxStatus.loading());
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
+
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
     var eps = "";
     switch (actionType) {
       case 1: // Like
@@ -223,10 +209,13 @@ class NewsOneController extends GetxController {
           } else {
             jsave = jsave - 1;
           }
-
           break;
+
         case 3: // Share
           eps = ApiEndPoints.interactionEndpoints.share;
+          share.value = "1";
+          jshare = jshare + 1;
+
           break;
         default:
           return "/";
@@ -249,17 +238,10 @@ class NewsOneController extends GetxController {
   Suggested(String newsId) async {
     //Creates a new Uri object by parsing a URI string.
 
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs!.getString('token').toString();
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
 
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization': token,
-      'Accept-Language': 'ID',
-      'User-Agent': 'LENOVO ideapad 3'
-    };
+    var headers = getHeaders("req");
     http.Response res;
 
     var url = Uri.parse(ApiEndPoints.baseUrl +
@@ -315,38 +297,39 @@ class NewsOneController extends GetxController {
   }
 
   saveOptions(String myOption) {
-    var prefs = new PrefUtils();
+    // var prefs = new PrefUtils();
     switch (myOption) {
       case "Small":
-        prefs.setTextSize(myOption);
+        SharedPrefs().size = myOption;
+        //  prefs.setTextSize(myOption);
         getStyle();
         break;
       case "Kecil":
-        prefs.setTextSize("Small");
+        SharedPrefs().size = "Small"; // prefs.setTextSize("Small");
         getStyle();
         break;
 
       case "Medium":
-        prefs.setTextSize(myOption);
+        SharedPrefs().size = myOption;
         getStyle();
         break;
 
       case "Besar":
-        prefs.setTextSize("Large");
+        SharedPrefs().size = "Large";
         getStyle();
         break;
 
       case "Large":
-        prefs.setTextSize(myOption);
+        SharedPrefs().size = myOption;
         getStyle();
         break;
 
       case "Indonesia":
-        prefs.setLanguage(myOption);
+        SharedPrefs().language = "ID";
         break;
 
       case "English":
-        prefs.setLanguage(myOption);
+        SharedPrefs().language = "EN";
         break;
 
       default:
@@ -356,8 +339,9 @@ class NewsOneController extends GetxController {
   getStyle() {
     //var myStyle; // = new CustomTextStyles();
     var iStyle;
-    var prefs = new PrefUtils();
-    iStyle = prefs.getTextSize();
+
+    iStyle = SharedPrefs().size;
+    // prefs.getTextSize();
     switch (iStyle) {
       case "Small":
         myStyle.value = CustomTextStyles.bodySmall10;

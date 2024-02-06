@@ -41,12 +41,20 @@ class NotificationScreen extends GetWidget<NotificationController> {
     return CustomAppBar(
         height: 77.v,
         leadingWidth: 49.h,
-        leading: AppbarLeadingImage(
-            imagePath: ImageConstant.imgArrowLeft,
-            margin: EdgeInsets.only(left: 25.h, top: 16.v, bottom: 16.v),
-            onTap: () {
-              onTapArrowLeft();
-            }),
+        leading: AppBar(
+          leading: BackButton(
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
+
+        //AppbarLeadingImage(
+        //    imagePath: ImageConstant.imgArrowLeft,
+        //    margin: EdgeInsets.only(left: 25.h, top: 16.v, bottom: 16.v),
+        //    onTap: () {
+        //      onTapArrowLeft();
+        //    }),
         centerTitle: true,
         title: AppbarTitle(text: "lbl_notifikasi".tr));
   }

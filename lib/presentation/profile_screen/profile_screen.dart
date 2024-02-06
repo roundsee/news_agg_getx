@@ -1,7 +1,9 @@
+import 'package:flutter_context_menu/flutter_context_menu.dart';
 import 'package:new_agg/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/news_stat_screen/news_stat_screen.dart';
-import 'package:new_agg/widgets/custom_text_form_field.dart';
+import 'package:easyupload_image_toserver/easyupload_image_toserver_mob.dart';
+import 'package:new_agg/presentation/profile_screen/form_upload.dart';
 
 import '../profile_screen/widgets/profilelist_item_widget.dart';
 import 'controller/profile_controller.dart';
@@ -21,14 +23,61 @@ class ProfileScreen extends GetWidget<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    UploadImageforPhone upload = UploadImageforPhone();
+
+    final entries = <ContextMenuEntry>[
+      const MenuHeader(text: ""),
+      MenuItem(
+        label: 'Gallery',
+        icon: Icons.file_open,
+        onSelected: () {
+          //print("Gallery");
+          upload.selectFromGallary();
+        },
+      ),
+      MenuItem(
+        label: 'Camera',
+        icon: Icons.camera,
+        onSelected: () {
+          print("Camera");
+        },
+      )
+    ];
+    final mycontextMenu = ContextMenu(
+      entries: entries,
+      position: const Offset(100, 200),
+      padding: const EdgeInsets.all(8.0),
+    );
+
+    var isShow = false;
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-      //appBar:
-      //AppBar(
-      //    leading: BackButton(
-      //  onPressed: () {},
-      //)),
+      /* appBar: AppBar(
+        title: const Text("AppMaking.com"),
+        centerTitle: true,
+        actions: [
+          PopupMenuButton(onSelected: (value) {
+            print(value);
+            Navigator.pushNamed(context, value.toString());
+          }, itemBuilder: (BuildContext bc) {
+            return const [
+              PopupMenuItem(
+                child: Text("Hello"),
+                value: '/hello',
+              ),
+              PopupMenuItem(
+                child: Text("About"),
+                value: '/about',
+              ),
+              PopupMenuItem(
+                child: Text("Contact"),
+                value: '/contact',
+              )
+            ];
+          })
+        ],
+      ),*/
       body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(horizontal: 26.h, vertical: 33.v),
@@ -44,6 +93,16 @@ class ProfileScreen extends GetWidget<ProfileController> {
             SizedBox(height: 40.v),
 
             Obx(() => CustomImageView(
+                onTap: () {
+                  Get.to(UploadScreen(),
+                      transition: Transition.leftToRightWithFade);
+                  print("ok");
+                  //showContextMenu(context, contextMenu: mycontextMenu);
+// or
+
+                  //final selectedValue = mycontextMenu.show(context);
+                  //print(selectedValue);
+                },
                 imagePath: profileController.photo.toString() == ""
                     ? "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46"
                     : profileController.photo.toString(),
@@ -51,7 +110,6 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 height: 139.adaptSize,
                 width: 139.adaptSize,
                 radius: BorderRadius.circular(69.h))),
-
             SizedBox(height: 15.v),
             Obx(
               () => Text(profileController.name.toString(),
@@ -80,9 +138,14 @@ class ProfileScreen extends GetWidget<ProfileController> {
               child: Text("msg_berita_yang_di_sukai".tr),
             ),
             ElevatedButton(
-                onPressed: () => Get.to(() => NewsStatScreen(), arguments: [
-                      {"statType": "like"}
-                    ]),
+                onPressed: () {
+                  Get.to(() => NewsStatScreen(), arguments: [
+                    {"statType": "like"}
+                  ]);
+                },
+                // onPressed: () => Get.to(() => NewsStatScreen(), arguments: [
+                //      {"statType": "like"}
+                //    ]),
                 child: Text(
                   "msg_berita_yang_di_sukai".tr,
                   style: TextStyle(color: appTheme.gray100),

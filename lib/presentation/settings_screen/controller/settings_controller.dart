@@ -1,6 +1,7 @@
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/presentation/settings_screen/models/settings_model.dart';
 import 'package:new_agg/presentation/startpage_screen/startpage_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +18,7 @@ class SettingsController extends GetxController {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Logout() async {
-    var pref = new PrefUtils();
     //final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = pref.getUserToken();
 
     //token =
     //  "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
@@ -38,26 +37,25 @@ class SettingsController extends GetxController {
 
     http.Response res = await http.post(url, headers: headers);
     if (res.statusCode == 401) {
-      Get.toNamed(
-        AppRoutes.loginPageScreen,
-      );
+      Get.offAll(AppRoutes.startpageScreen);
     }
     if (res.statusCode == 200) {
-      Get.toNamed(
-        AppRoutes.loginPageScreen,
+      SharedPrefs().token = SharedPrefs().defaultToken;
+      SharedPrefs().language = "ID";
+      Get.offAll(StartpageScreen());
+    } else {
+      final json = jsonDecode(res.body);
+      Get.snackbar(
+        "Logout",
+        json['message'],
+        //icon: Icon(Icons.person, color: Colors.white),
+        duration: const Duration(seconds: 5),
+        snackPosition: SnackPosition.BOTTOM,
       );
     }
-    var defaul_token =
-        "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-    //final SharedPreferences? prefs = await _prefs;
-    //await pref.clear();
-    await pref.setUserToken(defaul_token);
-    Get.offAll(StartpageScreen());
   }
 
   DeleteAccount() async {
-    var pref = new PrefUtils();
-    var token = pref.getUserToken();
     var headers = getHeaders("req");
     var url =
         Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.ResponseEndPoints.delete);
@@ -69,15 +67,16 @@ class SettingsController extends GetxController {
       );
     }
     if (res.statusCode == 200) {
-      Get.toNamed(
-        AppRoutes.loginPageScreen,
+      SharedPrefs().token = SharedPrefs().defaultToken;
+      SharedPrefs().language = "ID";
+      Get.snackbar(
+        "Delete Account",
+        "Your Account has been deleted",
+        //icon: Icon(Icons.person, color: Colors.white),
+        duration: const Duration(seconds: 5),
+        snackPosition: SnackPosition.BOTTOM,
       );
+      Get.offAll(StartpageScreen());
     }
-    var defaul_token =
-        "1701932392_0FZgPySf92ivu6jrhFWiWepjkNJapk4jTLvx3shT_00a7c4fe-837c-455b-9b8d-ad5fadd0b815";
-    //final SharedPreferences? prefs = await _prefs;
-    //await pref.clear();
-    await pref.setUserToken(defaul_token);
-    Get.offAll(StartpageScreen());
   }
 }

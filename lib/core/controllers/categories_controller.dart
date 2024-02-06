@@ -54,11 +54,24 @@ class CategoriesController extends GetxController {
     if (res.statusCode == 200) {
       //Parses the string and returns the resulting Json object.
       Categories categories = Categories.fromJson(jsonDecode(res.body));
-
+      var imageUrl = "";
       for (int i = 0; i < categories.data!.length; i++) {
         Category category = new Category();
         category.id = categories.data![i].id!;
-        category.icon = categories.data![i].icon!;
+        imageUrl = categories.data![i].icon!;
+        print("categories_controller");
+        //if (!Uri.tryParse(imageUrl)!.isAbsolute) {
+        //  category.icon =
+        //      "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        //} else {
+        if (await isValidUrl(imageUrl!)) {
+          category.icon = imageUrl;
+        } else {
+          category.icon =
+              "https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg?w=2000&t=st=1705367389~exp=1705367989~hmac=15d172d57e2f959df17fbdc8dcbd6a0e0a6506671ed0aaa3e27a93b2ca8afc46";
+        }
+        //}
+        // category.icon = categories.data![i].icon!;
         category.category = categories.data![i].category!;
         allCategory!.add(category);
         /*

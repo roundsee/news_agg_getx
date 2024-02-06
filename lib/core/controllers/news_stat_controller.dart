@@ -90,7 +90,7 @@ class NewsStatController extends GetxController
 
         newsContent.title = newsStat.data![i].content!.title;
         imageurl = newsStat.data![i].content!.header;
-
+        print("news_stat_controller");
         if (await isValidUrl(imageurl)) {
           newsContent.header = imageurl;
         } else {

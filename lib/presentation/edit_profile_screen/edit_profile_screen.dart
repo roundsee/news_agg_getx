@@ -19,7 +19,25 @@ class EditProfileScreen extends GetWidget<EditProfileController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
-            appBar: _buildAppBar(),
+            appBar: AppBar(
+                //height: 80.v,
+                leadingWidth: 49.h,
+                leading: BackButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                title: AppbarSubtitle(
+                    text: "lbl_edit_profile".tr,
+                    margin: EdgeInsets.only(left: 70.h)),
+                actions: [
+                  AppbarTrailingButton(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 32.h, vertical: 10.v),
+                      onTap: () {
+                        onTapSimpan();
+                      })
+                ]), // _buildAppBar(),
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 33.v),
