@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/models/news_detail.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_agg/core/utils/checkurl.dart';
 import 'dart:convert';

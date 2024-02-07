@@ -184,8 +184,8 @@ class HistoryPage extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: 11.h,
-          vertical: 10.v,
+          horizontal: 5.h,
+          vertical: 5.v,
         ),
         decoration: AppDecoration.fillGray.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder10,
@@ -197,8 +197,8 @@ class HistoryPage extends StatelessWidget {
               width: 287.h,
               margin: EdgeInsets.only(right: 2.h),
               padding: EdgeInsets.symmetric(
-                horizontal: 6.h,
-                vertical: 8.v,
+                horizontal: 5.h,
+                vertical: 5.v,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadiusStyle.roundedBorder5,
@@ -215,7 +215,7 @@ class HistoryPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 39.v),
                   Container(
-                    width: 33.h,
+                    width: 40.h,
                     padding: EdgeInsets.symmetric(
                       horizontal: 5.h,
                       vertical: 4.v,
@@ -223,10 +223,7 @@ class HistoryPage extends StatelessWidget {
                     decoration: AppDecoration.fillGray70002.copyWith(
                       borderRadius: BorderRadiusStyle.roundedBorder5,
                     ),
-                    child:
-                        //Obx(
-                        //  () =>
-                        Text(
+                    child: Text(
                       itemHistory.category.toString(),
                       style: CustomTextStyles.bodySmallWhiteA700_1,
                     ),

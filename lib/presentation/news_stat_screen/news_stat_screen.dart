@@ -52,11 +52,11 @@ class NewsStatScreen extends StatelessWidget {
                     child: Column(
                         // padding: EdgeInsets.only(left: 20.h, right: 23.h),
                         children: [
-                          Text("Search Result",
+                          /*Text("Search Result",
                               style: TextStyle(
                                 fontSize: 24,
                                 color: appTheme.green900,
-                              )),
+                              )),*/
                           SizedBox(height: 10.v),
                           Obx(
                             () => Container(

@@ -40,8 +40,7 @@ Map<String, String> getHeaders(String reqType) {
       theHeader = {
         'Content-Type': 'application/json',
         'Authorization': SharedPrefs().token,
-        'Accept-Language': SharedPrefs().language,
-        'User-Agent': 'LENOVO ideapad 3'
+        'Accept-Language': SharedPrefs().language
       };
 
       break;
@@ -52,7 +51,7 @@ Map<String, String> getHeaders(String reqType) {
             '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
         'Accept-Language': SharedPrefs().language,
         'fcm': SharedPrefs().fcm,
-        'User-Agent': 'LENOVO ideapad 3'
+        'User-Agent': SharedPrefs().useragent
       };
 
       break;
@@ -61,14 +60,16 @@ Map<String, String> getHeaders(String reqType) {
       theHeader = {
         'Content-Type': 'application/json',
         'Authorization':
-            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d'
+            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
+        'User-Agent': SharedPrefs().useragent
       };
       break;
     case "login":
       theHeader = {
         'Content-Type': 'application/json',
         'Authorization':
-            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d'
+            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
+        'User-Agent': SharedPrefs().useragent
       };
       break;
 

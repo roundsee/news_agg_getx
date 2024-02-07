@@ -37,7 +37,7 @@ class SettingsController extends GetxController {
 
     http.Response res = await http.post(url, headers: headers);
     if (res.statusCode == 401) {
-      Get.offAll(AppRoutes.startpageScreen);
+      Get.offAll(StartpageScreen());
     }
     if (res.statusCode == 200) {
       SharedPrefs().token = SharedPrefs().defaultToken;

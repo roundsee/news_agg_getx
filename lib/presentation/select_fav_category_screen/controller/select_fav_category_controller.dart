@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 /// current selectFavCategoryModelObj
 class SelectFavCategoryController extends GetxController {
   // TextEditingController ionsearchcircleController = TextEditingController();
-
+  dynamic argumentData = Get.arguments;
   //Rx<SelectFavCategoryModel> selectFavCategoryModelObj = SelectFavCategoryModel().obs;
   RxList<ChipsCategory> allChipsCategory = <ChipsCategory>[].obs;
   Rx<String> selectedCategory = "".obs;
@@ -25,14 +25,21 @@ class SelectFavCategoryController extends GetxController {
   }
 
   void onInit() {
-    GetCategoryChipsItems();
+    if (argumentData == null) {
+      GetCategoryChipsItems(false);
+    } else {
+      GetCategoryChipsItems(true);
+    }
+
+    //GetCategoryChipsItems();
     super.onInit();
   }
 
-  GetCategoryChipsItems() async {
+  GetCategoryChipsItems(bool isNew) async {
     //Creates a new Uri object by parsing a URI string.
 
     var headers = getHeaders("req");
+    if (isNew) {}
     var url = Uri.parse(
         ApiEndPoints.baseUrl + ApiEndPoints.categoryEndpoints.categories);
 

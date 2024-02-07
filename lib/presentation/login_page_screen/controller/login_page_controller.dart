@@ -77,6 +77,8 @@ class LoginPageController extends GetxController {
         var token = json['data']['access_token'];
         Logger.log("token:" + token);
         SharedPrefs().token = token;
+        SharedPrefs().userid = json['data']['user']['id'];
+        SharedPrefs().username = json['data']['user']['name'];
         //final SharedPreferences? prefs = await _prefs;
         //await prefs?.setString('token', token);
 

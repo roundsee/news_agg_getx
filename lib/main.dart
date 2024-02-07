@@ -7,9 +7,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_user_agentx/flutter_user_agent.dart';
 import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/app_export.dart';
 
@@ -46,6 +48,23 @@ Future<void> GetDeviceInfo() async {
     var manufacturer = androidInfo.manufacturer;
     var model = androidInfo.model;
     print('Android $release (SDK $sdkInt), $manufacturer $model');
+    SharedPrefs().OS = Platform.operatingSystem.toString();
+    SharedPrefs().brand = androidInfo.brand;
+    SharedPrefs().model = androidInfo.model;
+    SharedPrefs().manufacture = androidInfo.manufacturer +
+        "/" +
+        androidInfo.product +
+        "/" +
+        androidInfo.device;
+
+    String _userAgent = await FlutterUserAgent.getPropertyAsync('userAgent');
+
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    String code = packageInfo.buildNumber;
+    SharedPrefs().appVersion = version;
+    SharedPrefs().buildNumber = code;
+
     // Android 9 (SDK 28), Xiaomi Redmi Note 7
   }
 
@@ -72,7 +91,7 @@ main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  GetDeviceInfo();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<

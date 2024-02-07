@@ -1,5 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:new_agg/presentation/login_page_screen/login_page_screen.dart';
+import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controller/settings_controller.dart';
@@ -150,7 +151,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
                               style: CustomTextStyles.labelLargeMedium)),
                       GestureDetector(
                         onTap: () {
-                          //_ChangePassword()
+                          _changePassword();
                         },
                         child: CustomImageView(
                             imagePath: ImageConstant.imgArrowRight,
@@ -172,7 +173,9 @@ class SettingsScreen extends GetWidget<SettingsController> {
                           style: CustomTextStyles.bodySmallGray70003)),
                   _buildFrameSixtyNine(
                       notificationText: "msg_berita_yang_disarankan".tr,
-                      onTapFrameSixtyNine: () {}),
+                      onTapFrameSixtyNine: () {
+                        _onTapBeritaDisarankan();
+                      }),
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -258,6 +261,19 @@ class SettingsScreen extends GetWidget<SettingsController> {
       AppRoutes.notificationScreen,
     );
   }
+
+  _onTapBeritaDisarankan() {
+    Get.to(() => SelectFavCategoryScreen(), arguments: [
+      {"isNew": false}
+    ]);
+  }
+
+  _changePassword() {
+    Get.toNamed(
+      AppRoutes.changePassword,
+    );
+  }
+
 //===============================
 
 //===============================

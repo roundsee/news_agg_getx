@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "mediaType": "image",
+      "media": "https://picsum.photos/200/300",
+      "duration": "5.0",
+      "caption": "What do you think about this guy? He doing music, boxing, youtube. Like tf, how?",
+      "when": "14 hours ago",
+      "color": ""
+    },
+    {
+      "mediaType": "text",
+      "media": "",
+      "duration": "4.0",
+      "caption": "Did you know the Earth was flat until God provided an update?",
+      "when": "3 hours ago",
+      "color": "#303f9f"
+    },
+    {
+      "mediaType": "video",
+      "media": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "duration": "4.0",
+      "caption": "robo robo. robo me.",
+      "when": "2 hours ago",
+      "color": ""
+    },
+    {
+      "mediaType": "text",
+      "media": "",
+      "duration": "4.0",
+      "caption": "I hope you enjoyed the stories. Now go ahead and add stories to your app with the story_view library.",
+      "when": "just now",
+      "color": "#ff8f00"
+    }
+  ]
+}

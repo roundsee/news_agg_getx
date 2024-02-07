@@ -1,11 +1,9 @@
 import 'package:new_agg/core/models/category.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/presentation/alternative_home_page_design_container_screen/alternative_home_page_design_container_screen.dart';
-import 'package:new_agg/presentation/select_fav_category_screen/model/categorychipitems_item_model.dart';
-import 'package:new_agg/presentation/select_fav_category_screen/widget/categorychipitem_item_widget.dart';
 import 'controller/select_fav_category_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
-import 'package:new_agg/widgets/custom_text_form_field.dart';
 
 // ignore_for_file: must_be_immutable
 class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
@@ -40,7 +38,7 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "lbl_hai_idris".tr,
+                        text: SharedPrefs().username,
                         style: theme.textTheme.headlineSmall,
                       ),
                       TextSpan(

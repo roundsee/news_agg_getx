@@ -4,6 +4,7 @@ import 'package:new_agg/presentation/history_page/history_page.dart';
 import 'package:new_agg/presentation/news_stat_screen/news_stat_screen.dart';
 import 'package:easyupload_image_toserver/easyupload_image_toserver_mob.dart';
 import 'package:new_agg/presentation/profile_screen/form_upload.dart';
+import 'package:new_agg/widgets/custom_elevated_button.dart';
 
 import '../profile_screen/widgets/profilelist_item_widget.dart';
 import 'controller/profile_controller.dart';
@@ -128,6 +129,28 @@ class ProfileScreen extends GetWidget<ProfileController> {
                     style: CustomTextStyles.titleSmallErrorContainer
                         .copyWith(decoration: TextDecoration.underline))),
             SizedBox(height: 20.v),
+            CustomElevatedButton(
+                text: "Berita yang disukai",
+                buttonStyle: CustomButtonStyles.fillPrimary,
+                buttonTextStyle:
+                    CustomTextStyles.labelLargePoppinsWhiteA700SemiBold,
+                onPressed: () {
+                  Get.to(() => NewsStatScreen(), arguments: [
+                    {"statType": "like"}
+                  ]);
+                }),
+            SizedBox(height: 13.v),
+            CustomElevatedButton(
+                text: "Berita yang disimpan",
+                buttonStyle: CustomButtonStyles.fillPrimary,
+                buttonTextStyle:
+                    CustomTextStyles.labelLargePoppinsWhiteA700SemiBold,
+                onPressed: () {
+                  Get.to(() => NewsStatScreen(), arguments: [
+                    {"statType": "save"}
+                  ]);
+                })
+            /*
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 20),
@@ -137,6 +160,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
               },
               child: Text("msg_berita_yang_di_sukai".tr),
             ),
+
             ElevatedButton(
                 onPressed: () {
                   Get.to(() => NewsStatScreen(), arguments: [
@@ -153,7 +177,9 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 style: ElevatedButton.styleFrom(
                   elevation: 1,
                 )),
-            ElevatedButton(
+              */
+
+            /* ElevatedButton(
                 onPressed: () => Get.to(() => NewsStatScreen(), arguments: [
                       {"statType": "save"}
                     ]),
@@ -163,7 +189,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 ),
                 style: ElevatedButton.styleFrom(
                   elevation: 1,
-                )) //_buildProfileList()
+                ))*/ //_buildProfileList()
           ])),
       //bottomNavigationBar: _buildBottomBar()
     ));

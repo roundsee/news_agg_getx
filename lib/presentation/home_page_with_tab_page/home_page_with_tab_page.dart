@@ -4,26 +4,22 @@ import 'package:new_agg/core/controllers/categories_controller.dart';
 import 'package:new_agg/core/controllers/news_per_cagory_controller.dart';
 import 'package:new_agg/core/controllers/search_result_controller.dart';
 import 'package:new_agg/core/models/category.dart';
-//import 'package:new_agg/presentation/home_page/widgets/side_drawer.dart';
-//import 'package:new_agg/presentation/home_page_with_tab_page/webview.dart';
+
 import 'package:new_agg/presentation/news_one_screen/news_one_screen.dart';
 import 'package:new_agg/presentation/page_search_category/page_search_category.dart';
 import 'package:new_agg/presentation/search_result_screen/search_result_screen.dart';
-import 'package:new_agg/presentation/splash_screen/splash_screen.dart';
-//import 'package:new_agg/widgets/custom_elevated_button.dart';
-//import 'package:new_agg/widgets/custom_icon_button.dart';
-//import 'package:toggle_switch/toggle_switch.dart';
+import 'package:new_agg/story/whatsapp.dart';
+
 import 'controller/home_page_with_tab_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
-//import 'package:new_agg/presentation/home_page/home_page.dart';
+
 import 'package:new_agg/core/models/content_per_category.dart';
-//import 'package:new_agg/widgets/app_bar/appbar_leading_image.dart';
+
 import 'package:new_agg/widgets/app_bar/appbar_title_image.dart';
 import 'package:new_agg/widgets/app_bar/appbar_trailing_image.dart';
-//import 'package:new_agg/widgets/app_bar/custom_app_bar.dart';
+
 import 'package:new_agg/widgets/custom_search_view.dart';
-//import 'package:new_agg/core/models/content_per_category.dart';
 
 // ignore_for_file: must_be_immutable
 class HomePageWithTabPage extends GetView {
@@ -50,7 +46,12 @@ class HomePageWithTabPage extends GetView {
                 //  margin:
                 //       EdgeInsets.only(left: 23.h, top: 14.v, bottom: 14.v)),
                 centerTitle: true,
-                title: AppbarTitleImage(imagePath: ImageConstant.imgLogoNooz),
+                title: AppbarTitleImage(
+                  imagePath: ImageConstant.imgLogoNooz,
+                  onTap: () {
+                    Get.to(StoryPage());
+                  },
+                ),
                 actions: [
                   AppbarTrailingImage(
                       imagePath: ImageConstant.imgMdiBellNotification,

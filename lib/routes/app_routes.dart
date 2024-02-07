@@ -1,3 +1,5 @@
+import 'package:new_agg/presentation/change_password/chang_password_screen.dart';
+import 'package:new_agg/presentation/change_password/change_password_binding.dart';
 import 'package:new_agg/presentation/forgot_pass_two_screen/binding/input_otp_binding.dart';
 import 'package:new_agg/presentation/history_page/binding/history_binding.dart';
 import 'package:new_agg/presentation/history_page/history_page.dart';
@@ -71,6 +73,8 @@ import 'package:new_agg/presentation/alternative_home_page_design_one_screen/bin
 import 'package:new_agg/presentation/app_navigation_screen/app_navigation_screen.dart';
 import 'package:new_agg/presentation/app_navigation_screen/binding/app_navigation_binding.dart';
 import 'package:get/get.dart';
+import 'package:new_agg/story/story_binding.dart';
+import 'package:new_agg/story/whatsapp.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -95,6 +99,7 @@ class AppRoutes {
       '/trending_page_tab_container_page';
 
   static const String startpageScreen = '/startpage_screen';
+  static const String storyPage = '/story_page';
 
   static const String loginPageScreen = '/login_page_screen';
 
@@ -138,6 +143,7 @@ class AppRoutes {
   static const String bahasaScreen = '/bahasa_screen';
 
   static const String newsOneScreen = '/news_one_screen';
+  static const String changePassword = '/change_password';
 
   static const String searchPageFilterKategoriScreen =
       '/search_page_filter_kategori_screen';
@@ -389,6 +395,20 @@ class AppRoutes {
       page: () => NewTrendingPage(), // TrenPage(),
       bindings: [
         NewTrendingBinding(),
+      ],
+    ),
+    GetPage(
+      name: changePassword,
+      page: () => ChangePasswordScreen(), // TrenPage(),
+      bindings: [
+        ChangePasswordBinding(),
+      ],
+    ),
+    GetPage(
+      name: storyPage,
+      page: () => StoryPage(), // TrenPage(),
+      bindings: [
+        StoryBinding(),
       ],
     )
   ];

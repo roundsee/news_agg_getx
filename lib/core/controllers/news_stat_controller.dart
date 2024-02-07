@@ -20,13 +20,13 @@ class NewsStatController extends GetxController
   //RxBool categoryNotFound = false.obs;
   //RxBool isLoading = false.obs;
 
-  // @override
-  // void onInit() {
-  //if (argumentData == null) {
-  //} else {
-  //  SearchNews(argumentData[0]['idcategories'], argumentData[0]['keyword']);
-  // }
-
+  @override
+  void onInit() {
+    if (argumentData == null) {
+    } else {
+      GetStat(argumentData[0]['statType']);
+    }
+  }
   //print(argumentData[0]['idcategory']);
   //getNewsPerCategories(argumentData[0]['idcategory']);
   //print(argumentData[1]['second']);

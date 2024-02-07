@@ -26,14 +26,17 @@ dependencies:
   flutter_local_notifications: ^16.3.0
   flutter_otp_text_field: ^1.1.1
   flutter_svg: ^1.1.6
+  flutter_user_agentx: ^1.2.4
   gender_picker: ^1.1.0
   get: ^4.6.5
   google_sign_in: ^5.0.7
   intl: ^0.18.0
+  package_info_plus: ^5.0.1
   share_plus: ^7.2.1
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   social_share: ^2.3.1
+  story_view: ^0.16.0
   toggle_switch: ^2.1.0
   url_launcher: ^6.2.4
 

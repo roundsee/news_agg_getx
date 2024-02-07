@@ -3,8 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs {
   late final SharedPreferences _sharedPrefs;
 
-  static String keyAppVersion = "appversion"; // app version 1.1.x
-
   static final SharedPrefs _instance = SharedPrefs._internal();
   static String keyToken = "token";
   static String keySession = "appsession";
@@ -13,6 +11,13 @@ class SharedPrefs {
   static String keyStatus = "status";
   static String keySize = "size";
   static String keyTheme = "themedata";
+  static String keyUserid = "userid";
+  static String keyUserName = "username";
+  static String keyAppVersion = "appversion"; // app version 1.1.x
+  static String keyBuild = "build"; // app version 1.1.x
+  static String keyManufacture = "mfg"; // app version 1.1.x
+  static String keyUserAgent = "useragent"; // app version 1.1.x
+
   static String defaulttoken =
       "1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d";
   //Device Info Key
@@ -83,5 +88,41 @@ class SharedPrefs {
 
   set OS(String value) {
     _sharedPrefs.setString(keyOS, value);
+  }
+
+  String get userid => _sharedPrefs.getString(keyUserid) ?? "";
+
+  set userid(String value) {
+    _sharedPrefs.setString(keyUserid, value);
+  }
+
+  String get username => _sharedPrefs.getString(keyUserName) ?? "";
+
+  set username(String value) {
+    _sharedPrefs.setString(keyUserName, value);
+  }
+
+  String get appVersion => _sharedPrefs.getString(keyAppVersion) ?? "";
+
+  set appVersion(String value) {
+    _sharedPrefs.setString(keyAppVersion, value);
+  }
+
+  String get buildNumber => _sharedPrefs.getString(keyBuild) ?? "";
+
+  set buildNumber(String value) {
+    _sharedPrefs.setString(keyBuild, value);
+  }
+
+  String get manufacture => _sharedPrefs.getString(keyManufacture) ?? "";
+
+  set manufacture(String value) {
+    _sharedPrefs.setString(keyManufacture, value);
+  }
+
+  String get useragent => _sharedPrefs.getString(keyUserAgent) ?? "";
+
+  set useragent(String value) {
+    _sharedPrefs.setString(keyUserAgent, value);
   }
 }

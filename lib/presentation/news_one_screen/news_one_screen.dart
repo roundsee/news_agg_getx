@@ -144,14 +144,10 @@ class NewsOneScreen extends StatelessWidget {
                               Align(
                                   alignment: Alignment.center,
                                   child: Container(
-                                      width: 307.h,
-                                      margin: EdgeInsets.only(
-                                          left: 25.h, right: 28.h),
-                                      child: Text("lanjutan....",
-                                          maxLines: 26,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: CustomTextStyles
-                                              .labelLargeMedium))),
+                                    width: 307.h,
+                                    margin: EdgeInsets.only(
+                                        left: 25.h, right: 28.h),
+                                  )),
                               SizedBox(height: 17.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 25.h),
