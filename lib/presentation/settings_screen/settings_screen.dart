@@ -1,8 +1,5 @@
 import 'package:cool_alert/cool_alert.dart';
-import 'package:new_agg/presentation/login_page_screen/login_page_screen.dart';
 import 'package:new_agg/presentation/select_fav_category_screen/select_fav_category_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'controller/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -34,7 +31,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
                 child: Column(children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("lbl_akun".tr,
+                      child: Text("lbl_account".tr,
                           style: CustomTextStyles.bodySmallGray70003)),
                   _buildFrameSixtyNine(
                       notificationText: "lbl_edit_profil".tr,
@@ -114,16 +111,15 @@ class SettingsScreen extends GetWidget<SettingsController> {
                     children: [
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("lbl_hapus_akun".tr,
+                          child: Text("lbl_delete_account".tr,
                               style: CustomTextStyles.labelLargeMedium)),
                       GestureDetector(
                         onTap: () {
                           CoolAlert.show(
                             context: context,
-                            title: "Hapus Akun",
+                            title: "lbl_delete_account".tr,
                             type: CoolAlertType.confirm,
-                            text:
-                                'Apakah Anda yakin ingin menghapus akun anda ?',
+                            text: "msg_delete_confirm".tr,
                             confirmBtnText: 'Yes',
                             cancelBtnText: 'No',
                             confirmBtnColor: Colors.lightBlue,
@@ -169,21 +165,21 @@ class SettingsScreen extends GetWidget<SettingsController> {
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("lbl_berita".tr,
+                      child: Text("lbl_news".tr,
                           style: CustomTextStyles.bodySmallGray70003)),
                   _buildFrameSixtyNine(
-                      notificationText: "msg_berita_yang_disarankan".tr,
+                      notificationText: "msg_favourite_category".tr,
                       onTapFrameSixtyNine: () {
                         _onTapBeritaDisarankan();
                       }),
                   SizedBox(height: 20.v),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("lbl_dukungan".tr,
+                      child: Text("lbl_support".tr,
                           style: CustomTextStyles.bodySmallGray70003)),
                   SizedBox(height: 5.v),
                   _buildFrameSixtyNine(
-                      notificationText: "lbl_tentang".tr,
+                      notificationText: "lbl_about".tr,
                       onTapFrameSixtyNine: () {})
                 ]))));
   }
@@ -210,7 +206,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
         child: Stack(alignment: Alignment.centerRight, children: [
           Align(
               alignment: Alignment.centerLeft,
-              child: Text("lbl_keluar".tr,
+              child: Text("lbl_logout".tr,
                   style: CustomTextStyles.labelLargeMedium)),
           CustomImageView(
               imagePath: ImageConstant.imgArrowRight,

@@ -13,6 +13,7 @@ dependencies:
   cool_alert: ^2.0.1
   dashed_circular_progress_bar: ^0.0.6
   device_info_plus: ^9.1.1
+  easy_localization: ^3.0.4
   easyupload_image_toserver: ^0.0.3
   file_picker: ^6.1.1
   firebase_core: ^2.24.2
@@ -53,6 +54,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/translations/
   fonts:
     - family: Poppins
       fonts:

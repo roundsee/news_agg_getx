@@ -1,0 +1,163 @@
+
+    {
+        "_formname": "Forgot Pass Two Screen",
+        "lbl_sign_in": "Masuk",
+        "lbl_sign_up" : "Daftar",
+
+
+
+
+
+        "lbl_new_password": "Password Baru",
+        "lbl_reset_password": "Reset Password",
+        "msg_confirm_new_password": "Confirm New Password",
+
+        "lbl_resend_email": "Resend Email", "lbl_send_email": "Send Email",
+        "msg_havent_t_got_the": "Belum menerima email ?",
+
+
+        "msg_berita_yang_di_simpan": "Berita Yang di Simpan",
+        "msg_berita_yang_di_sukai": "Berita Yang di Sukai",
+
+
+        "lbl_skip": "Lewati",
+        "msg_intro": "Semua berita dalam genggamanmu",
+
+        "lbl_intro": "BERITA AKTUAL SETIAP HARI",
+
+
+        "lbl_create_account": "Buat Akun",
+        "msg_don_t_have_an_account": "Belum punya akun? Buat Akun",
+        "err_passwords_or_email": "passwords atau email tidak sesuai.",
+        "lbl_sign_in_to_your": "Masuk akun kamu",
+        "msg_sign_in_with_google": "Masuk lewat Google",
+
+
+
+
+
+
+
+        "lbl_saved_news": "Berita yang dimpan",
+        "lbl_news_like": "Berita yang disukai",
+
+
+        "lbl_account": "Akun",
+        "lbl_news": "Berita",
+        "lbl_support": "Dukungan",
+        "lbl_edit_profil": "Edit Profil",
+        "lbl_delete_account": "Hapus Akun",
+        "lbl_change_password": "Ganti Password",
+        "lbl_logout": "keluar",
+        "lbl_masuk": "Akun",
+        "lbl_settings": "Setelan",
+        "lbl_about": "Tentang",
+        "msg_aktifkan_ulang_akun": "Aktifkan ulang akun anda",
+        "msg_favourite_category": "Kategori favorit",
+
+
+        "lbl_hapus": "Hapus",
+        "lbl_tidak": "Tidak",
+        "msg_delete_confirm": "Apakah anda ingin menghapus akun anda?",
+
+
+        "lbl_name": "Nama",
+        "msg_confirm_password": "Confirm Password",
+        "msg_i_ve_read_and_agree":
+            "Saya telah membaca dan setuju dengan Syarat dan Ketentuan",
+        "msg_sign_up_to_your": "Daftar Akun",
+        "msg_sign_up_with_google": "Daftar melalui Google",
+        "msg_you_have_an_account": "Sudah punya akun ? Masuk",
+        "msg_you_have_an_account2": "Sudah punya akun ? ",
+
+
+
+        "msg_greeting": "Hai {} \nBerita apa yang ingin anda baca?",
+
+        "msg_choose_category": "Pilih kategori favoritmu",
+
+
+
+
+
+
+        "lbl_edit": "Edit",
+        "lbl_jenis_kelamin": "Jenis Kelamin\n",
+        "lbl_laki_laki": "Laki-laki",
+
+        "lbl_nama": "Nama\n",
+
+        "lbl_birtdate": "Tanggal Lahir\n",
+        "lbl_username": "Username\n",
+        "msg_male": "Jenis Kelamin\nLaki-laki",
+        "msg_female": "Jenis Kelamin\nPerempuan",
+
+
+
+
+        "lbl_fav_category": "Fav Category",
+        "lbl_kategori_kamu": "Kategori Kamu",
+        "lbl_pilih": "Pilih ",
+        "msg_5_kategori_yang":
+            "5 kategori yang kamu sukai, dan kami akan menampilkan berita sesuai keinginanmu ",
+        "msg_pilih_5_kategori2":
+            "Pilih 5 kategori yang kamu sukai, dan kami akan menampilkan berita sesuai keinginanmu ",
+        "msg_pilih_kategori_favorit": "Pilih Kategori Favorit kamu",
+
+
+        "msg_baca_selangkapnya": "Baca Selangkapnya",
+        "msg_desakan_yang_kuat":
+            "Desakan yang kuat dari berbagai pihak kepada pbb terkait isu dan masalah kemanusian, membuat PBB mengambil tindakan serius",
+        "msg_pbb_mengambil_keputusan":
+            "PBB Mengambil Keputusan Terkait Palestina dan Israel di Jalur Gaza ",
+
+
+        "lbl_besar": "Besar", "lbl_kecil": "Kecil", "lbl_sedang": "Sedang",
+        "lbl_text_size": "Ukuran Text",
+
+
+        "lbl_bahasa": "Bahasa", "lbl_indonesia": "Indonesia",
+        "lbl_inggris": "Inggris",
+
+
+
+        "lbl_batal": "Batal",
+        "lbl_similar": "Berita Serupa",
+        "lbl_bisnis": "Bisnis",
+
+        "lbl_edit_profile": "Edit Profile",
+        "lbl_email_address": "Email Address",
+
+        "lbl_home": "Home",
+        "lbl_kategori": "Kategori",
+        "lbl_ne": "Ne",
+        "lbl_new_news": "New News",
+        "lbl_newsa": "NewsA",
+        "lbl_notifikasi": "Notifikasi",
+        "lbl_password": "Password",
+
+        "lbl_profile": "Profile",
+
+        "lbl_search": "Cari",
+        "lbl_see_all": "Lihat Semua",
+        "lbl_sign_in": "Masuk",
+        "lbl_sign_up": "Daftar",
+        "lbl_simpan": "Simpan",
+        "lbl_ws": "ws",
+        "msg_enter_your_email": "Enter your email to reset your passsword",
+        "msg_forgot_password": "Lupa Password ? ",
+        "lbl_or_continue_with": "atau lanjutkan dengan",
+        "msg_recommend_for_you": "Rekomendasi untukmu",
+
+
+
+        "msg_network_err": "Network Error",
+        "msg_something_went_wrong": "Something Went Wrong!",
+
+
+        "err_msg_please_enter_valid_password": "Please enter valid password",
+        "err_msg_please_enter_valid_email": "Please enter valid email",
+        "err_msg_please_enter_valid_text": "Please enter valid text"
+      }
+
+

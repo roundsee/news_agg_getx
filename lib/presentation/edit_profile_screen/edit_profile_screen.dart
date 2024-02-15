@@ -1,5 +1,6 @@
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';
+import 'package:new_agg/core/utils/sharedprefs.dart';
 import 'package:new_agg/widgets/custom_text_form_field.dart';
 
 import 'controller/edit_profile_controller.dart';
@@ -62,7 +63,7 @@ class EditProfileScreen extends GetWidget<EditProfileController> {
                             buttonTextStyle: CustomTextStyles.labelLargeOnError,
                             alignment: Alignment.center),
                         SizedBox(height: 30.v),
-                        Text("Name"),
+                        Text("lbl_name".tr),
                         TextFormField(
                           controller: controller.namaController,
                           onFieldSubmitted: (value) {
@@ -94,13 +95,13 @@ class EditProfileScreen extends GetWidget<EditProfileController> {
                                       style:
                                           CustomTextStyles.bodySmallGray80001),
                                   TextSpan(
-                                      text: "msg_muhammadidrisme".tr,
+                                      text: SharedPrefs().username,
                                       style:
                                           CustomTextStyles.titleSmallBlack900)
                                 ]),
                                 textAlign: TextAlign.left)),
                         SizedBox(height: 17.v),
-                        Text("Birthdate"),
+                        Text("lbl_birtdate".tr),
                         TextFormField(
                           controller: controller.dateController,
                           readOnly: true,

@@ -37,14 +37,14 @@ class StartpageScreen extends GetWidget<StartpageController> {
                       SizedBox(height: 20.v),
                       Padding(
                           padding: EdgeInsets.only(left: 22.h),
-                          child: Text("msg_berita_aktual_setiap".tr,
+                          child: Text("lbl_intro".tr,
                               style:
                                   CustomTextStyles.titleMediumKohSantepheap)),
                       SizedBox(height: 10.v),
                       Container(
                           width: 263.h,
                           margin: EdgeInsets.only(left: 22.h, right: 74.h),
-                          child: Text("msg_apa_saja_yang_terjadi".tr,
+                          child: Text("msg_intro".tr,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                               style: CustomTextStyles

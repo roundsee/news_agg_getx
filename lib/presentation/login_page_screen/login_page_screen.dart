@@ -64,7 +64,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
                                           textAlign: TextAlign.left))
                                 ])),
                         SizedBox(height: 52.v),
-                        Text("msg_sign_in_to_your".tr,
+                        Text("lbl_sign_in_to_your".tr,
                             style: theme.textTheme.titleMedium),
                         SizedBox(height: 27.v),
                         _buildSignInWithGoogle(),
@@ -81,7 +81,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
                                           top: 7.v, bottom: 6.v),
                                       child: SizedBox(
                                           width: 86.h, child: Divider())),
-                                  Text("msg_or_continue_with".tr,
+                                  Text("lbl_or_continue_with".tr,
                                       style: CustomTextStyles
                                           .bodySmallPoppinsGray50001),
                                   Padding(
@@ -99,7 +99,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
                             alignment: Alignment.centerRight,
                             child: Padding(
                                 padding: EdgeInsets.only(right: 3.h),
-                                child: Text("msg_passwords_or_email".tr,
+                                child: Text("err_passwords_or_email".tr,
                                     style: CustomTextStyles
                                         .bodySmallPoppinsRed700))),
                         SizedBox(height: 17.v),
@@ -111,7 +111,7 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
                                 },
                                 child: Padding(
                                     padding: EdgeInsets.only(left: 3.h),
-                                    child: Text("msg_forgot_password2".tr,
+                                    child: Text("msg_forgot_password".tr,
                                         style: CustomTextStyles
                                             .bodySmallPoppinsGray50001
                                             .copyWith(

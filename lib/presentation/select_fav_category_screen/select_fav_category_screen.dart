@@ -42,7 +42,7 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
                         style: theme.textTheme.headlineSmall,
                       ),
                       TextSpan(
-                        text: "msg_kamu_suka_baca_berita".tr,
+                        text: "msg_greeting".tr,
                         style: CustomTextStyles.headlineSmallGray900,
                       ),
                     ],
@@ -52,7 +52,7 @@ class SelectFavCategoryScreen extends GetWidget<SelectFavCategoryController> {
               ),
               SizedBox(height: 5.v),
               Text(
-                "msg_pilih_5_kategori".tr,
+                "msg_choose_category".tr,
                 style: CustomTextStyles.bodyLargePoppinsPrimaryContainer,
               ),
               SizedBox(height: 10.v),

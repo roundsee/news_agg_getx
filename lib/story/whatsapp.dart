@@ -163,7 +163,7 @@ class _StoryViewDelegateState extends State<StoryViewDelegate> {
             }
           },
         ),
-        Container(
+        /* Container(
           padding: EdgeInsets.only(
             top: 48,
             left: 16,
@@ -171,6 +171,7 @@ class _StoryViewDelegateState extends State<StoryViewDelegate> {
           ),
           child: _buildProfileView(),
         )
+        */
       ],
     );
   }

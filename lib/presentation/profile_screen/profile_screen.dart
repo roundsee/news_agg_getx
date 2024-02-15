@@ -130,7 +130,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
                         .copyWith(decoration: TextDecoration.underline))),
             SizedBox(height: 20.v),
             CustomElevatedButton(
-                text: "Berita yang disukai",
+                text: "lbl_news_like".tr,
                 buttonStyle: CustomButtonStyles.fillPrimary,
                 buttonTextStyle:
                     CustomTextStyles.labelLargePoppinsWhiteA700SemiBold,
@@ -141,7 +141,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 }),
             SizedBox(height: 13.v),
             CustomElevatedButton(
-                text: "Berita yang disimpan",
+                text: "lbl_saved_news".tr,
                 buttonStyle: CustomButtonStyles.fillPrimary,
                 buttonTextStyle:
                     CustomTextStyles.labelLargePoppinsWhiteA700SemiBold,

@@ -222,7 +222,7 @@ class NewsOneScreen extends StatelessWidget {
                               SizedBox(height: 19.v),
                               Padding(
                                   padding: EdgeInsets.only(left: 20.h),
-                                  child: Text("lbl_berita_serupa".tr,
+                                  child: Text("lbl_similar".tr,
                                       style: theme.textTheme.labelLarge)),
                               SizedBox(height: 8.v),
                               _buildNewsOneList()
@@ -505,19 +505,22 @@ class NewsOneScreen extends StatelessWidget {
     showPlatformDialog(
       context: context,
       builder: (_) => BasicDialogAlert(
-        title: Text(xoption == "1" ? "Rubah Ukuran Text" : "Rubah Bahasa",
+        title: Text(
+            xoption == "1" ? "lbl_title_text_size".tr : "lbl_title_language".tr,
             style: CustomTextStyles.bodyMediumGray900),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               xoption == "1"
-                  ? _buildListItem("Kecil")
+                  ? _buildListItem("lbl_kecil".tr)
                   : _buildListItem("Indonesia"),
               xoption == "1"
-                  ? _buildListItem("Medium")
+                  ? _buildListItem("lbl_sedang".tr)
                   : _buildListItem("English"),
-              xoption == "1" ? _buildListItem("Besar") : _buildListItem(""),
+              xoption == "1"
+                  ? _buildListItem("lbl_besar".tr)
+                  : _buildListItem(""),
               //_buildListItem("Medium"),
               //_buildListItem("Besar"),
             ],

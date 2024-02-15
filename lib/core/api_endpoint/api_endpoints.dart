@@ -61,4 +61,5 @@ class _ContentEndPoints {
 
   final String SuggestedContent = 'contents/suggested';
   final String DetailContent = 'contents/single';
+  final String StoryContent = 'contents/story';
 }
