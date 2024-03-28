@@ -2,10 +2,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'dart:async';
 import 'dart:convert' show json;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
 import 'package:http/http.dart' as http;
 
 class GoogleAuthHelper {

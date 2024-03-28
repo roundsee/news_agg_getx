@@ -1,3 +1,5 @@
+import 'package:new_agg/presentation/login_page_screen/controller/login_page_controller.dart';
+
 import 'controller/register_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:new_agg/core/app_export.dart';
@@ -25,7 +27,7 @@ class RegisterPageScreen extends GetWidget<RegisterPageController> {
                 child: Container(
                     width: double.maxFinite,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 39.h, vertical: 21.v),
+                        EdgeInsets.symmetric(horizontal: 35.h, vertical: 21.v),
                     child: SingleChildScrollView(
                       child: Column(children: [
                         SizedBox(height: 7.v),
@@ -149,7 +151,7 @@ class RegisterPageScreen extends GetWidget<RegisterPageController> {
         controller: regController.nameController,
         hintText: "lbl_name".tr,
         validator: (value) {
-          if (!isText(value)) {
+          if (!isText(value, isRequired: true)) {
             return "err_msg_please_enter_valid_text".tr;
           }
           return null;
@@ -193,7 +195,9 @@ class RegisterPageScreen extends GetWidget<RegisterPageController> {
         textInputAction: TextInputAction.done,
         textInputType: TextInputType.visiblePassword,
         validator: (value) {
-          if (value == null || (!isValidPassword(value, isRequired: true))) {
+          if (value == null ||
+              value != regController.passwordController.value ||
+              (!isValidPassword(value, isRequired: true))) {
             return "err_msg_please_enter_valid_password".tr;
           }
           return null;
@@ -219,14 +223,19 @@ class RegisterPageScreen extends GetWidget<RegisterPageController> {
 
   /// Section Widget
   Widget _buildSignUp() {
-    return CustomElevatedButton(
-        height: 36.v,
-        text: "lbl_sign_up".tr,
-        buttonStyle: CustomButtonStyles.outlineBlack,
-        buttonTextStyle: CustomTextStyles.labelLargePoppinsWhiteA700_1,
-        onPressed: () {
-          onTapSignUp();
-        });
+    return Obx(
+      () => CustomElevatedButton(
+          height: 36.v,
+          text: "lbl_sign_up".tr,
+          buttonStyle: CustomButtonStyles.outlineBlack,
+          buttonTextStyle: CustomTextStyles.labelLargePoppinsWhiteA700_1,
+          isDisabled: !controller.iVeReadAndAgree.value,
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              onTapSignUp();
+            } else {}
+          }),
+    );
   }
 
   /// Performs a Google sign-in and returns a [GoogleUser] object.
@@ -237,9 +246,10 @@ class RegisterPageScreen extends GetWidget<RegisterPageController> {
   ///
   /// Throws an exception if the Google sign-in process fails.
   onTapSignUpWithGoogle() async {
+    await GoogleAuthHelper().googleSignOutProcess();
     await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
       if (googleUser != null) {
-        //TODO Actions to be performed after signin
+        LoginPageController().registerWithGoogle(googleUser);
       } else {
         Get.snackbar('Error', 'user data is empty');
       }

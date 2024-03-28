@@ -57,8 +57,7 @@ class RegisterPageController extends GetxController {
       print(response);
       if (response.statusCode == 201) {
         final json = jsonDecode(response.body);
-        //showAutoDismissAlert(Get.context,"Registration","Succes Registration, Please")
-        //void openDialog() {
+
         Get.snackbar(
           "Success Registration",
           "Congratulation, your account has been successfully created, We have sent activation email to " +
@@ -68,53 +67,32 @@ class RegisterPageController extends GetxController {
           duration: const Duration(seconds: 7),
           snackPosition: SnackPosition.BOTTOM,
         );
-        //}
-/*
-        showDialog(
-            context: Get.context!,
-            builder: (context) {
-              return SimpleDialog(
-                title: Text('Registration'),
-                contentPadding: EdgeInsets.all(20),
-                children: [
-                  Text(
-                      "Success registration, Congratulation, your account has been successfully created, We have sent activation email to " +
-                          emailController.text +
-                          ". Click 'Activate Now' to confirm registraton")
-                ],
-              );
-            });
-*/
+
         Get.offAll(LoginPageScreen());
-        /*
-        if (json['code'] == 0) {
-          var token = json['data']['Token'];
-          print(token);
-          final SharedPreferences? prefs = await _prefs;
-
-          await prefs?.setString('token', token);
-          nameController.clear();
-          emailController.clear();
-          passwordController.clear();
-          Get.off(SelectFavCategoryScreen());
-
-        } else {
-          //Get.off(SelectFavCategoryScreen());
-          throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
-        }
-        */
       } else {
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occured";
       }
     } catch (e) {
       Get.back();
+      var msg = "";
+      if (nameController.text == "") {
+        msg = msg + "Name must be filled" + "\r\n";
+      }
+      if (emailController.text == "") {
+        msg = msg + "Email must be filled" + "\r\n";
+      }
+      if (passwordController.text != confirmPasswordController.text &&
+          passwordController.text != "") {
+        msg = msg + "Password does'nt match";
+      }
+
       showDialog(
           context: Get.context!,
           builder: (context) {
             return SimpleDialog(
-              title: Text('Error'),
+              title: Text('Message'),
               contentPadding: EdgeInsets.all(20),
-              children: [Text(e.toString())],
+              children: [Text(msg)],
             );
           });
     }

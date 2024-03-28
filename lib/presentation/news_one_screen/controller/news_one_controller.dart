@@ -33,6 +33,7 @@ class NewsOneController extends GetxController {
   Rx<NewsDetailModel> newsModelObj = NewsDetailModel().obs;
   RxBool newsNotFound = false.obs;
   RxBool isLoading = false.obs;
+  RxString lang = "en_US".obs;
 
   //RxString theNews = "".obs;
 
@@ -325,11 +326,20 @@ class NewsOneController extends GetxController {
         break;
 
       case "Indonesia":
+        // val appLocale: LocaleListCompat =
+        // LocaleListCompat.forLanguageTags("xx-YY")
+        // Call this on the main thread as it may require Activity.restart()
+        // AppCompatDelegate.setApplicationLocales(appLocale);
+
         SharedPrefs().language = "ID";
+        Locale locale = new Locale("id-ID");
+        setLanguage(locale);
         break;
 
       case "English":
-        SharedPrefs().language = "EN";
+        SharedPrefs().language = "en";
+        Locale locale = new Locale("en-US");
+        setLanguage(locale);
         break;
 
       default:
@@ -357,5 +367,23 @@ class NewsOneController extends GetxController {
     }
     myStyle.refresh();
     // return myStyle;
+  }
+
+  void setLanguage(Locale locale) {
+    var lc = "";
+    Get.updateLocale(locale);
+    switch (locale.languageCode) {
+      case "English":
+        lc = "EN";
+        break;
+      case "Bahasa":
+        lc = "ID";
+        break;
+      default:
+    }
+    //SharedPrefs().language = lc;
+    //_locale = locale;
+    //saveLanguage(_locale);
+    update();
   }
 }

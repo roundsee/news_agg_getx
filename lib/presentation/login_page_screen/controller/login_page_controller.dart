@@ -1,4 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:new_agg/core/api_endpoint/api_endpoints.dart';
 import 'package:new_agg/core/app_export.dart';
 import 'package:new_agg/core/utils/checkurl.dart';
@@ -77,6 +79,7 @@ class LoginPageController extends GetxController {
         var token = json['data']['access_token'];
         Logger.log("token:" + token);
         SharedPrefs().token = token;
+        SharedPrefs().language = "ID";
         SharedPrefs().userid = json['data']['user']['id'];
         SharedPrefs().username = json['data']['user']['name'];
         //final SharedPreferences? prefs = await _prefs;
@@ -131,19 +134,85 @@ class LoginPageController extends GetxController {
     }
   }
 
-  Future<void> registerWithGoogle() async {
+  Future<void> loginSSO(GoogleSignInAccount gUser) async {
+    var headers = getHeaders("defaulttoken");
+
     try {
-      var headers = {
-        'Content-Type': 'application/json',
-        'Authorization':
-            '1705401024_16qCEN4vooAJNAFZepPO6DBj88x3T2sCGDaRQqbx_75d0d76b-9b72-4601-9a10-e2f00f732c3d',
-        'User-Agent': 'LENOVO ideapad 3'
-      };
+      var fcmtoken = SharedPrefs().fcm;
+      if (fcmtoken == "") {
+        fcmtoken = (await FirebaseMessaging.instance.getToken())!;
+        SharedPrefs().fcm = fcmtoken;
+      }
+      var url =
+          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.loginSSO);
+
+      var headers = getHeaders("defaulttoken");
+      Map body = {'email': gUser.email, 'name': gUser.displayName};
+      var strbody = jsonEncode(body);
+      http.Response response =
+          await http.post(url, body: strbody, headers: headers);
+      print(response);
+      var responsecode = response.statusCode;
+      if (responsecode == 200) {
+        final json = jsonDecode(response.body);
+        var token = json['data']['access_token'];
+        Logger.log("token:" + token);
+        SharedPrefs().token = token;
+        SharedPrefs().language = "ID";
+        SharedPrefs().userid = json['data']['user']['id'];
+        SharedPrefs().username = json['data']['user']['name'];
+        //final SharedPreferences? prefs = await _prefs;
+        //await prefs?.setString('token', token);
+
+        if (json['data']['user']['status'] == 2) {
+          SharedPrefs().status = "2";
+
+          Get.to(() => AlternativeHomePageDesignContainerScreen());
+        }
+
+        if (json['data']['user']['status'] == 1) {
+          SharedPrefs().status = "1";
+
+          Get.to(() => SelectFavCategoryScreen());
+        }
+      } else if (responsecode == 404) {
+        // SSO not found
+
+        /*
+        Get.snackbar(
+          "Login",
+          "Your email has not been registered, you will be redirected to Register Page",
+          icon: Icon(Icons.person, color: Colors.white),
+          duration: const Duration(seconds: 7),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        Get.toNamed(
+          AppRoutes.registerPageScreen,
+        );
+        */
+      }
+    } catch (error) {
+      Get.back();
+      showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text('Login Fail'),
+              contentPadding: EdgeInsets.all(20),
+              children: [Text(error.toString())],
+            );
+          });
+    }
+  }
+
+  Future<void> registerWithGoogle(GoogleSignInAccount gUser) async {
+    try {
+      var headers = getHeaders("defaulttoken");
       var url = Uri.parse(
           ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.registerSSO);
       Map body = {
-        'name': nameController.text,
-        'email': emailController.text.trim(),
+        'name': gUser.displayName, // nameController.text,
+        'email': gUser.email // emailController.text.trim(),
         //'password': passwordController.text
       };
 
@@ -174,7 +243,7 @@ class LoginPageController extends GetxController {
           context: Get.context!,
           builder: (context) {
             return SimpleDialog(
-              title: Text('Error'),
+              title: Text('Message'),
               contentPadding: EdgeInsets.all(20),
               children: [Text(e.toString())],
             );

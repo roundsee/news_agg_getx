@@ -170,7 +170,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
                   _buildFrameSixtyNine(
                       notificationText: "msg_favourite_category".tr,
                       onTapFrameSixtyNine: () {
-                        _onTapBeritaDisarankan();
+                        _onTapFavCategory();
                       }),
                   SizedBox(height: 20.v),
                   Align(
@@ -258,7 +258,7 @@ class SettingsScreen extends GetWidget<SettingsController> {
     );
   }
 
-  _onTapBeritaDisarankan() {
+  _onTapFavCategory() {
     Get.to(() => SelectFavCategoryScreen(), arguments: [
       {"isNew": false}
     ]);

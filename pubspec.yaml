@@ -16,6 +16,7 @@ dependencies:
   easy_localization: ^3.0.4
   easyupload_image_toserver: ^0.0.3
   file_picker: ^6.1.1
+  firebase_auth: ^4.17.4
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.9
   flutter:
@@ -30,7 +31,7 @@ dependencies:
   flutter_user_agentx: ^1.2.4
   gender_picker: ^1.1.0
   get: ^4.6.5
-  google_sign_in: ^5.0.7
+  google_sign_in: ^6.2.1
   intl: ^0.18.0
   package_info_plus: ^5.0.1
   share_plus: ^7.2.1

@@ -1,4 +1,4 @@
-final Map<String, String> bahasa = {
+final Map<String, String> id = {
   "lbl_sign_in": "Masuk",
   "lbl_sign_up": "Daftar",
   "lbl_new_password": "Password Baru",
@@ -9,6 +9,7 @@ final Map<String, String> bahasa = {
   "msg_havent_t_got_the": "Belum terima email ?",
   "msg_save_news": "Berita yang disimpan",
   "msg_like_news": "Berita yang disukai",
+  "lbl_history": "Sejarah",
   "lbl_skip": "Lewati",
   "msg_intro": "Semua kejadian dalam dalam genggaman anda",
   "lbl_intro": "BERITA AKTUAL TIAP HARI",

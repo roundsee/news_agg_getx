@@ -220,10 +220,11 @@ class LoginPageScreen extends GetWidget<LoginPageController> {
   ///
   /// Throws an exception if the Google sign-in process fails.
   onTapSignInWithGoogle() async {
+    await GoogleAuthHelper().googleSignOutProcess();
+
     await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
       if (googleUser != null) {
-        LoginPageController().registerWithGoogle();
-        //TODO Actions to be performed after signin
+        LoginPageController().loginSSO(googleUser);
       } else {
         Get.snackbar('Error', 'user data is empty');
       }

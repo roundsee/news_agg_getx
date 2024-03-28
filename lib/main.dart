@@ -90,9 +90,7 @@ main() async {
 
   await SharedPrefs().init();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   GetDeviceInfo();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await flutterLocalNotificationsPlugin
@@ -149,12 +147,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get.updateLocale(Locale("ID"));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
       translations: AppLocalization(),
       locale: Get.deviceLocale, //for setting localization strings
-      fallbackLocale: Locale('en', 'US'),
+      fallbackLocale: Locale('id', 'ID'),
       title: 'Sedang Rame',
       initialBinding: InitialBindings(),
       initialRoute: AppRoutes.initialRoute,

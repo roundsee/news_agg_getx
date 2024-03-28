@@ -50,14 +50,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "182055279876-51r0r8tsfgcs53hojh9f4muviru8lero.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dps.nooz",
-            "certificate_hash": "2e5d3a95559591b02bcd37800fe1231309007ab1"
-          }
-        },
-        {
           "client_id": "182055279876-054e3c1jv1ff4nlqkllemt5qh08le2o1.apps.googleusercontent.com",
           "client_type": 3
         }

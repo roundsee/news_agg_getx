@@ -1,6 +1,10 @@
-final Map<String, String> enUs = {
+final Map<String, String> en = {
   "lbl_sign_in": "Sign In",
   "lbl_sign_up": "Sign Up",
+  "lbl_history": "History",
+  "lbl_a": "a",
+  "lbl_ws": "ws",
+  "lbl_ne": "Ne",
   "lbl_new_password": "New Password",
   "lbl_reset_password": "Reset Password",
   "msg_confirm_new_password": "Confirm New Password",

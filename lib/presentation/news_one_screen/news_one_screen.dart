@@ -514,10 +514,10 @@ class NewsOneScreen extends StatelessWidget {
             children: <Widget>[
               xoption == "1"
                   ? _buildListItem("lbl_kecil".tr)
-                  : _buildListItem("Indonesia"),
+                  : _buildListItem("English"),
               xoption == "1"
                   ? _buildListItem("lbl_sedang".tr)
-                  : _buildListItem("English"),
+                  : _buildListItem("Indonesia"),
               xoption == "1"
                   ? _buildListItem("lbl_besar".tr)
                   : _buildListItem(""),
@@ -589,6 +589,12 @@ class NewsOneScreen extends StatelessWidget {
                       controller.saveOptions(title);
                       break;
                     case "besar":
+                      controller.saveOptions(title);
+                      break;
+                    case "indonesia":
+                      controller.saveOptions(title);
+                      break;
+                    case "english":
                       controller.saveOptions(title);
                       break;
                     default:
